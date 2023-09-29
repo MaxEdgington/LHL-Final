@@ -1,5 +1,6 @@
 // declarations
 require('dotenv').config()
+const cors = require('cors');
 const {ENVIROMENT, PORT} = process.env;
 const express = require('express');
 const morgan = require('morgan');
@@ -13,6 +14,19 @@ const app = express();
 // middleware setup
 app.use(morgan(ENVIROMENT));
 app.use(bodyParser.json());
+
+// corsObject to whitelist ORIGIN with appropriate credentials
+const corsOptions = {
+    origin: process.env.ORIGIN,
+    optionsSuccessStatus: 200,
+  credentials: true,
+  ContentType: 'json'
+};
+
+app.use(cors(corsOptions));
+
+
+// NPM install cors , setup cors from code from lecture (project kickoff lecture)
 
 app.use('/cats', catsRoutes)
 
