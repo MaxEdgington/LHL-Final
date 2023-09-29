@@ -3,7 +3,7 @@
 Server Instructions: 
     In server folder: 
 
-    To start server: node app.js
+    To start server: npm run dev
     To restart database:  npm run db:reset
 
 Client Instructions:
