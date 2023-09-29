@@ -25,7 +25,7 @@ function App() {
 
   return (
     <>
-      <h1>Hello from React!</h1>
+      <h1>Lens project</h1>
       {error && <p>Error loading data: {error.message}</p>}
       {data ? (
         <div>
