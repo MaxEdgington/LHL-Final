@@ -23,12 +23,11 @@ const corsOptions = {
   ContentType: 'json'
 };
 
-app.use(cors(corsOptions));
-
 
 // NPM install cors , setup cors from code from lecture (project kickoff lecture)
-
+app.use(cors(corsOptions));
 app.use('/cats', catsRoutes)
+
 
 app.get('/', (req, res) => {
 	res.json({greetings: 'hello world'});

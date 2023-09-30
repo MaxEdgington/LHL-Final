@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const url = 'http://localhost:8080/cats';
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(url);
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching the data', error);
+        setError(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Lens project</h1>
+      {error && <p>Error loading data: {error.message}</p>}
+      {data ? (
+        <div>
+          <h2>Data from the server:</h2>
+          <p>{data.users[0].email}</p>
+        </div>
+      ) : (
+        <p>Loading data...</p>
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
