@@ -1,6 +1,22 @@
-INSERT INTO users (id, email, password) VALUES (1, 'rick.sandchez@gmail.com', 'picklerick');
-INSERT INTO users (id, email, password) VALUES (2, 'lisa.simpson@gmail.com', 'ehhhhh');
-INSERT INTO users (id, email, password) VALUES (3, 'link@yahoo.com', 'hyrule');
-INSERT INTO users (id, email, password) VALUES (4, 'simon_bel123@mail.ca', 'dracula');
-INSERT INTO users (id, email, password) VALUES (5, 'all_might@academia.jp', 'plusUltra');
-INSERT INTO users (id, email, password) VALUES (6, 'mario@mushroomkindom.jp', 'plumber79');
+INSERT INTO users (username, email, password) 
+  VALUES 
+    ('Caroline', 'caro@example.com', 'passwrd'),
+    ('Yuli', 'yuli@example.com', 'passwrd'),
+    ('Max', 'max@eaxmple.com', 'passwrd'),
+    ('Edwin', 'edwin@example.com', 'passwrd'),
+    ('Curtis', 'curtis@example.com', 'passwrd'),
+    ('Salman', 'salman@example.com', 'passwrd'),
+    ('Shani', 'shani@example.com', 'passwrd')
+
+;
+
+-- -- as mock
+-- const usersMockArr = [
+--   {id: 1, name:'Caroline', email: 'caro@example.com', password: 'passwrd'},
+--   {id: 2, name:'Yuli', email: 'yuli@example.com, password:  'passwrd'},
+--   {id: 3, name:'Max', email: 'max@eaxmple.com', password: 'passwrd'},
+--   {id: 4, name:'Edwin', email: 'edwin@example.com', password: 'passwrd'},
+--   {id: 5, name:'Curtis', email: 'curtis@example.com', password: 'passwrd'},
+--   {id: 6, name:'Salman', email: 'salman@example.com', password: 'passwrd'},
+--   {id: 7, name:'Shani', email: 'shani@example.com', password: 'passwrd'}
+-- ]
