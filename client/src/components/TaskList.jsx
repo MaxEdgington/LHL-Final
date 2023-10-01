@@ -1,6 +1,7 @@
 import React from "react";
 import TaskListItem from "./TaskListItem";
 import "../styles/TaskList.scss";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 // mock data
 const taskMockArr = [
@@ -80,14 +81,22 @@ const taskMockArr = [
 
 const TaskList = () => {
 
-  const taskArray = taskMockArr.map(task => <TaskListItem key={task.id} name={task.name} />);
+  const taskArray = taskMockArr.map((task, index) => <TaskListItem key={task.id} id={task.id} name={task.name} index={index} />);
 
   return (
     <div>
       <h3>this is TaskList(for To Do columnlist)</h3>
-      <ul>
-        {taskArray}
-      </ul>
+
+
+      <Droppable droppableId="tasks">
+        {(provided) => (
+          <ul className="task-list" {...provided.droppableProps} ref={provided.innerRef}>
+            {taskArray}
+            {provided.placeholder}
+
+          </ul>
+        )}
+      </Droppable>
     </div>
   );
 };
