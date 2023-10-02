@@ -137,7 +137,7 @@ const ColumnList = (props) => {
     <DragDropContext onDragEnd={result => onDragEnd(result)}>
      
       <div>
-        <h1>This is ColumnList</h1>
+        <h1>Project 1</h1>
         <ul className="columnlist">
           {columnArr}
         </ul>

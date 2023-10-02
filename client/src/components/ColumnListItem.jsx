@@ -9,6 +9,7 @@ const ColumnListItem = (props) => {
     <div className="column">
       <h2>{name}</h2>
       <TaskList id={id} tasks={tasks}/>
+      {id==1 && <button>Add New Task</button>}
     </div>
 
   );
