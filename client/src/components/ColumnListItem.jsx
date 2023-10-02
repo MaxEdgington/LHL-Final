@@ -4,6 +4,10 @@ import "../styles/ColumnListItem.scss";
 
 const ColumnListItem = (props) => {
   const { id, name, tasks } = props;
+
+  console.log("ColumnListItem props:", props); // Check the props
+  console.log("Tasks received:", tasks); // Check the tasks data
+
   return (
 
     <div className="column">

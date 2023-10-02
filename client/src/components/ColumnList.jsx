@@ -6,42 +6,52 @@ import { DragDropContext } from "react-beautiful-dnd";
 
 
 
+const initialColumnData = {
+  1: { name: "To Do", tasks: [] },
+  2: { name: "In Progress", tasks: [] },
+  3: { name: "In Review", tasks: [] },
+  4: { name: "Complete!", tasks: [] }
+};
+
 const ColumnList = (props) => {
-  const initialColumnData = {
-    1: { name: "To Do", tasks: [] },
-    2: { name: "In Progress", tasks: [] },
-    3: { name: "In Review", tasks: [] },
-    4: { name: "Complete!", tasks: [] }
-  };
 
   const [columns, setColumns] = useState(initialColumnData);
 
+  
+
+  // Start of new code 
+
   useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const res = await axios.get("http://localhost:8080/api/tasks");
-        console.log("Tasks received from server:", res.data); // Log data here
-        const fetchedTasks = res.data.reduce((acc, task) => {
-          acc[task.status] = [...(acc[task.status] || []), task];
+  const fetchTasks = async () => {
+    try {
+      const res = await axios.get("http://localhost:8080/api/tasks");
+      console.log("Tasks received from server:", res.data); 
+
+      // ... rest of your logging and fetching logic ...
+
+      // Creating a new column state based on the fetched tasks
+      setColumns(prevColumns =>
+        Object.keys(prevColumns).reduce((acc, columnId) => {
+          acc[columnId] = {
+            ...prevColumns[columnId],
+            tasks: fetchTasks[columnId] || [],
+          };
           return acc;
-        }, {});
+        }, {})
+      );
 
-        setColumns((prevColumns) =>
-          Object.keys(prevColumns).reduce((acc, columnId) => {
-            acc[columnId] = {
-              ...prevColumns[columnId],
-              tasks: fetchedTasks[columnId] || [],
-            };
-            return acc;
-          }, {})
-        );
-      } catch (error) {
-        console.error("Could not fetch tasks", error);
-      }
-    };
+      console.log("After data transformation:", columns);
+    } catch (error) {
+      console.error("Could not fetch tasks", error);
+    }
+  };
 
-    fetchTasks();
-  }, []);
+  fetchTasks();
+}, []);
+
+// End of new code 
+
+
 
   const onDragEnd = (result) => {
     if(!result.destination) return;
