@@ -3,6 +3,7 @@ import axios from 'axios';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from './components/Header';
 import ColumnList from './components/ColumnList';
+import ChatDrawer from './components/ChatDrawer';
 
 import './App.css';
 
@@ -58,7 +59,9 @@ function App() {
       )} */}
       <ThemeProvider theme={theme}>
         <Header />
-        <ColumnList />
+        <div>
+          <ColumnList />
+        </div>
       </ThemeProvider>
     </>
   );

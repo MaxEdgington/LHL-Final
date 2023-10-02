@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ColumnListItem from "./ColumnListItem";
+import ChatDrawer from "./ChatDrawer";
 import { Box, Typography } from "@mui/material";
 import "../styles/ColumnList.scss";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -147,6 +148,7 @@ const ColumnList = (props) => {
       >
         <div>
           <h1>Project 1</h1>
+          <ChatDrawer />
           <ul className="columnlist">
             {columnArr}
           </ul>
