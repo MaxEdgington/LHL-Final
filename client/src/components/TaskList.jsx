@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import TaskListItem from "./TaskListItem";
 import "../styles/TaskList.scss";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { Box } from "@mui/material";
+
+import { Droppable } from "react-beautiful-dnd";
 
 // mock data
 const taskMockArr = [
@@ -100,18 +102,20 @@ const TaskList = (props) => {
 
       <Droppable droppableId="tasks">
         {(provided, snapshot) => (
-          <ul className="task-list" {...provided.droppableProps} ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
-            {filteredTasks.map((task, index) =>
-              <TaskListItem
-                key={task.id}
-                id={task.id}
-                name={task.name}
-                index={index}
-              />
-            )}
-            {provided.placeholder}
+          <Box sx={{ marginBottom: 1 }}>
+            <ul className="task-list" {...provided.droppableProps} ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
+              {filteredTasks.map((task, index) =>
+                <TaskListItem
+                  key={task.id}
+                  id={task.id}
+                  name={task.name}
+                  index={index}
+                />
+              )}
+              {provided.placeholder}
 
-          </ul>
+            </ul>
+          </Box>
         )}
       </Droppable>
     </div>
