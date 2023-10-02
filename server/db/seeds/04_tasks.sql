@@ -1,3 +1,22 @@
+INSERT INTO tasks (name, description, project_id, due_date, status, assigned_user)
+VALUES
+  ('Project Planning and Ideation', 'Define project objectives, create a timeline, and brainstorm unique features.', 1, '2023-10-12', 'To Do', 1),
+
+  ('Market Research', 'Research pet and cat-related social media platforms for insights and opportunities.', 1, '2023-11-12', 'To Do', 2),
+
+  ('Technology Stack Selection', 'Choose front-end and back-end technologies, including programming languages and databases.', 1, '2023-12-12', 'To Do', 3),
+
+  ('UI/UX Design', 'Create wireframes, mockups, and a visually appealing cat-themed interface.', 1, '2023-12-13', 'To Do', 1),
+
+  ('Front-End Development', 'Develop the front-end using HTML, CSS, and JavaScript with relevant frameworks.', 1, '2023-12-14', 'To Do', 4),
+
+  ('Back-End Development', 'Build server-side logic, implement authentication, and create APIs for key features.', 1, '2023-12-15', 'To Do', 6),
+
+  ('Database Setup and Management', 'Design the database schema, set up the database server, and implement queries.', 1, '2023-12-16', 'To Do', 5),
+  
+  ('Testing, Deployment, and Monitoring', 'Test for bugs, deploy to a web server, and set up monitoring for performance.', 1, '2023-12-17', 'To Do', 1);
+
+
 
 -- -- as mock:
 -- const nameMockArr = [
