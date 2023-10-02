@@ -147,8 +147,10 @@ const ColumnList = (props) => {
         }}
       >
         <div>
-          <h1>Project 1</h1>
-          <ChatDrawer />
+          <span>
+            <h1>Project 1</h1>
+            <ChatDrawer />
+          </span>
           <ul className="columnlist">
             {columnArr}
           </ul>

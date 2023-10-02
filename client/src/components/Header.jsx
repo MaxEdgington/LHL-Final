@@ -16,9 +16,25 @@ import AdbIcon from '@mui/icons-material/Adb';
 const pages = ['New Project', 'TBA', 'What Links?'];
 const settings = ['Profile', 'My Projects', 'Logout'];
 
-function Header() {
+function Header(props) {
+  const { SetView } = props;
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  // const [active, setActive] = useState(1);
+
+  // const SetView = (active) => { setActive(active); };
+
+  // const ActiveView = () => {
+  //   console.log("VIEWstate", active);
+  //   switch (active) {
+  //     case 1:
+  //       return <ColumnList />;
+  //     case 2:
+  //       return <StartNewProject />;
+  //     default:
+  //       return <ColumnList />;
+  //   }
+  // };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -89,7 +105,7 @@ function Header() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center" href='StartNewProject'>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -117,7 +133,7 @@ function Header() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => SetView(2)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}

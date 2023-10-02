@@ -4,13 +4,27 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from './components/Header';
 import ColumnList from './components/ColumnList';
 import ChatDrawer from './components/ChatDrawer';
+import StartNewProject from './components/StartNewProject';
 
 import './App.css';
 
 function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [active, setActive] = useState(1);
 
+  const SetView = (active) => { setActive(active); };
+
+  const ActiveView = () => {
+    switch (active) {
+      case 1:
+        return <ColumnList />;
+      case 2:
+        return <StartNewProject />;
+      default:
+        return <ColumnList />;
+    }
+  };
 
   const theme = createTheme({
     palette: {
@@ -58,10 +72,8 @@ function App() {
         <p>Loading data...</p>
       )} */}
       <ThemeProvider theme={theme}>
-        <Header />
-        <div>
-          <ColumnList />
-        </div>
+        <Header SetView={SetView} />
+        {ActiveView()}
       </ThemeProvider>
     </>
   );

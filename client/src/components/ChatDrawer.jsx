@@ -17,7 +17,7 @@ const ChatDrawer = () => {
 
   return (
     // {(['Cat'] as const).map((anchor) => (
-    <div >
+    < >
       <Button onClick={toggleDrawer(true)}>Open Chat</Button>
       <Drawer
         anchor={'right'}
@@ -26,7 +26,7 @@ const ChatDrawer = () => {
       >
         <p>something here?</p>
       </Drawer>
-    </div >
+    </ >
   );
 };
 

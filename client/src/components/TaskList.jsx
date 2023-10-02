@@ -5,7 +5,7 @@ import { Droppable } from "react-beautiful-dnd";
 
 const getListStyle = (isDraggingOver) => ({
   background: isDraggingOver ? "#df0405" : "white",
-  width: 250
+  // width: 250
 });
 
 const TaskList = (props) => {

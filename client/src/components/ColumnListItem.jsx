@@ -9,10 +9,10 @@ const ColumnListItem = (props) => {
   return (
     <Box
       sx={{
-        flex: 1,
+        // flex: 1,
         paddingTop: "8px",
         paddingBottom: "16px",
-        margin: "8px",
+        margin: "16px",
         bgcolor: "white",
         "&:first-child": {
           paddingLeft: "5px",
