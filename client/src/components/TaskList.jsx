@@ -3,6 +3,30 @@ import TaskListItem from "./TaskListItem";
 import "../styles/TaskList.scss";
 import { Droppable } from "react-beautiful-dnd";
 
+
+
+const TaskList = (props) => {
+  const {id, tasks} = props
+
+  const taskArray = tasks.map((task, index) => <TaskListItem key={task.id} id={task.id} name={task.name} index={index} />);
+
+  return (
+    <div>
+      <Droppable key={id} droppableId={id}>
+        {(provided) => (
+          <ul className="task-list" {...provided.droppableProps} ref={provided.innerRef}>
+            {taskArray}
+            {provided.placeholder}
+
+          </ul>
+        )}
+      </Droppable>
+    </div>
+  );
+};
+
+export default TaskList;
+
 // mock data
 // const taskMockArr = [
 //   {
@@ -78,25 +102,3 @@ import { Droppable } from "react-beautiful-dnd";
 //     assigned_user: 1
 //   }
 // ];
-
-const TaskList = (props) => {
-  const {id, tasks} = props
-
-  const taskArray = tasks.map((task, index) => <TaskListItem key={task.id} id={task.id} name={task.name} index={index} />);
-
-  return (
-    <div>
-      <Droppable key={id} droppableId={id}>
-        {(provided) => (
-          <ul className="task-list" {...provided.droppableProps} ref={provided.innerRef}>
-            {taskArray}
-            {provided.placeholder}
-
-          </ul>
-        )}
-      </Droppable>
-    </div>
-  );
-};
-
-export default TaskList;

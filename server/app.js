@@ -20,6 +20,9 @@ app.use(morgan(ENVIROMENT));
 app.use(bodyParser.json());
 
 // corsObject to whitelist ORIGIN with appropriate credentials
+
+console.log('CORS Origin: ', process.env.ORIGIN);
+
 const corsOptions = {
     origin: process.env.ORIGIN,
     optionsSuccessStatus: 200,

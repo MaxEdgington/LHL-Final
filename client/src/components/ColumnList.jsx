@@ -19,7 +19,8 @@ const ColumnList = (props) => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const res = await axios.get("http://localhost:5173/api/tasks");
+        const res = await axios.get("http://localhost:8080/api/tasks");
+        console.log("Tasks received from server:", res.data); // Log data here
         const fetchedTasks = res.data.reduce((acc, task) => {
           acc[task.status] = [...(acc[task.status] || []), task];
           return acc;
