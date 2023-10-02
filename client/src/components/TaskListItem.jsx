@@ -1,16 +1,28 @@
-import React from "react"
-import "../styles/TaskListItem.scss"
+import React from "react";
+import "../styles/TaskListItem.scss";
+import { Draggable } from "react-beautiful-dnd";
+
+
 
 const TaskListItem = (props) => {
+  const { id, name, index } = props;
 
+  // console.log("some ID", id);
+  // console.log("typeOF", typeof String(id));
 
   return (
-    <div>
-      <p>This is TaskListItem1</p>
-      <p>This is TaskListItem2</p>
-      <p>This is TaskListItem3</p>
-    </div>
-  );
-}
+    <Draggable key={id} draggableId={String(id)} index={index}>
+      {(provided) => (
+        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
 
-export default TaskListItem
+          {name}
+
+        </li>
+      )}
+    </Draggable>
+  );
+
+};
+
+export default TaskListItem;
+

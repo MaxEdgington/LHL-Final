@@ -9,25 +9,25 @@ function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const url = 'http://localhost:8080/cats';
+  // useEffect(() => {
+  //   const url = 'http://localhost:8080/cats';
 
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(url);
-        setData(response.data);
-      } catch (error) {
-        console.error('Error fetching the data', error);
-        setError(error);
-      }
-    };
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(url);
+  //       setData(response.data);
+  //     } catch (error) {
+  //       console.error('Error fetching the data', error);
+  //       setError(error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   return (
     <>
-      <h1>Lens project</h1>
+      {/* <h1>Lens project</h1>
       {error && <p>Error loading data: {error.message}</p>}
       {data ? (
         <div>
@@ -36,8 +36,8 @@ function App() {
         </div>
       ) : (
         <p>Loading data...</p>
-      )}
-      
+      )} */}
+
       <Header />
       <ColumnList />
 
