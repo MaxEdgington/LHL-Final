@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TaskListItem from "./TaskListItem";
 import "../styles/TaskList.scss";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
@@ -10,7 +10,7 @@ const taskMockArr = [
     name: "Project Planning and Ideation",
     description: "Define project objectives, create a timeline, and brainstorm unique features.",
     project_id: 1,
-    due_date: 10 - 12 - 2023,
+    due_date: '10-12-2023',
     status: 'To Do',
     assigned_user: 1
   },
@@ -19,7 +19,7 @@ const taskMockArr = [
     name: "Market Research",
     description: "Research pet and cat-related social media platforms for insights and opportunities.",
     project_id: 1,
-    due_date: 11 - 12 - 2023,
+    due_date: '11-12-2023',
     status: 'To Do',
     assigned_user: 2
   },
@@ -28,7 +28,7 @@ const taskMockArr = [
     name: "Technology Stack Selection",
     description: "Choose front-end and back-end technologies, including programming languages and databases.",
     project_id: 1,
-    due_date: 12 - 12 - 2023,
+    due_date: '12-12-2023',
     status: 'To Do',
     assigned_user: 3
   },
@@ -37,7 +37,7 @@ const taskMockArr = [
     name: "UI/UX Design",
     description: "Create wireframes, mockups, and a visually appealing cat-themed interface.",
     project_id: 1,
-    due_date: 13 - 12 - 2023,
+    due_date: '13-12-2023',
     status: 'To Do',
     assigned_user: 1
   },
@@ -46,7 +46,7 @@ const taskMockArr = [
     name: "Front-End Development",
     description: "Develop the front-end using HTML, CSS, and JavaScript with relevant frameworks.",
     project_id: 1,
-    due_date: 14 - 12 - 2023,
+    due_date: '14-12-2023',
     status: 'To Do',
     assigned_user: 4
   },
@@ -55,7 +55,7 @@ const taskMockArr = [
     name: "Back-End Development",
     description: "Build server-side logic, implement authentication, and create APIs for key features.",
     project_id: 1,
-    due_date: 15 - 12 - 2023,
+    due_date: '15-12-2023',
     status: 'To Do',
     assigned_user: 6
   },
@@ -64,7 +64,7 @@ const taskMockArr = [
     name: "Database Setup and Management",
     description: "Design the database schema, set up the database server, and implement queries.",
     project_id: 1,
-    due_date: 16 - 12 - 2023,
+    due_date: '16-12-2023',
     status: 'To Do',
     assigned_user: 5
   },
@@ -73,15 +73,21 @@ const taskMockArr = [
     name: "Testing, Deployment, and Monitoring",
     description: "Test for bugs, deploy to a web server, and set up monitoring for performance.",
     project_id: 1,
-    due_date: 17 - 12 - 2023,
+    due_date: '17-12-2023',
     status: 'To Do',
     assigned_user: 1
   }
 ];
 
-const TaskList = () => {
+const TaskList = (props) => {
+  const { filteredTasks } = props;
+  // "taskState" is maybe a terribel name
+  // const [tasksState, setTasks] = useState(taskMockArr);
 
-  const taskArray = taskMockArr.map((task, index) => <TaskListItem key={task.id} id={task.id} name={task.name} index={index} />);
+
+
+  // const taskArray = taskMockArr.map((task, index) => <TaskListItem key={task.id} id={task.id} name={task.name} index={index} />);
+
 
   return (
     <div>
@@ -91,7 +97,14 @@ const TaskList = () => {
       <Droppable droppableId="tasks">
         {(provided) => (
           <ul className="task-list" {...provided.droppableProps} ref={provided.innerRef}>
-            {taskArray}
+            {filteredTasks.map((task, index) =>
+              <TaskListItem
+                key={task.id}
+                id={task.id}
+                name={task.name}
+                index={index}
+              />
+            )}
             {provided.placeholder}
 
           </ul>

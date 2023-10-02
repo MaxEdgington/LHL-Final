@@ -7,8 +7,8 @@ import { DragDropContext, Draggable } from "react-beautiful-dnd";
 const TaskListItem = (props) => {
   const { name, id, index } = props;
 
-  console.log("some ID", id);
-  console.log("typeOF", typeof String(id));
+  // console.log("some ID", id);
+  // console.log("typeOF", typeof String(id));
 
   return (
     <Draggable key={id} draggableId={String(id)} index={index}>
