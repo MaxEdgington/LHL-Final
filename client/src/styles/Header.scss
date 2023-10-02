@@ -2,8 +2,16 @@
   display: flex;
   border-bottom: 2px solid black;
   text-decoration: none;
+  justify-content: space-between;
+  list-style-type: none;
 }
 
 .nav {
   display: flex;
+  list-style-type: none;
+  justify-content:center;
+}
+
+.nav li {
+  margin: 0 10px;
 }
