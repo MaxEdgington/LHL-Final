@@ -84,19 +84,23 @@ const TaskList = (props) => {
   // "taskState" is maybe a terribel name
   // const [tasksState, setTasks] = useState(taskMockArr);
 
-
+  const getListStyle = (isDraggingOver) => ({
+    background: isDraggingOver ? "lightblue" : "grey",
+    // padding: grid,
+    width: 250
+  });
 
   // const taskArray = taskMockArr.map((task, index) => <TaskListItem key={task.id} id={task.id} name={task.name} index={index} />);
 
 
   return (
     <div>
-      <h3>this is TaskList(for To Do columnlist)</h3>
+      {/* <h3>this is TaskList(for To Do columnlist)</h3> */}
 
 
       <Droppable droppableId="tasks">
-        {(provided) => (
-          <ul className="task-list" {...provided.droppableProps} ref={provided.innerRef}>
+        {(provided, snapshot) => (
+          <ul className="task-list" {...provided.droppableProps} ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
             {filteredTasks.map((task, index) =>
               <TaskListItem
                 key={task.id}
