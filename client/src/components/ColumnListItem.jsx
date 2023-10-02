@@ -3,16 +3,12 @@ import TaskList from "./TaskList";
 import "../styles/ColumnListItem.scss";
 
 const ColumnListItem = (props) => {
-  const { name } = props;
+  const { id, name, tasks } = props;
   return (
 
-    <div>
-      <h2>This is ColumListItem {name}</h2>
-
-
-      <TaskList />
-
-
+    <div className="column">
+      <h2>{name}</h2>
+      <TaskList id={id} tasks={tasks}/>
     </div>
 
   );

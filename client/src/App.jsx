@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import Header from './components/Header';
 import ColumnList from './components/ColumnList';
 
@@ -28,7 +27,7 @@ function App() {
 
   return (
     <>
-      <h1>Lens project</h1>
+      {/* <h1>Lens project</h1>
       {error && <p>Error loading data: {error.message}</p>}
       {data ? (
         <div>
@@ -37,7 +36,7 @@ function App() {
         </div>
       ) : (
         <p>Loading data...</p>
-      )}
+      )} */}
 
       <Header />
       <ColumnList />
