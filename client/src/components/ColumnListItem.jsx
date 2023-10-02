@@ -1,15 +1,18 @@
-import React from "react";
-import TaskList from "./TaskList";
-import "../styles/ColumnListItem.scss";
+import React from 'react';
+import { Droppable } from 'react-beautiful-dnd';
+import Task from './Task'; // Replace with your actual Task component.
 
-const ColumnListItem = (props) => {
-
+const ColumnListItem = ({ column }) => {
   return (
-    <div>
-      <h2>This is ColumListItem - To Do</h2>
-      <TaskList />
-    </div>
-  )
+    <Droppable droppableId={column.id.toString()}>
+      {(provided) => (
+        <div ref={provided.innerRef} {...provided.droppableProps}>
+          {column.tasks.map((task, index) => <Task key={task.id} task={task} index={index} />)}
+          {provided.placeholder}
+        </div>
+      )}
+    </Droppable>
+  );
 }
 
 export default ColumnListItem;
