@@ -148,7 +148,7 @@ const ColumnList = (props) => {
       >
         <div>
           <span>
-            <h1>Project 1</h1>
+            <h1>Project 1</h1> {/* this needs to also come from the backend */}
             <ChatDrawer />
           </span>
           <ul className="columnlist">
