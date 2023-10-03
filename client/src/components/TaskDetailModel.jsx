@@ -27,7 +27,7 @@ const TaskDetailModel = (props) => {
       </Typography>
       <Typography id="modal-modal-description" sx={{ mt: 2 }} fontSize={28}> 
         Due Date: {due_date}
-        {/* it does not show the correct due_date */}
+        {/* it does not show the correct due_date!!! */}
       </Typography>
   </Box>
   )
