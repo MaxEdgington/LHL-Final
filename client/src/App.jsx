@@ -5,6 +5,7 @@ import Header from './components/Header';
 import ColumnList from './components/ColumnList';
 import ChatDrawer from './components/ChatDrawer';
 import StartNewProject from './components/StartNewProject';
+import NewTasksForm from './components/NewTasksForm';
 
 import './App.css';
 
@@ -20,7 +21,9 @@ function App() {
       case 1:
         return <ColumnList />;
       case 2:
-        return <StartNewProject />;
+        return <StartNewProject SetView={SetView} />;
+      case 3:
+        return <NewTasksForm />;
       default:
         return <ColumnList />;
     }

@@ -1,12 +1,13 @@
 import React from 'react';
 import NewProjectForm from './NewProjectForm';
 
-function StartNewProject() {
+function StartNewProject(props) {
+  const { SetView } = props;
 
   return (
     <>
       <div>
-        <NewProjectForm />
+        <NewProjectForm SetView={SetView} />
       </div>
     </>
   );
