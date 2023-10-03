@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+// import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from './components/Header';
 import ColumnList from './components/ColumnList';
-import ChatDrawer from './components/ChatDrawer';
 import StartNewProject from './components/StartNewProject';
 import NewTasksForm from './components/NewTasksForm';
+import { ThemeProvider } from '@mui/material';
+import { theme } from './theme';
+
+// import CustomThemeProvider from './providers/ThemeProvider';
 
 import './App.css';
 
@@ -29,22 +32,22 @@ function App() {
     }
   };
 
-  const theme = createTheme({
-    palette: {
-      primary: {
-        light: '#e4e1df',
-        main: '#dedad7',
-        dark: '#9b9896',
-        contrastText: '#fff',
-      },
-      secondary: {
-        light: '#e53637',
-        main: '#df0405',
-        dark: '#9c0203',
-        contrastText: '#000',
-      },
-    },
-  });
+  // const theme = createTheme({
+  //   palette: {
+  //     primary: {
+  //       light: '#e4e1df',
+  //       main: '#dedad7',
+  //       dark: '#9b9896',
+  //       contrastText: '#fff',
+  //     },
+  //     secondary: {
+  //       light: '#e53637',
+  //       main: '#df0405',
+  //       dark: '#9c0203',
+  //       contrastText: '#000',
+  //     },
+  //   },
+  // });
 
   // useEffect(() => {
   //   const url = 'http://localhost:8080/cats';
@@ -64,16 +67,6 @@ function App() {
 
   return (
     <>
-      {/* <h1>Lens project</h1>
-      {error && <p>Error loading data: {error.message}</p>}
-      {data ? (
-        <div>
-          <h2>Data from the server:</h2>
-          <p>{data.users[0].email}</p>
-        </div>
-      ) : (
-        <p>Loading data...</p>
-      )} */}
       <ThemeProvider theme={theme}>
         <Header SetView={SetView} />
         {ActiveView()}

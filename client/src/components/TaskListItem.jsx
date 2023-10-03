@@ -1,13 +1,17 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "../styles/TaskListItem.scss";
-import { Box, Card, CardContent, Typography, Avatar, CardActionArea } from "@mui/material";
+
+import { Box, Card, CardContent, CardActions, Typography, Avatar, CardActionArea, useTheme } from "@mui/material";
+
 import { Draggable } from "react-beautiful-dnd";
 import Modal from '@mui/material/Modal';
 import TaskDetailModel from "./TaskDetailModel";
 
 const TaskListItem = (props) => {
   const { id, name, index } = props;
-  const {description, project_id, due_date, assigned_user} = props.task
+  const { description, project_id, due_date, assigned_user } = props.task;
+  const theme = useTheme();
+  console.log("THEME", theme);
 
   const [ModalOpen, setModalOpen] = useState(false);
 
@@ -18,19 +22,19 @@ const TaskListItem = (props) => {
     // margin: `0 0 ${grid}px 0`,
 
     // change background colour if dragging
-    background: isDragging ? "#e53637" : "white",
+    background: isDragging ? 'primary' : "white",
 
     // styles we need to apply on draggables
     ...draggableStyle
   });
 
-   const handleOpen = () => {
-     setModalOpen(true)
-   }
+  const handleOpen = () => {
+    setModalOpen(true);
+  };
 
-   const handleClose = () => {
-    setModalOpen(false)
-   }
+  const handleClose = () => {
+    setModalOpen(false);
+  };
 
   return (
     <Draggable key={id} draggableId={String(id)} index={index}>
@@ -40,15 +44,15 @@ const TaskListItem = (props) => {
           <Card>
             <CardActionArea>
               <Modal open={ModalOpen} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-                  <div>
-                  <TaskDetailModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={assigned_user}/>
-                  </div>
+                <div>
+                  <TaskDetailModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={assigned_user} />
+                </div>
               </Modal>
 
               <CardContent onClick={handleOpen}>
                 <Typography variant="h5" component="div">
                   <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
-                  style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}>
+                    style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}>
 
                     {name}
 
