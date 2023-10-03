@@ -11,6 +11,9 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+
 import { useTheme } from '@mui/material/styles';
 
 
@@ -19,24 +22,12 @@ const settings = ['Profile', 'My Projects', 'Logout'];
 
 function Header(props) {
   const { SetView } = props;
+
+  const theme = useTheme();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const theme = useTheme();
-  // const [active, setActive] = useState(1);
+  const [PaletteMode, setMode] = useState('light');
 
-  // const SetView = (active) => { setActive(active); };
-
-  // const ActiveView = () => {
-  //   console.log("VIEWstate", active);
-  //   switch (active) {
-  //     case 1:
-  //       return <ColumnList />;
-  //     case 2:
-  //       return <StartNewProject />;
-  //     default:
-  //       return <ColumnList />;
-  //   }
-  // };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -52,6 +43,13 @@ function Header(props) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const toggleColorMode = () => {
+    setMode((PaletteMode) =>
+      PaletteMode === 'light' ? 'dark' : 'light',
+    );
+  };
+
 
   return (
     <AppBar position="static">
@@ -149,6 +147,11 @@ function Header(props) {
                 <Avatar alt="L" src="../../public/avatars/avatar5.png" />
               </IconButton>
             </Tooltip>
+
+            <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
+              {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+            </IconButton>
+
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
