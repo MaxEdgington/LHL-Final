@@ -13,7 +13,7 @@ const taskMockArr = [
     name: "Project Planning and Ideation",
     description: "Define project objectives, create a timeline, and brainstorm unique features.",
     project_id: 1,
-    due_date: 10 - 12 - 2023,
+    due_date: 10-12-2023,
     // status: 'To Do',
     assigned_user: 1
   },

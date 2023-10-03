@@ -5,8 +5,6 @@ import { Draggable } from "react-beautiful-dnd";
 import Modal from '@mui/material/Modal';
 import TaskDetailModel from "./TaskDetailModel";
 
-
-
 const TaskListItem = (props) => {
   const { id, name, index } = props;
   const {description, project_id, due_date, assigned_user} = props.task
