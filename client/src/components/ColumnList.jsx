@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import ColumnListItem from "./ColumnListItem";
+import ChatDrawer from "./ChatDrawer";
+import { Box, Typography } from "@mui/material";
 import "../styles/ColumnList.scss";
 import { DragDropContext } from "react-beautiful-dnd";
 
@@ -81,10 +83,10 @@ const taskMockArr = [
 ];
 
 const columnData = {
-   1 : {name: "To Do", tasks: taskMockArr },
-   2 : {name: "In Progress", tasks: [] },
-   3 : {name: "In Review", tasks: [] },
-   4 : {name: "Complete!", tasks: [] }
+  1: { name: "To Do", tasks: taskMockArr },
+  2: { name: "In Progress", tasks: [] },
+  3: { name: "In Review", tasks: [] },
+  4: { name: "Complete!", tasks: [] }
 };
 
 // const [tasks, setTasks] = useState();
@@ -92,11 +94,11 @@ const columnData = {
 // }
 
 const ColumnList = (props) => {
-  const [columns, setColumns] = useState(columnData)
- 
+  const [columns, setColumns] = useState(columnData);
+
   const onDragEnd = (result) => {
-    if(!result.destination) return;
-    const { source, destination} = result;
+    if (!result.destination) return;
+    const { source, destination } = result;
     if (source.droppableId !== destination.droppableId) {
       const sourceColumn = columns[source.droppableId];
       const destColumn = columns[destination.droppableId];
@@ -130,18 +132,30 @@ const ColumnList = (props) => {
     }
   };
 
-  const columnArr = Object.entries(columns).map(([columnId, column], index) => <ColumnListItem key={columnId} id={columnId} name={column.name} tasks={column.tasks}/>
+  const columnArr = Object.entries(columns).map(([columnId, column], index) => <ColumnListItem key={columnId} id={columnId} name={column.name} tasks={column.tasks} />
   );
 
   return (
     <DragDropContext onDragEnd={result => onDragEnd(result)}>
-     
-      <div>
-        <h1>Project 1</h1>
-        <ul className="columnlist">
-          {columnArr}
-        </ul>
-      </div>
+      <Box
+        sx={{
+          flex: 1,
+          paddingTop: "8px",
+          paddingBottom: "16px",
+          bgcolor: "#eaeaee"
+          // change to theme colours
+        }}
+      >
+        <div>
+          <span>
+            <h1>Project 1</h1> {/* this needs to also come from the backend */}
+            <ChatDrawer />
+          </span>
+          <ul className="columnlist">
+            {columnArr}
+          </ul>
+        </div>
+      </Box>
     </ DragDropContext>
   );
 };
