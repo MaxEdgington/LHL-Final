@@ -11,6 +11,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { useTheme } from '@mui/material/styles';
+
 
 const pages = ['New Project', 'TBA', 'What Links?'];
 const settings = ['Profile', 'My Projects', 'Logout'];
@@ -19,6 +21,7 @@ function Header(props) {
   const { SetView } = props;
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const theme = useTheme();
   // const [active, setActive] = useState(1);
 
   // const SetView = (active) => { setActive(active); };
@@ -53,7 +56,7 @@ function Header(props) {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters sx={{ background: 'secondary' }}>
           <img src={"../../public/vite.svg"} sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
@@ -171,7 +174,7 @@ function Header(props) {
           </Box>
         </Toolbar>
       </Container>
-    </AppBar>
+    </AppBar >
   );
 }
 export default Header;
