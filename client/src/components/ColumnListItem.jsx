@@ -6,6 +6,10 @@ import "../styles/ColumnListItem.scss";
 
 const ColumnListItem = (props) => {
   const { id, name, tasks } = props;
+
+  console.log("ColumnListItem props:", props); // Check the props
+  console.log("Tasks received:", tasks); // Check the tasks data
+
   return (
     <Box
       sx={{
@@ -31,6 +35,7 @@ const ColumnListItem = (props) => {
         {id == 1 && <button>Add New Task</button>}
       </div>
     </Box>
+
   );
 };
 

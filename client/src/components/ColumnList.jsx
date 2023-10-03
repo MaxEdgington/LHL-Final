@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ColumnListItem from "./ColumnListItem";
+import axios from "axios";
 import ChatDrawer from "./ChatDrawer";
 import { Box, Typography } from "@mui/material";
 import "../styles/ColumnList.scss";
 import { DragDropContext } from "react-beautiful-dnd";
-
-//mock data
 
 const taskMockArr = [
   {
@@ -82,19 +81,63 @@ const taskMockArr = [
   }
 ];
 
-const columnData = {
-  1: { name: "To Do", tasks: taskMockArr },
+const initialColumnData = {
+  1: { name: "To Do", tasks: [] },
   2: { name: "In Progress", tasks: [] },
   3: { name: "In Review", tasks: [] },
   4: { name: "Complete!", tasks: [] }
 };
 
-// const [tasks, setTasks] = useState();
-// function handleOnDragEnd(result) {
-// }
-
 const ColumnList = (props) => {
-  const [columns, setColumns] = useState(columnData);
+
+  const [columns, setColumns] = useState(initialColumnData);
+
+  
+  // Start of new code 
+
+  useEffect(() => {
+  const fetchTasks = async () => {
+    try {
+      const res = await axios.get("http://localhost:8080/api/tasks");
+      console.log("Tasks received from server:", res.data); 
+
+      // ... rest of your logging and fetching logic ...
+
+      // Creating a new column state based on the fetched tasks
+      // setColumns(prevColumns =>
+      //   Object.keys(prevColumns).reduce((acc, columnId) => {
+      //     acc[columnId] = {
+      //       ...prevColumns[columnId],
+      //       tasks: fetchTasks[columnId] || [],
+      //     };
+      //     return acc;
+      //   }, {})
+      // );
+
+      setColumns(prevColumns => {
+        // console.log("Mentor Session: Looking for prevColumns", prevColumns[0])
+        // prevColumns[0].tasks = res.data
+        let newTasks = {}
+        return {
+          ...prevColumns, 
+          [1]:{
+            ...prevColumns[1], 
+            tasks:res.data
+          }}
+      } )
+
+      console.log("After data transformation:", columns);
+    } catch (error) {
+      console.error("Could not fetch tasks", error);
+    }
+  };
+
+  fetchTasks();
+}, []);
+
+// End of new code 
+
+
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
@@ -132,7 +175,19 @@ const ColumnList = (props) => {
     }
   };
 
-  const columnArr = Object.entries(columns).map(([columnId, column], index) => <ColumnListItem key={columnId} id={columnId} name={column.name} tasks={column.tasks} />
+  console.log(columns);
+  const columnArr = Object
+    .entries(columns)
+    .map(([columnId, column]) => {
+      return <ColumnListItem 
+      key={columnId} 
+      id={columnId} 
+      name={column.name} 
+      tasks={column.tasks}/>
+  }
+
+
+
   );
 
   return (
@@ -161,3 +216,7 @@ const ColumnList = (props) => {
 };
 
 export default ColumnList;
+
+
+
+//mock data
