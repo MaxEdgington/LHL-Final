@@ -19,14 +19,14 @@ const TaskDetailModel = (props) => {
 
   return (
     <Box sx={style}>  
-      <Typography id="modal-modal-title" variant="h6" component="h2" align="center" fontSize={35}>
+      <Typography id="modal-modal-title" variant="h6" component="h2" align="center" fontSize={36}>
         {name}
       </Typography>
       <Typography id="modal-modal-description" sx={{ mt: 2 }} fontSize={28}> 
         {description}
       </Typography>
       <Typography id="modal-modal-description" sx={{ mt: 2 }} fontSize={28}> 
-        {due_date}
+        Due Date: {due_date}
         {/* it does not show the correct due_date */}
       </Typography>
   </Box>
