@@ -4,8 +4,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from './components/Header';
 import ColumnList from './components/ColumnList';
 import ChatDrawer from './components/ChatDrawer';
-import StartNewProject from './components/StartNewProject';
-import NewTasksForm from './components/NewTasksForm';
+import StartNewProject from './components/StartProj/StartNewProject';
+import NewTasksForm from './components/StartProj/NewTasksForm';
 
 import './App.css';
 

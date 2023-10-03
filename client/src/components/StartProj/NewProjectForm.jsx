@@ -23,7 +23,7 @@ function NewProjectForm(props) {
           <TextField color='primary'></TextField>
           <Box>
             <h3>Would you like to use our Lens AI to help you get started?</h3>
-            <Button >Yes, use LensAI</Button> {/* this button will need to open a different Form*/}
+            <Button >Yes, use Lens AI</Button> {/* this button will need to open a different Form*/}
             <Button type="submit" onClick={() => SetView(3)}>No, I'll create Tasks myself</Button>
           </Box>
         </FormControl>
