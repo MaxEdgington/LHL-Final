@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ColumnListItem from "./ColumnListItem";
 import axios from "axios";
+import ChatDrawer from "./ChatDrawer";
+import { Box, Typography } from "@mui/material";
 import "../styles/ColumnList.scss";
 import { DragDropContext } from "react-beautiful-dnd";
 
@@ -10,7 +12,7 @@ const taskMockArr = [
     name: "Project Planning and Ideation",
     description: "Define project objectives, create a timeline, and brainstorm unique features.",
     project_id: 1,
-    due_date: 10 - 12 - 2023,
+    due_date: "2023-10-12",
     // status: 'To Do',
     assigned_user: 1
   },
@@ -19,7 +21,7 @@ const taskMockArr = [
     name: "Market Research",
     description: "Research pet and cat-related social media platforms for insights and opportunities.",
     project_id: 1,
-    due_date: 11 - 12 - 2023,
+    due_date: "2023-10-13",
     // status: 'To Do',
     assigned_user: 2
   },
@@ -28,7 +30,7 @@ const taskMockArr = [
     name: "Technology Stack Selection",
     description: "Choose front-end and back-end technologies, including programming languages and databases.",
     project_id: 1,
-    due_date: 12 - 12 - 2023,
+    due_date: "2023-10-14",
     // status: 'To Do',
     assigned_user: 3
   },
@@ -37,7 +39,7 @@ const taskMockArr = [
     name: "UI/UX Design",
     description: "Create wireframes, mockups, and a visually appealing cat-themed interface.",
     project_id: 1,
-    due_date: 13 - 12 - 2023,
+    due_date: "2023-10-13",
     // status: 'To Do',
     assigned_user: 1
   },
@@ -46,7 +48,7 @@ const taskMockArr = [
     name: "Front-End Development",
     description: "Develop the front-end using HTML, CSS, and JavaScript with relevant frameworks.",
     project_id: 1,
-    due_date: 14 - 12 - 2023,
+    due_date: "2023-11-14",
     // status: 'To Do',
     assigned_user: 4
   },
@@ -55,7 +57,7 @@ const taskMockArr = [
     name: "Back-End Development",
     description: "Build server-side logic, implement authentication, and create APIs for key features.",
     project_id: 1,
-    due_date: 15 - 12 - 2023,
+    due_date: "2023-11-15",
     // status: 'To Do',
     assigned_user: 6
   },
@@ -64,7 +66,7 @@ const taskMockArr = [
     name: "Database Setup and Management",
     description: "Design the database schema, set up the database server, and implement queries.",
     project_id: 1,
-    due_date: 16 - 12 - 2023,
+    due_date: "2023-12-15",
     // status: 'To Do',
     assigned_user: 5
   },
@@ -73,12 +75,11 @@ const taskMockArr = [
     name: "Testing, Deployment, and Monitoring",
     description: "Test for bugs, deploy to a web server, and set up monitoring for performance.",
     project_id: 1,
-    due_date: 17 - 12 - 2023,
+    due_date: "2023-12-17",
     // status: 'To Do',
     assigned_user: 1
   }
 ];
-
 
 const initialColumnData = {
   1: { name: "To Do", tasks: [] },
@@ -139,8 +140,8 @@ const ColumnList = (props) => {
 
 
   const onDragEnd = (result) => {
-    if(!result.destination) return;
-    const { source, destination} = result;
+    if (!result.destination) return;
+    const { source, destination } = result;
     if (source.droppableId !== destination.droppableId) {
       const sourceColumn = columns[source.droppableId];
       const destColumn = columns[destination.droppableId];
@@ -173,6 +174,7 @@ const ColumnList = (props) => {
       });
     }
   };
+
   console.log(columns);
   const columnArr = Object
     .entries(columns)
@@ -183,17 +185,32 @@ const ColumnList = (props) => {
       name={column.name} 
       tasks={column.tasks}/>
   }
+
+
+
   );
 
   return (
     <DragDropContext onDragEnd={result => onDragEnd(result)}>
-     
-    <div>
-        <h1>Project 1</h1>
-        <ul className="columnlist">
-          {columnArr}
-        </ul>
-    </div>
+      <Box
+        sx={{
+          flex: 1,
+          paddingTop: "8px",
+          paddingBottom: "16px",
+          bgcolor: "#eaeaee"
+          // change to theme colours
+        }}
+      >
+        <div>
+          <span>
+            <h1>Project 1</h1> {/* this needs to also come from the backend */}
+            <ChatDrawer />
+          </span>
+          <ul className="columnlist">
+            {columnArr}
+          </ul>
+        </div>
+      </Box>
     </ DragDropContext>
   );
 };
