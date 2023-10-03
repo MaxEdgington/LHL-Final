@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "../styles/TaskListItem.scss";
-import { Box, Card, CardContent, CardActions, Typography, Avatar, CardActionArea } from "@mui/material";
+import { Box, Card, CardContent, Typography, Avatar, CardActionArea } from "@mui/material";
 import { Draggable } from "react-beautiful-dnd";
 import Modal from '@mui/material/Modal';
 import TaskDetailModel from "./TaskDetailModel";
@@ -57,10 +57,6 @@ const TaskListItem = (props) => {
               </CardContent>
 
             </CardActionArea>
-
-            {/* <CardActions> */}
-              {/* somethign in here for clickable??? from mui? */}
-            {/* </CardActions> */}
 
           </Card>
         </Box>
