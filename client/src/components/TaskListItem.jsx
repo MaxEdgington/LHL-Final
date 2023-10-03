@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/TaskListItem.scss";
+// import "../styles/TaskListItem.scss";
 import { Box, Card, CardContent, CardActions, Typography, Avatar } from "@mui/material";
 import { Draggable } from "react-beautiful-dnd";
 

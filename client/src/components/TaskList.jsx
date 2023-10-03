@@ -1,11 +1,11 @@
 import React from "react";
 import TaskListItem from "./TaskListItem";
-import "../styles/TaskList.scss";
+// import "../styles/TaskList.scss";
 import { Droppable } from "react-beautiful-dnd";
 
 const getListStyle = (isDraggingOver) => ({
   background: isDraggingOver ? "#df0405" : "white",
-  // width: 250
+  width: '100%'
 });
 
 const TaskList = (props) => {

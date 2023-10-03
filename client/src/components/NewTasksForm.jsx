@@ -23,9 +23,9 @@ function NewTasksForm() {
       <form noValidate autoComplete="off" onSubmit={handleDoneSubmit}>
         <FormControl>
           <FormLabel>Task Name</FormLabel>
-          <TextField color='primary'></TextField> {/* input id or something?*/}
+          <TextField color='primary' name="task-name"></TextField> {/* input id or something?*/}
           <FormLabel>Description Name</FormLabel>
-          <TextField color='primary'></TextField>
+          <TextField color='primary' name="task-description"></TextField>
           <Box>
             <h3> more tasks?</h3>
             <Button onClick={() => handleMoreTasksClick}>Enter More Tasks</Button> {/* other types than submit?*/}

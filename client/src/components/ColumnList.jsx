@@ -142,8 +142,8 @@ const ColumnList = (props) => {
           flex: 1,
           paddingTop: "8px",
           paddingBottom: "16px",
-          bgcolor: "#eaeaee",
-
+          bgcolor: "#eaeaee"
+          // change to theme colours
         }}
       >
         <div>

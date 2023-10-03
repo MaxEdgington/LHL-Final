@@ -11,7 +11,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 
 const pages = ['New Project', 'TBA', 'What Links?'];
 const settings = ['Profile', 'My Projects', 'Logout'];
@@ -110,7 +109,7 @@ function Header(props) {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          {/* <img src={"../../public/vite.svg"} sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
             variant="h5"
             noWrap
@@ -127,7 +126,7 @@ function Header(props) {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Lens
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
