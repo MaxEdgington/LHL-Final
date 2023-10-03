@@ -4,6 +4,80 @@ import axios from "axios";
 import "../styles/ColumnList.scss";
 import { DragDropContext } from "react-beautiful-dnd";
 
+const taskMockArr = [
+  {
+    id: 1,
+    name: "Project Planning and Ideation",
+    description: "Define project objectives, create a timeline, and brainstorm unique features.",
+    project_id: 1,
+    due_date: 10 - 12 - 2023,
+    // status: 'To Do',
+    assigned_user: 1
+  },
+  {
+    id: 2,
+    name: "Market Research",
+    description: "Research pet and cat-related social media platforms for insights and opportunities.",
+    project_id: 1,
+    due_date: 11 - 12 - 2023,
+    // status: 'To Do',
+    assigned_user: 2
+  },
+  {
+    id: 3,
+    name: "Technology Stack Selection",
+    description: "Choose front-end and back-end technologies, including programming languages and databases.",
+    project_id: 1,
+    due_date: 12 - 12 - 2023,
+    // status: 'To Do',
+    assigned_user: 3
+  },
+  {
+    id: 4,
+    name: "UI/UX Design",
+    description: "Create wireframes, mockups, and a visually appealing cat-themed interface.",
+    project_id: 1,
+    due_date: 13 - 12 - 2023,
+    // status: 'To Do',
+    assigned_user: 1
+  },
+  {
+    id: 5,
+    name: "Front-End Development",
+    description: "Develop the front-end using HTML, CSS, and JavaScript with relevant frameworks.",
+    project_id: 1,
+    due_date: 14 - 12 - 2023,
+    // status: 'To Do',
+    assigned_user: 4
+  },
+  {
+    id: 6,
+    name: "Back-End Development",
+    description: "Build server-side logic, implement authentication, and create APIs for key features.",
+    project_id: 1,
+    due_date: 15 - 12 - 2023,
+    // status: 'To Do',
+    assigned_user: 6
+  },
+  {
+    id: 7,
+    name: "Database Setup and Management",
+    description: "Design the database schema, set up the database server, and implement queries.",
+    project_id: 1,
+    due_date: 16 - 12 - 2023,
+    // status: 'To Do',
+    assigned_user: 5
+  },
+  {
+    id: 8,
+    name: "Testing, Deployment, and Monitoring",
+    description: "Test for bugs, deploy to a web server, and set up monitoring for performance.",
+    project_id: 1,
+    due_date: 17 - 12 - 2023,
+    // status: 'To Do',
+    assigned_user: 1
+  }
+];
 
 
 const initialColumnData = {
@@ -18,7 +92,6 @@ const ColumnList = (props) => {
   const [columns, setColumns] = useState(initialColumnData);
 
   
-
   // Start of new code 
 
   useEffect(() => {
@@ -30,15 +103,27 @@ const ColumnList = (props) => {
       // ... rest of your logging and fetching logic ...
 
       // Creating a new column state based on the fetched tasks
-      setColumns(prevColumns =>
-        Object.keys(prevColumns).reduce((acc, columnId) => {
-          acc[columnId] = {
-            ...prevColumns[columnId],
-            tasks: fetchTasks[columnId] || [],
-          };
-          return acc;
-        }, {})
-      );
+      // setColumns(prevColumns =>
+      //   Object.keys(prevColumns).reduce((acc, columnId) => {
+      //     acc[columnId] = {
+      //       ...prevColumns[columnId],
+      //       tasks: fetchTasks[columnId] || [],
+      //     };
+      //     return acc;
+      //   }, {})
+      // );
+
+      setColumns(prevColumns => {
+        // console.log("Mentor Session: Looking for prevColumns", prevColumns[0])
+        // prevColumns[0].tasks = res.data
+        let newTasks = {}
+        return {
+          ...prevColumns, 
+          [1]:{
+            ...prevColumns[1], 
+            tasks:res.data
+          }}
+      } )
 
       console.log("After data transformation:", columns);
     } catch (error) {
@@ -88,8 +173,16 @@ const ColumnList = (props) => {
       });
     }
   };
-
-  const columnArr = Object.entries(columns).map(([columnId, column], index) => <ColumnListItem key={columnId} id={columnId} name={column.name} tasks={column.tasks}/>
+  console.log(columns);
+  const columnArr = Object
+    .entries(columns)
+    .map(([columnId, column]) => {
+      return <ColumnListItem 
+      key={columnId} 
+      id={columnId} 
+      name={column.name} 
+      tasks={column.tasks}/>
+  }
   );
 
   return (
@@ -110,78 +203,3 @@ export default ColumnList;
 
 
 //mock data
-
-// const taskMockArr = [
-//   {
-//     id: 1,
-//     name: "Project Planning and Ideation",
-//     description: "Define project objectives, create a timeline, and brainstorm unique features.",
-//     project_id: 1,
-//     due_date: 10 - 12 - 2023,
-//     // status: 'To Do',
-//     assigned_user: 1
-//   },
-//   {
-//     id: 2,
-//     name: "Market Research",
-//     description: "Research pet and cat-related social media platforms for insights and opportunities.",
-//     project_id: 1,
-//     due_date: 11 - 12 - 2023,
-//     // status: 'To Do',
-//     assigned_user: 2
-//   },
-//   {
-//     id: 3,
-//     name: "Technology Stack Selection",
-//     description: "Choose front-end and back-end technologies, including programming languages and databases.",
-//     project_id: 1,
-//     due_date: 12 - 12 - 2023,
-//     // status: 'To Do',
-//     assigned_user: 3
-//   },
-//   {
-//     id: 4,
-//     name: "UI/UX Design",
-//     description: "Create wireframes, mockups, and a visually appealing cat-themed interface.",
-//     project_id: 1,
-//     due_date: 13 - 12 - 2023,
-//     // status: 'To Do',
-//     assigned_user: 1
-//   },
-//   {
-//     id: 5,
-//     name: "Front-End Development",
-//     description: "Develop the front-end using HTML, CSS, and JavaScript with relevant frameworks.",
-//     project_id: 1,
-//     due_date: 14 - 12 - 2023,
-//     // status: 'To Do',
-//     assigned_user: 4
-//   },
-//   {
-//     id: 6,
-//     name: "Back-End Development",
-//     description: "Build server-side logic, implement authentication, and create APIs for key features.",
-//     project_id: 1,
-//     due_date: 15 - 12 - 2023,
-//     // status: 'To Do',
-//     assigned_user: 6
-//   },
-//   {
-//     id: 7,
-//     name: "Database Setup and Management",
-//     description: "Design the database schema, set up the database server, and implement queries.",
-//     project_id: 1,
-//     due_date: 16 - 12 - 2023,
-//     // status: 'To Do',
-//     assigned_user: 5
-//   },
-//   {
-//     id: 8,
-//     name: "Testing, Deployment, and Monitoring",
-//     description: "Test for bugs, deploy to a web server, and set up monitoring for performance.",
-//     project_id: 1,
-//     due_date: 17 - 12 - 2023,
-//     // status: 'To Do',
-//     assigned_user: 1
-//   }
-// ];
