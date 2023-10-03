@@ -16,6 +16,7 @@ const TaskList = (props) => {
       key={task.id}
       id={task.id}
       name={task.name}
+      task={task}
       index={index} />);
 
   return (

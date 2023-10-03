@@ -1,12 +1,15 @@
-import React from "react";
-// import "../styles/TaskListItem.scss";
-import { Box, Card, CardContent, CardActions, Typography, Avatar } from "@mui/material";
+import React, {useState} from "react";
+import "../styles/TaskListItem.scss";
+import { Box, Card, CardContent, CardActions, Typography, Avatar, CardActionArea } from "@mui/material";
 import { Draggable } from "react-beautiful-dnd";
-
-
+import Modal from '@mui/material/Modal';
+import TaskDetailModel from "./TaskDetailModel";
 
 const TaskListItem = (props) => {
   const { id, name, index } = props;
+  const {description, project_id, due_date, assigned_user} = props.task
+
+  const [ModalOpen, setModalOpen] = useState(false);
 
   const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -21,27 +24,43 @@ const TaskListItem = (props) => {
     ...draggableStyle
   });
 
+   const handleOpen = () => {
+     setModalOpen(true)
+   }
+
+   const handleClose = () => {
+    setModalOpen(false)
+   }
+
   return (
     <Draggable key={id} draggableId={String(id)} index={index}>
       {(provided, snapshot) => (
 
         <Box sx={{ marginBottom: 1 }}>
           <Card>
-            <CardContent>
-              <Typography variant="h5" component="div">
+            <CardActionArea>
+              <Modal open={ModalOpen} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                  <div>
+                  <TaskDetailModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={assigned_user}/>
+                  </div>
+              </Modal>
 
-                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
+              <CardContent onClick={handleOpen}>
+                <Typography variant="h5" component="div">
+                  <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
                   style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}>
 
-                  {name}
-                </div>
+                    {name}
 
-              </Typography>
-            </CardContent>
+                  </div>
+                </Typography>
+              </CardContent>
 
-            <CardActions>
+            </CardActionArea>
+
+            {/* <CardActions> */}
               {/* somethign in here for clickable??? from mui? */}
-            </CardActions>
+            {/* </CardActions> */}
 
           </Card>
         </Box>
