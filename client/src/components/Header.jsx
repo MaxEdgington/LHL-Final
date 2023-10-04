@@ -21,7 +21,7 @@ const pages = ['New Project', 'What Links?'];
 const settings = ['My Projects', 'Logout'];
 
 function Header(props) {
-  const { SetView } = props;
+  const { setView } = props;
 
   const theme = useTheme();
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -61,7 +61,7 @@ function Header(props) {
             variant="h6"
             noWrap
             component="a"
-            onClick={() => SetView(1)}
+            onClick={() => setView(1)}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -134,7 +134,7 @@ function Header(props) {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={() => SetView(2)}
+                onClick={() => setView(2)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}

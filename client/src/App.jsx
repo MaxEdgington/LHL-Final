@@ -24,7 +24,7 @@ function App() {
   const [error, setError] = useState(null);
   const [active, setActive] = useState(4);
 
-  const SetView = (active) => {
+  const setView = (active) => {
     setActive(active);
   };
 
@@ -33,7 +33,7 @@ function App() {
       case 1:
         return <ColumnList />;
       case 2:
-        return <StartNewProject SetView={SetView} />;
+        return <StartNewProject setView={setView} />;
       case 3:
         return <NewTasksForm />;
       case 4:
@@ -78,7 +78,7 @@ function App() {
 
   return (
     <>
-      <Header SetView={SetView} />
+      <Header setView={setView} />
 
       <ProjectProvider>
         <ColumnsProvider>

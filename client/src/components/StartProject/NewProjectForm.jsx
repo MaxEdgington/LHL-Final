@@ -8,7 +8,7 @@ import background from '../../../public/lens-img-darkmode.jpeg';
 
 
 function NewProjectForm(props) {
-  const { SetView } = props;
+  const { setView } = props;
   const { addProject } = useContext(projectContext);
 
   const [projectName, setProjectName] = useState('');
