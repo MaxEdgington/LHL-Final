@@ -5,6 +5,7 @@ export const projectContext = createContext();
 
 export default function ProjectProvider(props) {
   const [project, setProject] = useState({}); //inital?
+  //project is an object with all the keys from db, same as res.data below
 
   const fetchProject = async () => {
     try {
@@ -22,8 +23,8 @@ export default function ProjectProvider(props) {
     try {
       const res = await axios.post(`http://localhost:8080/api/projects/add`, formData);
       console.log("this is what projProvider gets:", res.data);
-      // setProject(res.data);
-      setView(1);
+      setProject(res.data);
+
     } catch (error) {
       console.error("Could not add project", error);
     }

@@ -11,6 +11,7 @@ import { projectContext } from "../providers/ProjectProvider";
 const ColumnList = (props) => {
   const { columns, fetchTasks, onDragEnd } = useContext(columnsContext);
   const { project } = useContext(projectContext);
+  console.log("am i getting the project?", project);
 
   // Start of new code
 

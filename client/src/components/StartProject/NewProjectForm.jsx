@@ -37,6 +37,7 @@ function NewProjectForm(props) {
 
     console.log(formData);
     addProject(formData);
+    setView(1);
   };
 
 
