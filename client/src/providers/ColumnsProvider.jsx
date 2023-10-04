@@ -94,6 +94,7 @@ export default function ColumnsProvider(props) {
       const destTasks = [...destColumn.tasks];
       const [removed] = sourceTasks.splice(source.index, 1);
       destTasks.splice(destination.index, 0, removed);
+      // add axio post request here to change the tasks table's status colomn
       setColumns({
         ...columns,
         [source.droppableId]: {
