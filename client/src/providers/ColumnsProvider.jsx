@@ -4,7 +4,6 @@ import axios from "axios";
 export const columnsContext = createContext();
 
 export default function ColumnsProvider(props) {
-
   const initialColumnData = {
     1: { name: "To Do", tasks: [] },
     2: { name: "In Progress", tasks: [] },
@@ -20,7 +19,6 @@ export default function ColumnsProvider(props) {
       const res = await axios.get("http://localhost:8080/api/tasks");
       console.log("Tasks received from server:", res.data);
       setColumns((prevColumns) => {
-        
         return {
           ...prevColumns,
           [1]: {
@@ -36,11 +34,11 @@ export default function ColumnsProvider(props) {
     }
   };
 
-  const addNewTask = async () => {
+  const addNewTask = async (taskTitle) => {
     // give this form params from form
     try {
       const response = await axios.post("http://localhost:8080/api/tasks/add", {
-        title: "Default Task Title", // You can set a default title for now
+        title: taskTitle, // You can set a default title for now
       });
       console.log("New task added:", response.data);
 
@@ -59,18 +57,28 @@ export default function ColumnsProvider(props) {
 
   // }, []);
 
-  const handleDelete = async(taskId) => {
-    console.log("tasks No:", taskId)
+  const handleDelete = async (taskId) => {
+    // console.log("tasks No:", taskId)
     try {
-     await axios.post(`http://localhost:8080/api/tasks/${taskId}/delete`);
-     
-      // setColumns(
-      //  Object.values(columns).map(column => {
-      //    return (
-      //      column.tasks.length > 0 && column.tasks.filter(task => task.id !== taskId)
-      //    )
-      //  })
-      // )
+      await axios.post(`http://localhost:8080/api/tasks/${taskId}/delete`);
+
+      console.log("*****deleted task id:", taskId);
+      console.log("Columns data here:", columns);
+
+      const newColumns = Object.entries(columns).reduce(
+        (acc, [key, column]) => {
+          return {
+            ...acc,
+            [key]: {
+              ...column,
+              tasks: column.tasks.filter((task) => task.id !== taskId),
+            },
+          };
+        },
+        {}
+      );
+
+      setColumns(newColumns);
     } catch (error) {
       console.error("Could not delete tasks", error);
     }
@@ -86,6 +94,7 @@ export default function ColumnsProvider(props) {
       const destTasks = [...destColumn.tasks];
       const [removed] = sourceTasks.splice(source.index, 1);
       destTasks.splice(destination.index, 0, removed);
+      // add axio post request here to change the tasks table's status colomn
       setColumns({
         ...columns,
         [source.droppableId]: {
@@ -112,7 +121,13 @@ export default function ColumnsProvider(props) {
     }
   };
 
-  const columnData = { columns, fetchTasks, handleDelete, onDragEnd, addNewTask  };
+  const columnData = {
+    columns,
+    fetchTasks,
+    onDragEnd,
+    addNewTask,
+    handleDelete,
+  };
 
   return (
     <columnsContext.Provider value={columnData}>
