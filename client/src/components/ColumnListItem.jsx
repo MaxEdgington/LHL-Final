@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import TaskList from "./TaskList";
-
+import { columnsContext } from "../providers/ColumnsProvider";
 import { Box, Typography } from "@mui/material";
 import "../styles/ColumnListItem.scss";
 
 const ColumnListItem = (props) => {
   const { id, name, tasks } = props;
-
+  const { addNewTask } = useContext(columnsContext);
   console.log("ColumnListItem props:", props); // Check the props
   console.log("Tasks received:", tasks); // Check the tasks data
 
@@ -17,7 +17,7 @@ const ColumnListItem = (props) => {
         paddingTop: "8px",
         paddingBottom: "16px",
         margin: "16px",
-        width: '25%',
+        width: "25%",
         bgcolor: "white",
         "&:first-child": {
           paddingLeft: "5px",
@@ -32,10 +32,9 @@ const ColumnListItem = (props) => {
       <div className="column">
         <h2>{name}</h2>
         <TaskList id={id} tasks={tasks} />
-        {id == 1 && <button>Add New Task</button>}
+        {id == 1 && <button onClick={addNewTask}>Add New Task</button>}
       </div>
     </Box>
-
   );
 };
 
