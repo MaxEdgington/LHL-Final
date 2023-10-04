@@ -1,5 +1,6 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 import axios from "axios";
+
 export const columnsContext = createContext();
 
 export default function ColumnsProvider(props) {
@@ -18,7 +19,7 @@ export default function ColumnsProvider(props) {
       const res = await axios.get("http://localhost:8080/api/tasks");
       console.log("Tasks received from server:", res.data);
       setColumns((prevColumns) => {
-        let newTasks = {};
+        
         return {
           ...prevColumns,
           [1]: {

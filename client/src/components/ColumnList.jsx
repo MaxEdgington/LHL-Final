@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import ColumnListItem from "./ColumnListItem";
-import axios from "axios";
 import ChatDrawer from "./ChatDrawer";
 import { Box, Typography } from "@mui/material";
 import "../styles/ColumnList.scss";
@@ -24,8 +23,8 @@ const ColumnList = (props) => {
       <ColumnListItem
         key={columnId}
         id={columnId}
-        name={column.name}
-        tasks={column.tasks}
+        // name={column.name}
+        // tasks={column.tasks}
       />
     );
   });
