@@ -45,7 +45,7 @@ const TaskListItem = (props) => {
             <CardActionArea>
               <Modal open={ModalOpen} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
                 <div>
-                  <TaskDetailModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={assigned_user} />
+                  <TaskDetailModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={assigned_user}  handleClose={handleClose}/>
                 </div>
               </Modal>
 

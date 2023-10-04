@@ -4,6 +4,7 @@ import axios from "axios";
 export const columnsContext = createContext();
 
 export default function ColumnsProvider(props) {
+
   const initialColumnData = {
     1: { name: "To Do", tasks: [] },
     2: { name: "In Progress", tasks: [] },
@@ -36,6 +37,21 @@ export default function ColumnsProvider(props) {
   };
 
   // }, []);
+
+  const handleDelete = async(taskId) => {
+    try {
+     await axios.post(`http://localhost:8000/api/tasks/${taskId}/delete`);
+     setColumns(
+      Object.values(columns).map(column => {
+        return (
+          column.tasks.length > 0 && column.tasks.filter(task => task.id !== taskId)
+        )
+      })
+     )
+    } catch (error) {
+      console.error("Could not delete tasks", error);
+    }
+  }
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
@@ -73,7 +89,7 @@ export default function ColumnsProvider(props) {
     }
   };
 
-  const columnData = { columns, fetchTasks, onDragEnd };
+  const columnData = { columns, fetchTasks, handleDelete, onDragEnd };
 
   return (
     <columnsContext.Provider value={columnData}>
