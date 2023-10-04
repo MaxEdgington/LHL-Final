@@ -1,5 +1,8 @@
 import React from "react";
 import {Box, Typography} from "@mui/material";
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const style = {
   position: 'absolute',
@@ -27,7 +30,14 @@ const TaskDetailModel = (props) => {
       </Typography>
       <Typography id="modal-modal-description" sx={{ mt: 2 }} fontSize={28}> 
         Due Date: {due_date}
+
       </Typography>
+      <Stack direction="column" spacing={2} sx={{ '& button': { m: 1 } }}>
+        <Button variant="contained" startIcon={<DeleteIcon />}>
+        Delete
+        </Button>
+        <Button variant="outlined" size="small">Edit</Button>
+    </Stack>
   </Box>
   )
 }
