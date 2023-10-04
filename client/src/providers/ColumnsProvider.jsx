@@ -41,6 +41,7 @@ export default function ColumnsProvider(props) {
   const handleDelete = async(taskId) => {
     try {
      await axios.post(`http://localhost:8000/api/tasks/${taskId}/delete`);
+     
      setColumns(
       Object.values(columns).map(column => {
         return (
