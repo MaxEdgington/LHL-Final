@@ -19,7 +19,8 @@ router.post('/:id/delete', async(req, res) => {
     try{
         console.log("deleting tasks No.: ", req.params)
         await db.query('DELETE FROM tasks WHERE id=$1', [req.params.id]);
-        console.log("deleted")
+        res.status(200).send()
+        console.log("----deleted")
     } catch (error) {
         console.error('Error during fetching tasks:', error);
         res.status(500).send('Server Error');

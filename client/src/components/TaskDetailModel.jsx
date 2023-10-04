@@ -21,10 +21,11 @@ const style = {
 const TaskDetailModel = (props) => {
   const {name, id, description, project_id, due_date, assigned_user, handleClose} = props
 
-  const { handleDelete } = useContext(columnsContext)
+  const { handleDelete, columns } = useContext(columnsContext)
 
   const deleteTask = () => {
     handleDelete(id)
+    // console.log("++++New Columns data here:", columns)
     handleClose()
   } 
 
