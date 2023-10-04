@@ -19,7 +19,6 @@ export default function ColumnsProvider(props) {
       const res = await axios.get("http://localhost:8080/api/tasks");
       console.log("Tasks received from server:", res.data);
       setColumns((prevColumns) => {
-        
         return {
           ...prevColumns,
           [1]: {
@@ -35,11 +34,11 @@ export default function ColumnsProvider(props) {
     }
   };
 
-  const addNewTask = async () => {
+  const addNewTask = async (taskTitle) => {
     // give this form params from form
     try {
       const response = await axios.post("http://localhost:8080/api/tasks/add", {
-        title: "Default Task Title", // You can set a default title for now
+        title: taskTitle, // You can set a default title for now
       });
       console.log("New task added:", response.data);
 
@@ -94,7 +93,12 @@ export default function ColumnsProvider(props) {
     }
   };
 
-  const columnData = { columns, fetchTasks, onDragEnd, addNewTask };
+  const columnData = {
+    columns,
+    fetchTasks,
+    onDragEnd,
+    addNewTask,
+  };
 
   return (
     <columnsContext.Provider value={columnData}>
