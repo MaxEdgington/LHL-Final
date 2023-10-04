@@ -3,12 +3,12 @@ import axios from "axios";
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from "./components/Header";
 import ColumnList from "./components/ColumnList";
-import StartNewProject from "./components/StartNewProject";
+import StartNewProject from "./components/StartProject/StartNewProject";
 import NewTasksForm from "./components/NewTasksForm";
-import { ThemeProvider } from "@mui/material";
-import { theme } from "./theme";
+
 import ColumnsProvider from "./providers/ColumnsProvider";
-import { columnsContext } from "./providers/ColumnsProvider";
+import ProjectProvider from "./providers/ProjectProvider";
+// import { columnsContext } from "./providers/ColumnsProvider";
 
 // import CustomThemeProvider from './providers/ThemeProvider';
 
@@ -71,10 +71,14 @@ function App() {
 
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <Header SetView={SetView} />
-        <ColumnsProvider>{ActiveView()}</ColumnsProvider>
-      </ThemeProvider>
+      <Header SetView={SetView} />
+
+      <ProjectProvider>
+        <ColumnsProvider>
+          {ActiveView()}
+        </ColumnsProvider>
+      </ProjectProvider>
+
     </>
   );
 }
