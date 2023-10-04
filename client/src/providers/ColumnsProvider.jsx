@@ -43,13 +43,13 @@ export default function ColumnsProvider(props) {
     try {
      await axios.post(`http://localhost:8080/api/tasks/${taskId}/delete`);
      
-      setColumns(
-       Object.values(columns).map(column => {
-         return (
-           column.tasks.length > 0 && column.tasks.filter(task => task.id !== taskId)
-         )
-       })
-      )
+      // setColumns(
+      //  Object.values(columns).map(column => {
+      //    return (
+      //      column.tasks.length > 0 && column.tasks.filter(task => task.id !== taskId)
+      //    )
+      //  })
+      // )
     } catch (error) {
       console.error("Could not delete tasks", error);
     }
