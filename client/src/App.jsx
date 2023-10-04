@@ -1,23 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useContext } from "react";
+import axios from "axios";
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Header from './components/Header';
-import ColumnList from './components/ColumnList';
-import StartNewProject from './components/StartNewProject';
-import NewTasksForm from './components/NewTasksForm';
-import { ThemeProvider } from '@mui/material';
-import { theme } from './theme';
+import Header from "./components/Header";
+import ColumnList from "./components/ColumnList";
+import StartNewProject from "./components/StartNewProject";
+import NewTasksForm from "./components/NewTasksForm";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./theme";
+import ColumnsProvider from "./providers/ColumnsProvider";
+import { columnsContext } from "./providers/ColumnsProvider";
 
 // import CustomThemeProvider from './providers/ThemeProvider';
 
-import './App.css';
+import "./App.css";
 
 function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [active, setActive] = useState(1);
 
-  const SetView = (active) => { setActive(active); };
+  const SetView = (active) => {
+    setActive(active);
+  };
 
   const ActiveView = () => {
     switch (active) {
@@ -69,7 +73,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <Header SetView={SetView} />
-        {ActiveView()}
+        <ColumnsProvider>{ActiveView()}</ColumnsProvider>
       </ThemeProvider>
     </>
   );

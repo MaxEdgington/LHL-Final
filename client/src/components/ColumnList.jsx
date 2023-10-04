@@ -5,90 +5,39 @@ import ChatDrawer from "./ChatDrawer";
 import { Box, Typography } from "@mui/material";
 import "../styles/ColumnList.scss";
 import { DragDropContext } from "react-beautiful-dnd";
-import { columnsContext } from "../providers/ColumnsProvider" 
+import { columnsContext } from "../providers/ColumnsProvider";
 
 const ColumnList = (props) => {
-  const { columns, fetchTasks } = useContext(columnsContext)
- 
+  const { columns, fetchTasks, onDragEnd } = useContext(columnsContext);
 
-  
-  // Start of new code 
+  // Start of new code
 
   useEffect(() => {
-  
+    fetchTasks();
+  }, []);
 
-      console.log("After data transformation:", columns);
-    } catch (error) {
-      console.error("Could not fetch tasks", error);
-    }
-  };
-
-  fetchTasks();
-}, []);
-
-// End of new code 
-
-
-
-  const onDragEnd = (result) => {
-    if (!result.destination) return;
-    const { source, destination } = result;
-    if (source.droppableId !== destination.droppableId) {
-      const sourceColumn = columns[source.droppableId];
-      const destColumn = columns[destination.droppableId];
-      const sourceTasks = [...sourceColumn.tasks];
-      const destTasks = [...destColumn.tasks];
-      const [removed] = sourceTasks.splice(source.index, 1);
-      destTasks.splice(destination.index, 0, removed);
-      setColumns({
-        ...columns,
-        [source.droppableId]: {
-          ...sourceColumn,
-          tasks: sourceTasks
-        },
-        [destination.droppableId]: {
-          ...destColumn,
-          tasks: destTasks
-        }
-      });
-    } else {
-      const column = columns[source.droppableId];
-      const copiedTasks = [...column.tasks];
-      const [removed] = copiedTasks.splice(source.index, 1);
-      copiedTasks.splice(destination.index, 0, removed);
-      setColumns({
-        ...columns,
-        [source.droppableId]: {
-          ...column,
-          tasks: copiedTasks
-        }
-      });
-    }
-  };
+  // End of new code
 
   console.log(columns);
-  const columnArr = Object
-    .entries(columns)
-    .map(([columnId, column]) => {
-      return <ColumnListItem 
-      key={columnId} 
-      id={columnId} 
-      name={column.name} 
-      tasks={column.tasks}/>
-  }
-
-
-
-  );
+  const columnArr = Object.entries(columns).map(([columnId, column]) => {
+    return (
+      <ColumnListItem
+        key={columnId}
+        id={columnId}
+        name={column.name}
+        tasks={column.tasks}
+      />
+    );
+  });
 
   return (
-    <DragDropContext onDragEnd={result => onDragEnd(result)}>
+    <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
       <Box
         sx={{
           flex: 1,
           paddingTop: "8px",
           paddingBottom: "16px",
-          bgcolor: "#eaeaee"
+          bgcolor: "#eaeaee",
           // change to theme colours
         }}
       >
@@ -97,17 +46,13 @@ const ColumnList = (props) => {
             <h1>Project 1</h1> {/* this needs to also come from the backend */}
             <ChatDrawer />
           </span>
-          <ul className="columnlist">
-            {columnArr}
-          </ul>
+          <ul className="columnlist">{columnArr}</ul>
         </div>
       </Box>
-    </ DragDropContext>
+    </DragDropContext>
   );
 };
 
 export default ColumnList;
-
-
 
 //mock data
