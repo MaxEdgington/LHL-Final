@@ -1,5 +1,9 @@
-import React from "react";
+import React, {useContext, useState} from "react";
 import {Box, Typography} from "@mui/material";
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { columnsContext } from "../providers/ColumnsProvider";
 
 const style = {
   position: 'absolute',
@@ -15,7 +19,15 @@ const style = {
 };
 
 const TaskDetailModel = (props) => {
-  const {name, id, description, project_id, due_date, assigned_user} = props
+  const {name, id, description, project_id, due_date, assigned_user, handleClose} = props
+
+  const { handleDelete, columns } = useContext(columnsContext)
+
+  const deleteTask = () => {
+    handleDelete(id)
+    // console.log("++++New Columns data here:", columns)
+    handleClose()
+  } 
 
   return (
     <Box sx={style}>  
@@ -25,9 +37,16 @@ const TaskDetailModel = (props) => {
       <Typography id="modal-modal-description" sx={{ mt: 2 }} fontSize={28}> 
         {description}
       </Typography>
-      <Typography id="modal-modal-description" sx={{ mt: 2 }} fontSize={28}> 
+      <Typography id="modal-modal-description" sx={{ mt: 2 }} fontSize={28} mb={2}> 
         Due Date: {due_date}
       </Typography>
+      <Stack direction="column" spacing={2} sx={{ '& button': { m: 1 } }}>
+        <Button variant="contained" startIcon={<DeleteIcon />}
+        onClick={deleteTask}>
+        Delete
+        </Button>
+        <Button variant="outlined" size="small">Edit</Button>
+    </Stack>
   </Box>
   )
 }
