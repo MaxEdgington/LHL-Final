@@ -67,25 +67,7 @@ export default function ColumnsProvider(props) {
       console.log("*****deleted task id:", taskId); 
       console.log("Columns data here:", columns)
       
-      // console.log("New columns returned:",  Object.values(columns).map(column => {
-      //   return (
-      //     column.tasks.length > 0 && column.tasks.filter(task => task.id !== taskId)
-      //   )
-      // }))
-
-      // const columnsArray = Object.values(columns).map(column => {
-      //   return (
-      //     column.tasks.length > 0 && column.tasks.filter(task => task.id !== taskId)
-      //   )
-      // })
-      // setColumns(
-      //  ...columns,
-      //  1: { ...columns[1], tasks: [...columns[1].tasks, columnsArray[0]]},
-      //  2: { ...columns[2], tasks: [...columns[2].tasks, columnsArray[1]]},
-      //  3: { ...columns[3], tasks: [...columns[3].tasks, columnsArray[2]]},
-      //  4: { ...columns[4], tasks: [...columns[4].tasks, columnsArray[3]]}
-      // )
-      
+      // use .reduce to create an object given an array of objects
       const newColumns = Object.entries(columns).reduce((acc, [key, column]) => {
         return {
           ...acc,
