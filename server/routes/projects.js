@@ -13,10 +13,10 @@ router.get('/', async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
-router.post('/:id', async (req, res) => {
-  console.log("adding project", req.params);
+router.post('/add', async (req, res) => {
+  console.log("adding project in route", req.body);
   try {
-    const newProject = await projectQueries.addProject(req); //do i need to destructure req
+    const newProject = await projectQueries.addProject(req.body.project_name, req.body.project_description, req.body.project_due_date); //do i need to destructure req
     res.status(200).json(newProject.rows);
   } catch (error) {
     console.error('Error during adding project-server side:', error);

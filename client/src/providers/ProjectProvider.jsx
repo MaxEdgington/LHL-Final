@@ -18,7 +18,18 @@ export default function ProjectProvider(props) {
     }
   };
 
-  const projectData = { project, fetchProject };
+  const addProject = async (formData) => {
+    try {
+      const res = await axios.post(`http://localhost:8080/api/projects/add`, formData);
+      console.log("this is what projProvider gets:", res.data);
+      // setProject(res.data);
+      setView(1);
+    } catch (error) {
+      console.error("Could not add project", error);
+    }
+  };
+
+  const projectData = { project, fetchProject, addProject };
 
   return (
     <projectContext.Provider value={projectData}>

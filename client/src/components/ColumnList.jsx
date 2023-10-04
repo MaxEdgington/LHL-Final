@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import ColumnListItem from "./ColumnListItem";
-import ChatDrawer from "./ChatDrawer";
+import ChatDrawer from "./Chat/ChatDrawer";
 import { Box, Typography } from "@mui/material";
 import "../styles/ColumnList.scss";
 import { DragDropContext } from "react-beautiful-dnd";
