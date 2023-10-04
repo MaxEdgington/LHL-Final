@@ -8,7 +8,8 @@ import NewTasksForm from "./components/NewTasksForm";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./theme";
 import ColumnsProvider from "./providers/ColumnsProvider";
-import { columnsContext } from "./providers/ColumnsProvider";
+import ProjectProvider from "./providers/ProjectProvider";
+// import { columnsContext } from "./providers/ColumnsProvider";
 
 // import CustomThemeProvider from './providers/ThemeProvider';
 
@@ -72,8 +73,15 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
+
         <Header SetView={SetView} />
-        <ColumnsProvider>{ActiveView()}</ColumnsProvider>
+
+        <ProjectProvider>
+          <ColumnsProvider>
+            {ActiveView()}
+          </ColumnsProvider>
+        </ProjectProvider>
+
       </ThemeProvider>
     </>
   );

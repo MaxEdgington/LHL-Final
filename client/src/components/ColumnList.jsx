@@ -5,9 +5,12 @@ import { Box, Typography } from "@mui/material";
 import "../styles/ColumnList.scss";
 import { DragDropContext } from "react-beautiful-dnd";
 import { columnsContext } from "../providers/ColumnsProvider";
+import { projectContext } from "../providers/ProjectProvider";
+
 
 const ColumnList = (props) => {
   const { columns, fetchTasks, onDragEnd } = useContext(columnsContext);
+  const { project } = useContext(projectContext);
 
   // Start of new code
 
@@ -23,8 +26,8 @@ const ColumnList = (props) => {
       <ColumnListItem
         key={columnId}
         id={columnId}
-        // name={column.name}
-        // tasks={column.tasks}
+      // name={column.name}
+      // tasks={column.tasks}
       />
     );
   });
@@ -42,7 +45,7 @@ const ColumnList = (props) => {
       >
         <div>
           <span>
-            <h1>Project 1</h1> {/* this needs to also come from the backend */}
+            <h1>{project.name}</h1> {/* this needs to also come from the backend */}
             <ChatDrawer />
           </span>
           <ul className="columnlist">{columnArr}</ul>
