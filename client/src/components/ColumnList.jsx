@@ -6,6 +6,7 @@ import "../styles/ColumnList.scss";
 import { DragDropContext } from "react-beautiful-dnd";
 import { columnsContext } from "../providers/ColumnsProvider";
 import { projectContext } from "../providers/ProjectProvider";
+// import background from '../../public/lens-img-darkmode.jpeg';
 
 
 const ColumnList = (props) => {
@@ -41,6 +42,7 @@ const ColumnList = (props) => {
           paddingTop: "8px",
           paddingBottom: "16px",
           bgcolor: "#eaeaee",
+          // backgroundImage: `url(${background})`
           // change to theme colours
         }}
       >

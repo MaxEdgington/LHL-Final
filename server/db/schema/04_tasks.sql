@@ -8,7 +8,7 @@ CREATE TABLE tasks (
   name VARCHAR(255) NOT NULL,
   description text,
   due_date Date,
-  -- status status  DEFAULT 'To Do'::status
+  status status DEFAULT 'To Do'::status,
   project_id INT REFERENCES projects(id) NOT NULL,
   assigned_user INT REFERENCES users(id)
   );

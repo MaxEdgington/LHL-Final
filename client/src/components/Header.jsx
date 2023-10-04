@@ -52,15 +52,16 @@ function Header(props) {
 
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
+      {/* <AppBar position="static"> */}
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ background: 'secondary' }}>
-          <img src={"../../public/vite.svg"} sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <img src={"../../public/lens-line.jpg"} width="3.5%" sx={{ display: { xs: 'none', md: 'flex' }, mx: 2, px: 2 }} />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            onClick={() => SetView(1)}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
