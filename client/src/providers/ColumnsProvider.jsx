@@ -4,7 +4,6 @@ import axios from "axios";
 export const columnsContext = createContext();
 
 export default function ColumnsProvider(props) {
-
   const initialColumnData = {
     1: { name: "To Do", tasks: [] },
     2: { name: "In Progress", tasks: [] },
@@ -20,7 +19,6 @@ export default function ColumnsProvider(props) {
       const res = await axios.get("http://localhost:8080/api/tasks");
       console.log("Tasks received from server:", res.data);
       setColumns((prevColumns) => {
-        
         return {
           ...prevColumns,
           [1]: {
@@ -36,11 +34,11 @@ export default function ColumnsProvider(props) {
     }
   };
 
-  const addNewTask = async () => {
+  const addNewTask = async (taskTitle) => {
     // give this form params from form
     try {
       const response = await axios.post("http://localhost:8080/api/tasks/add", {
-        title: "Default Task Title", // You can set a default title for now
+        title: taskTitle, // You can set a default title for now
       });
       console.log("New task added:", response.data);
 
@@ -59,27 +57,47 @@ export default function ColumnsProvider(props) {
 
   // }, []);
 
-  const handleDelete = async(taskId) => {
+  const handleDelete = async (taskId) => {
     // console.log("tasks No:", taskId)
     try {
-     await axios.post(`http://localhost:8080/api/tasks/${taskId}/delete`);
-      
-      console.log("*****deleted task id:", taskId); 
-      console.log("Columns data here:", columns)
-      
-      // use .reduce to create an object given an array of objects
-      const newColumns = Object.entries(columns).reduce((acc, [key, column]) => {
-        return {
-          ...acc,
-          [key]: {
-            ...column,
-            tasks: column.tasks.filter(task => task.id !== taskId),
-          },
-        };
-      }, {});
-      
-      setColumns(newColumns);
+      await axios.post(`http://localhost:8080/api/tasks/${taskId}/delete`);
 
+      console.log("*****deleted task id:", taskId);
+      console.log("Columns data here:", columns);
+
+      // console.log("New columns returned:",  Object.values(columns).map(column => {
+      //   return (
+      //     column.tasks.length > 0 && column.tasks.filter(task => task.id !== taskId)
+      //   )
+      // }))
+
+      // const columnsArray = Object.values(columns).map(column => {
+      //   return (
+      //     column.tasks.length > 0 && column.tasks.filter(task => task.id !== taskId)
+      //   )
+      // })
+      // setColumns(
+      //  ...columns,
+      //  1: { ...columns[1], tasks: [...columns[1].tasks, columnsArray[0]]},
+      //  2: { ...columns[2], tasks: [...columns[2].tasks, columnsArray[1]]},
+      //  3: { ...columns[3], tasks: [...columns[3].tasks, columnsArray[2]]},
+      //  4: { ...columns[4], tasks: [...columns[4].tasks, columnsArray[3]]}
+      // )
+
+      const newColumns = Object.entries(columns).reduce(
+        (acc, [key, column]) => {
+          return {
+            ...acc,
+            [key]: {
+              ...column,
+              tasks: column.tasks.filter((task) => task.id !== taskId),
+            },
+          };
+        },
+        {}
+      );
+
+      setColumns(newColumns);
     } catch (error) {
       console.error("Could not delete tasks", error);
     }
@@ -121,7 +139,12 @@ export default function ColumnsProvider(props) {
     }
   };
 
-  const columnData = { columns, fetchTasks, handleDelete, onDragEnd, addNewTask  };
+  const columnData = {
+    columns,
+    fetchTasks,
+    onDragEnd,
+    addNewTask,
+  };
 
   return (
     <columnsContext.Provider value={columnData}>
