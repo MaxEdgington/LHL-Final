@@ -72,7 +72,7 @@ export default function ColumnsProvider(props) {
     }
   };
 
-  const columnData = { columns, fetchTasks, onDragEnd };
+  const columnData = { columns, fetchTasks, onDragEnd, addNewTask };
 
   return (
     <columnsContext.Provider value={columnData}>
