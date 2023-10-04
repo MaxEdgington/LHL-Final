@@ -17,8 +17,8 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { useTheme } from '@mui/material/styles';
 
 
-const pages = ['New Project', 'TBA', 'What Links?'];
-const settings = ['Profile', 'My Projects', 'Logout'];
+const pages = ['New Project', 'What Links?'];
+const settings = ['My Projects', 'Logout'];
 
 function Header(props) {
   const { SetView } = props;

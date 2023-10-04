@@ -8,18 +8,16 @@ import background from '../../../public/lots-of-lenses.jpg';
 const Login = () => {
 
   const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
-  const avatarStyle = { backgroundColor: '#1bbd7e' };
   const btnstyle = { margin: '8px 0' };
   return (
     <Box
-      class="candles"
       style={{
         backgroundImage: `url(${background})`,
       }}>
       <Grid>
         <Paper elevation={10} style={paperStyle}>
           <Grid align='center'>
-            <Avatar style={avatarStyle} src="../../../public/lens-line.jpg"></Avatar>
+            <Avatar src="../../../public/lens-line.jpg"></Avatar>
             <h2>Sign In</h2>
           </Grid>
           <TextField label='Username' placeholder='Enter username' variant="outlined" fullWidth required />
