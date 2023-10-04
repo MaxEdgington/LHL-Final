@@ -60,17 +60,44 @@ export default function ColumnsProvider(props) {
   // }, []);
 
   const handleDelete = async(taskId) => {
-    console.log("tasks No:", taskId)
+    // console.log("tasks No:", taskId)
     try {
      await axios.post(`http://localhost:8080/api/tasks/${taskId}/delete`);
-     
+      
+      console.log("*****deleted task id:", taskId); 
+      console.log("Columns data here:", columns)
+      
+      // console.log("New columns returned:",  Object.values(columns).map(column => {
+      //   return (
+      //     column.tasks.length > 0 && column.tasks.filter(task => task.id !== taskId)
+      //   )
+      // }))
+
+      // const columnsArray = Object.values(columns).map(column => {
+      //   return (
+      //     column.tasks.length > 0 && column.tasks.filter(task => task.id !== taskId)
+      //   )
+      // })
       // setColumns(
-      //  Object.values(columns).map(column => {
-      //    return (
-      //      column.tasks.length > 0 && column.tasks.filter(task => task.id !== taskId)
-      //    )
-      //  })
+      //  ...columns,
+      //  1: { ...columns[1], tasks: [...columns[1].tasks, columnsArray[0]]},
+      //  2: { ...columns[2], tasks: [...columns[2].tasks, columnsArray[1]]},
+      //  3: { ...columns[3], tasks: [...columns[3].tasks, columnsArray[2]]},
+      //  4: { ...columns[4], tasks: [...columns[4].tasks, columnsArray[3]]}
       // )
+      
+      const newColumns = Object.entries(columns).reduce((acc, [key, column]) => {
+        return {
+          ...acc,
+          [key]: {
+            ...column,
+            tasks: column.tasks.filter(task => task.id !== taskId),
+          },
+        };
+      }, {});
+      
+      setColumns(newColumns);
+
     } catch (error) {
       console.error("Could not delete tasks", error);
     }
