@@ -11,7 +11,6 @@ const TaskListItem = (props) => {
   const { id, name, index } = props;
   const { description, project_id, due_date, assigned_user } = props.task;
   const theme = useTheme();
-  console.log("THEME", theme);
 
   const [ModalOpen, setModalOpen] = useState(false);
 

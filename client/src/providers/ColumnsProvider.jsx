@@ -36,6 +36,27 @@ export default function ColumnsProvider(props) {
     }
   };
 
+  const addNewTask = async () => {
+    // give this form params from form
+    try {
+      const response = await axios.post("http://localhost:8080/api/tasks/add", {
+        title: "Default Task Title", // You can set a default title for now
+      });
+      console.log("New task added:", response.data);
+
+      // Now, you should update your local state to reflect this new task:
+      setColumns((prevColumns) => ({
+        ...prevColumns,
+        1: {
+          ...prevColumns[1],
+          tasks: [...prevColumns[1].tasks, response.data],
+        },
+      }));
+    } catch (error) {
+      console.error("Error adding new task:", error);
+    }
+  };
+
   // }, []);
 
   const handleDelete = async(taskId) => {
@@ -91,7 +112,7 @@ export default function ColumnsProvider(props) {
     }
   };
 
-  const columnData = { columns, fetchTasks, handleDelete, onDragEnd };
+  const columnData = { columns, fetchTasks, handleDelete, onDragEnd, addNewTask  };
 
   return (
     <columnsContext.Provider value={columnData}>
