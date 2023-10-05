@@ -16,6 +16,7 @@ CREATE TABLE tasks (
   description text,
   due_date Date,
   status status DEFAULT '1'::status, -- Default to 'To Do'
+  index INT NOT NULL,
   project_id INT REFERENCES projects(id) NOT NULL,
   assigned_user INT REFERENCES users(id)
 );
