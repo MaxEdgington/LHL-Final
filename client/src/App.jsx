@@ -1,25 +1,30 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Box } from "@mui/material";
+
 import Header from "./components/Header";
 import ColumnList from "./components/ColumnList";
 import StartNewProject from "./components/StartProject/StartNewProject";
 import NewTasksForm from "./components/NewTasksForm";
+import Login from "./components/User/Login";
+import background from '../public/lots-of-lenses.jpg';
+
 
 import ColumnsProvider from "./providers/ColumnsProvider";
 import ProjectProvider from "./providers/ProjectProvider";
 // import { columnsContext } from "./providers/ColumnsProvider";
-
 // import CustomThemeProvider from './providers/ThemeProvider';
+// import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 
 import "./App.css";
 
 function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(4);
 
-  const SetView = (active) => {
+  const setView = (active) => {
     setActive(active);
   };
 
@@ -28,11 +33,13 @@ function App() {
       case 1:
         return <ColumnList />;
       case 2:
-        return <StartNewProject SetView={SetView} />;
+        return <StartNewProject setView={setView} />;
       case 3:
         return <NewTasksForm />;
+      case 4:
+        return <Login />;
       default:
-        return <ColumnList />;
+        return <Login />;
     }
   };
 
@@ -71,7 +78,7 @@ function App() {
 
   return (
     <>
-      <Header SetView={SetView} />
+      <Header setView={setView} />
 
       <ProjectProvider>
         <ColumnsProvider>

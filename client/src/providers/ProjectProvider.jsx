@@ -7,30 +7,42 @@ export default function ProjectProvider(props) {
   const [project, setProject] = useState({}); //inital?
   //project is an object with all the keys from db, same as res.data below
 
-  const fetchProject = async () => {
-    try {
-      const res = await axios.get("http://localhost:8080/api/projects");
-      // need a query?
-      console.log("project form fetch", res.data);
-      setProject(res.data);
-
-    } catch (error) {
-      console.error("Could not fetch projects", error);
-    }
-  };
-
   const addProject = async (formData) => {
+    console.log("this is what projProvider-add gets:", formData);
     try {
-      const res = await axios.post(`http://localhost:8080/api/projects/add`, formData);
-      console.log("this is what projProvider gets:", res.data);
-      setProject(res.data);
-
+      console.log("Before axios.post");
+      await axios.post(`http://localhost:8080/api/projects/add`, formData);
+      // console.log("what async stuff is keeping this from logging?", formData);
+      console.log("After axios.post");
+      console.log("After axios.post", formData.project_name);
+      return formData.project_name;
     } catch (error) {
       console.error("Could not add project", error);
     }
   };
 
-  const projectData = { project, fetchProject, addProject };
+  const fetchProjectbyName = async (name) => {
+    console.log("this is what projProvider-fetch gets:", name);
+    try {
+      const get = await axios.get(`http://localhost:8080/api/projects/${name}`);
+      console.log("project form fetch", res.data);
+    } catch (error) {
+      console.error("Could not fetch projects", error);
+    }
+  };
+
+
+  const projectAddFetchSet = async (formData) => {
+    try {
+      const resultFromAdd = await addProject(formData);
+      const resultFromFetch = await fetchProjectbyName(resultFromAdd);
+      // setProject(resultFromFetch); // will this work here? or need to be in async funct as well??
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
+
+  const projectData = { project, projectAddFetchSet };
 
   return (
     <projectContext.Provider value={projectData}>

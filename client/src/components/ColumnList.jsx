@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import ColumnListItem from "./ColumnListItem";
 import ChatDrawer from "./Chat/ChatDrawer";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Paper } from "@mui/material";
 import "../styles/ColumnList.scss";
 import { DragDropContext } from "react-beautiful-dnd";
 import { columnsContext } from "../providers/ColumnsProvider";
 import { projectContext } from "../providers/ProjectProvider";
-
+// import background from '../../public/lens-img-darkmode.jpeg';
 
 const ColumnList = (props) => {
   const { columns, fetchTasks, onDragEnd } = useContext(columnsContext);
@@ -27,11 +27,13 @@ const ColumnList = (props) => {
       <ColumnListItem
         key={columnId}
         id={columnId}
-      // name={column.name}
-      // tasks={column.tasks}
+        // name={column.name}
+        // tasks={column.tasks}
       />
     );
   });
+
+  const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
 
   return (
     <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
@@ -41,15 +43,20 @@ const ColumnList = (props) => {
           paddingTop: "8px",
           paddingBottom: "16px",
           bgcolor: "#eaeaee",
+          // backgroundImage: `url(${background})`
           // change to theme colours
         }}
       >
+
         <div>
           <span>
-            <h1>{project.name}</h1> {/* this needs to also come from the backend */}
+            <h1>{project.name}</h1>{" "}
+            {/* this needs to also come from the backend */}
             <ChatDrawer />
           </span>
-          <ul className="columnlist">{columnArr}</ul>
+          <ul className="columnlist">
+            {columnArr}
+          </ul>
         </div>
       </Box>
     </DragDropContext>

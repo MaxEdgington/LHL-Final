@@ -18,14 +18,17 @@ export default function ColumnsProvider(props) {
     try {
       const res = await axios.get("http://localhost:8080/api/tasks");
       console.log("Tasks received from server:", res.data);
-      setColumns((prevColumns) => {
-        return {
-          ...prevColumns,
-          [1]: {
-            ...prevColumns[1],
-            tasks: res.data,
-          },
-        };
+
+      const todoTasks = res.data.filter((task) => task.status === "1");
+      const inProgressTasks = res.data.filter((task) => task.status === "2");
+      const inReviewTasks = res.data.filter((task) => task.status === "3");
+      const completedTasks = res.data.filter((task) => task.status === "4");
+
+      setColumns({
+        1: { ...columns[1], tasks: todoTasks },
+        2: { ...columns[2], tasks: inProgressTasks },
+        3: { ...columns[3], tasks: inReviewTasks },
+        4: { ...columns[4], tasks: completedTasks },
       });
 
       console.log("After data transformation:", columns);

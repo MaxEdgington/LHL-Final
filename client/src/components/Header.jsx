@@ -17,11 +17,11 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { useTheme } from '@mui/material/styles';
 
 
-const pages = ['New Project', 'TBA', 'What Links?'];
-const settings = ['Profile', 'My Projects', 'Logout'];
+const pages = ['New Project', 'What Links?'];
+const settings = ['My Projects', 'Logout'];
 
 function Header(props) {
-  const { SetView } = props;
+  const { setView } = props;
 
   const theme = useTheme();
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -52,15 +52,16 @@ function Header(props) {
 
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
+      {/* <AppBar position="static"> */}
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ background: 'secondary' }}>
-          <img src={"../../public/vite.svg"} sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <img src={"../../public/lens-line.jpg"} width="3.5%" sx={{ display: { xs: 'none', md: 'flex' }, mx: 2, px: 2 }} />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            onClick={() => setView(1)}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -133,7 +134,7 @@ function Header(props) {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={() => SetView(2)}
+                onClick={() => setView(2)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
@@ -142,15 +143,17 @@ function Header(props) {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="User settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="L" src="../../public/avatars/avatar5.png" />
               </IconButton>
             </Tooltip>
 
-            <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
-              {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-            </IconButton>
+            <Tooltip title="Dark Mode">
+              <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
+                {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+              </IconButton>
+            </Tooltip>
 
             <Menu
               sx={{ mt: '45px' }}
