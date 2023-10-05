@@ -8,8 +8,8 @@ router.get('/:name', async (req, res) => {
   try {
     console.log("PARAMS", req.params);
     const selectedProject = await projectQueries.getProjectbyName(req.params.name);
-    console.log("checkign in the router", selectedProject.rows); /////
-    res.status(200).json(selectedProject.rows); ////
+    console.log("checkign in the router", selectedProject); ///// is this not logging just because its out of sync?
+    res.status(200).json(selectedProject); ////
   } catch (error) {
     console.error('Error during fetching projects-server side:', error);
     res.status(500).send('Server Error');
