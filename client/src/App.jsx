@@ -9,7 +9,7 @@ import NewTasksForm from "./components/NewTasksForm";
 import Login from "./components/User/Login";
 import background from '../public/lots-of-lenses.jpg';
 
-
+import UserProvider from "./providers/UserProvider";
 import ColumnsProvider from "./providers/ColumnsProvider";
 import ProjectProvider from "./providers/ProjectProvider";
 // import { columnsContext } from "./providers/ColumnsProvider";
@@ -80,11 +80,13 @@ function App() {
     <>
       <Header setView={setView} />
 
-      <ProjectProvider>
-        <ColumnsProvider>
-          {ActiveView()}
-        </ColumnsProvider>
-      </ProjectProvider>
+      <UserProvider>
+        <ProjectProvider>
+          <ColumnsProvider>
+            {ActiveView()}
+          </ColumnsProvider>
+        </ProjectProvider>
+      </UserProvider>
 
     </>
   );

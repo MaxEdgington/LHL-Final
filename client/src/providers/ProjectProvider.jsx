@@ -25,7 +25,8 @@ export default function ProjectProvider(props) {
     console.log("this is what projProvider-fetch gets:", name);
     try {
       const get = await axios.get(`http://localhost:8080/api/projects/${name}`);
-      console.log("project form fetch", res.data);
+      console.log("project form fetch", get);
+      return get;
     } catch (error) {
       console.error("Could not fetch projects", error);
     }
@@ -36,7 +37,9 @@ export default function ProjectProvider(props) {
     try {
       const resultFromAdd = await addProject(formData);
       const resultFromFetch = await fetchProjectbyName(resultFromAdd);
-      // setProject(resultFromFetch); // will this work here? or need to be in async funct as well??
+      console.log("FETCH RESULT", resultFromFetch);
+      setProject(resultFromFetch); // will this work here? or need to be in async funct as well??
+      return project;
     } catch (error) {
       console.error('An error occurred:', error);
     }

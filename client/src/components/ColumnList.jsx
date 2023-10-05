@@ -51,7 +51,7 @@ const ColumnList = (props) => {
 
         <div>
           <span>
-            <h1>{project.name}</h1> {/* this needs to also come from the backend */}
+            <h1>HERE-{project.name}-HERE</h1> {/* this needs to also come from the backend */}
             <ChatDrawer />
           </span>
           <ul className="columnlist">

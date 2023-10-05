@@ -4,10 +4,10 @@ const db = require('../../configs/db.config');
 
 const getProjectbyName = (name) => {
   return db
-    .query(`SELECT * FROM projects WHERE name = ${name}`)
+    .query(`SELECT * FROM projects WHERE name = $1`, [name])
     .then(data => {
-      console.log("checking in the query", data.rows);
-      return data.rows;
+      console.log("checking in the query", data.rows[0]);
+      return data.rows[0];
     }).catch(err => {
       console.error("Error executing query: ", err);
       throw err;
