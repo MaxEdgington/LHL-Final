@@ -21,7 +21,7 @@ const TaskListItem = (props) => {
     // margin: `0 0 ${grid}px 0`,
 
     // change background colour if dragging
-    background: isDragging ? 'primary' : "white",
+    background: isDragging ? "#a3a2a9" : "white",
 
     // styles we need to apply on draggables
     ...draggableStyle
@@ -44,7 +44,7 @@ const TaskListItem = (props) => {
             <CardActionArea>
               <Modal open={ModalOpen} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
                 <div>
-                  <TaskDetailModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={assigned_user}  handleClose={handleClose}/>
+                  <TaskDetailModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={assigned_user} handleClose={handleClose} />
                 </div>
               </Modal>
 

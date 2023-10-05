@@ -2,10 +2,11 @@ const db = require('../../configs/db.config');
 //is this th eright connection?? that fiel exports "pool"
 
 
-const getProject = (id) => {
+const getProjectbyName = (name) => {
   return db
-    .query(`SELECT * FROM projects WHERE id = ${id}`)
+    .query(`SELECT * FROM projects WHERE name = ${name}`)
     .then(data => {
+      console.log("checking in the query", data.rows);
       return data.rows;
     }).catch(err => {
       console.error("Error executing query: ", err);
@@ -28,4 +29,4 @@ const addProject = (name, description, due_date) => {
     });
 };
 
-module.exports = { getProject, addProject };
+module.exports = { getProjectbyName, addProject };
