@@ -1,7 +1,7 @@
 // routes/tasks.js
 const express = require("express");
 const router = express.Router();
-const db = require("../configs/db.config"); // Adjust the path to point to your actual db config file
+const db = require("../configs/db.config");
 const tasksQueries = require("../db/queries/tasks");
 
 router.get("/", async (req, res) => {
@@ -15,36 +15,28 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post('/:id/delete', async (req, res) => {
-  try {
-    console.log("deleting tasks No.: ", req.params);
-    await db.query('DELETE FROM tasks WHERE id=$1', [req.params.id]);
-    res.status(200).send();
-    console.log("----deleted");
-  } catch (error) {
-    console.error('Error during fetching tasks:', error);
-    res.status(500).send('Server Error');
-  }
-});
-
-module.exports = router;
 router.post("/add", async (req, res) => {
-  console.log("POST /add route hit. Body:", req.body); // Log the incoming request
+  console.log("POST /add route hit. Body:", req.body);
 
   try {
-    // Extract task data from request body
     const { title } = req.body;
-    // Ideally, we'd want to have more details about the task
-    // here, for simplicity, we're just getting the title and column_id
-
-    // Add the task to the database
-    // This is a hypothetical function. Your actual function will depend on your database logic
     const newTask = await tasksQueries.addNewTask(title);
-
-    // Respond with the new task
     res.status(201).json(newTask);
   } catch (error) {
     res.status(500).json({ error: "Failed to add new task" });
+  }
+});
+
+router.post("/:id/delete", async (req, res) => {
+  //We may be succeptible to a SQL injection here, Instead of using POST for the delete operation, mabye HTTP DELETE method? - Stretch
+  try {
+    console.log("deleting tasks No.: ", req.params);
+    await db.query("DELETE FROM tasks WHERE id=$1", [req.params.id]);
+    res.status(200).send();
+    console.log("----deleted");
+  } catch (error) {
+    console.error("Error during fetching tasks:", error);
+    res.status(500).send("Server Error");
   }
 });
 
