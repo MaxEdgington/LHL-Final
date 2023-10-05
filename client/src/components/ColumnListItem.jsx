@@ -71,7 +71,6 @@ const ColumnListItem = (props) => {
         )}
       </div>
     </Paper>
-    // </Box>
   );
 };
 
