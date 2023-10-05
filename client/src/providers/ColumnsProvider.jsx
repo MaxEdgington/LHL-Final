@@ -64,7 +64,8 @@ export default function ColumnsProvider(props) {
 
       console.log("*****deleted task id:", taskId);
       console.log("Columns data here:", columns);
-
+      
+      // get an array of key-column objects, use .reduce to create a new columns object which removes the task whose id it taskId
       const newColumns = Object.entries(columns).reduce(
         (acc, [key, column]) => {
           return {
