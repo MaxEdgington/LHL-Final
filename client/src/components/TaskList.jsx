@@ -23,7 +23,8 @@ const TaskList = (props) => {
     <div>
       <Droppable key={id} droppableId={id}>
 
-        {(provided, snapshot) => (
+        {(provided, snapshot) => {
+          return (
           <ul className="task-list" {...provided.droppableProps}
             ref={provided.innerRef}
             style={getListStyle(snapshot.isDraggingOver)}
@@ -32,7 +33,8 @@ const TaskList = (props) => {
             {provided.placeholder}
 
           </ul>
-        )}
+          )
+        }}
       </Droppable>
     </div>
   );

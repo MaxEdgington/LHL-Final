@@ -87,7 +87,9 @@ export default function ColumnsProvider(props) {
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
+    console.log("result.destination:",result.destination)
     const { source, destination } = result;
+    console.log("result:",result)
     if (source.droppableId !== destination.droppableId) {
       const sourceColumn = columns[source.droppableId];
       const destColumn = columns[destination.droppableId];

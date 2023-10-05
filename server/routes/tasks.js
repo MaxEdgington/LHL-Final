@@ -27,7 +27,7 @@ router.post('/:id/delete', async(req, res) => {
     }
 });
 
-module.exports = router;
+// module.exports = router;
 router.post("/add", async (req, res) => {
   console.log("POST /add route hit. Body:", req.body); // Log the incoming request
 
