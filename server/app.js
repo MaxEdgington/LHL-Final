@@ -22,7 +22,7 @@ const app = express();
 app.use(morgan(ENVIROMENT));
 app.use(bodyParser.json());
 
-
+// Initialize cookie-session middleware
 app.use(cookieSession({
   name: 'session',
   keys: ["Caroline", "Yuli", "Max"],
@@ -47,8 +47,8 @@ app.use(cors(corsOptions));
 app.use('/cats', catsRoutes);
 app.use('/api/tasks', tasksRoutes); // Adjust the path as per your project’s URL structure.
 app.use('/api/projects', projectRoutes);
-app.use('/', userRoutes);
-console.log('Tasks Routes Setup'); // This will log when the tasks routes are set up.
+app.use('/api', userRoutes);
+// console.log('Tasks Routes Setup'); // This will log when the tasks routes are set up.
 
 
 app.get('/', (req, res) => {

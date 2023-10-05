@@ -10,8 +10,8 @@ export default function ProjectProvider(props) {
   const addProject = async (formData) => {
     console.log("this is what projProvider-add gets:", formData);
     try {
-      const newProject = await axios.post(`http://localhost:8080/api/projects/add`, formData);
-      setProject(newProject.data);
+      const response = await axios.post(`/api/projects/add`, formData);
+      setProject(response.data);
     } catch (error) {
       console.error("Could not add project", error);
     }

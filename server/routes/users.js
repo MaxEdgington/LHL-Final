@@ -4,25 +4,27 @@ const router = express.Router();
 const usersQueries = require('../db/queries/users');
 
 
-const userData = (email) => {
-  return usersQueries.getUserByEmail(email);
-  //no password checking yet!
-};
-
 //set the cookie-session
-router.post('/api/set-session', (req, res) => {
-  console.log("Setting the cookie in routes in the app.js", req.body);
-  const email = req.body.email;
-  const password = req.body.password; //
-  userData(email)
-    .then(user => {
-      if (!user) {
-        res.send({ error: "No account found with that email!" });
-        return;
-      }
-      console.log("here is the userObj from the router.session.post", user);
-      req.session = user.rows[0].id; //this is totally a guess??
-      // res.status(200).send('Session data set successfully');
-    });
+router.post('/set-session', async (req, res) => {
+  console.log("user route req.body", req.body); //this is empty??
+  // const { email } = req.body.email;
+  // const password = req.body.password; //
+  try {
+    const requestedUser = await usersQueries.getUserByEmail(req.body.email);
+    console.log("query response in the route", requestedUser);
+    req.session.user = requestedUser; //this is totally a guess??
+    console.log("No session???", req.session);
+    res.status(200);
+  } catch (error) {
+    console.error('Error during adding project-server side:', error);
+    res.status(500).send('Server Error');
+  }
+
+  // if (!user) {
+  //   res.send({ error: "No account found with that email!" });
+  //   return;
+  // }
+  // res.status(200).send('Session data set successfully');
+  // });
 });
 module.exports = router;

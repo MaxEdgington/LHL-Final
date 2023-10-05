@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Box, Grid, Paper, Avatar, Button, Typography, Link, FormControlLabel, TextField } from '@mui/material';
 // import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Checkbox from '@mui/material/Checkbox';
@@ -6,7 +6,19 @@ import background from '../../../public/lots-of-lenses.jpg';
 import { userContext } from '../../providers/UserProvider';
 
 const Login = () => {
-  const { handleSignIn } = useContext(userContext);
+  const { setCookie } = useContext(userContext);
+  const [formEmail, setFormEmail] = useState();
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+
+    const formData = {
+      email: formEmail
+    };
+    console.log("move handle funct", formData);
+    setCookie(formData);
+    e.target.reset();
+  };
 
   const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
   const btnstyle = { margin: '8px 0' };
@@ -28,8 +40,15 @@ const Login = () => {
           </Grid>
 
           <form onSubmit={handleSignIn}>
-            <TextField label='Username' placeholder='Enter username' variant="outlined" fullWidth required />
-            <TextField label='Password' placeholder='Enter password' type='password' variant="outlined" fullWidth />
+            <TextField
+              label='Email'
+              name='email'
+              placeholder='Enter email'
+              onChange={(e) => setFormEmail(e.target.value)}
+              variant="outlined"
+              fullWidth
+              required />
+            <TextField label='Password' name='password' placeholder='Enter password' type='password' variant="outlined" fullWidth />
             <FormControlLabel
               control={
                 <Checkbox

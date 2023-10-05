@@ -8,10 +8,10 @@ const getAllUsers = () => {
 
 const getUserByEmail = email => {
   return db
-    .query("SELECT * FROM users; WHERE email = $1", [email])
+    .query("SELECT * FROM users WHERE email = $1", [email])
     .then(data => {
-      console.log("am I getting the user in the query?", data.rows);
-      return data.rows;
+      console.log("am I getting the user in the query?", data.rows[0]);
+      return data.rows[0];
     });
 };
 
