@@ -88,30 +88,45 @@ export default function ColumnsProvider(props) {
     }
   };
 
-  const onDragEnd = (result) => {
+  const onDragEnd = async (result) => {
     if (!result.destination) return;
-    console.log("result.destination:",result.destination)
-    const { source, destination } = result;
+    
     console.log("result:",result)
+    const { source, destination } = result;
+    const taskId = result.draggableId
+    console.log("taskId:", taskId) 
+    // taskId is a string
+
     if (source.droppableId !== destination.droppableId) {
-      const sourceColumn = columns[source.droppableId];
-      const destColumn = columns[destination.droppableId];
-      const sourceTasks = [...sourceColumn.tasks];
-      const destTasks = [...destColumn.tasks];
-      const [removed] = sourceTasks.splice(source.index, 1);
-      destTasks.splice(destination.index, 0, removed);
+      
+      try{
+        await axios.post(`http://localhost:8080/api/tasks/${Number(taskId)}`, {
+          new_column_status : destination.droppableId,
+          new_task_index : destination.index
+        });
+        
+        const sourceColumn = columns[source.droppableId];
+        const destColumn = columns[destination.droppableId];
+        const sourceTasks = [...sourceColumn.tasks];
+        const destTasks = [...destColumn.tasks];
+        const [removed] = sourceTasks.splice(source.index, 1);
+        destTasks.splice(destination.index, 0, removed);
       // add axio post request here to change the tasks table's status colomn
-      setColumns({
-        ...columns,
-        [source.droppableId]: {
-          ...sourceColumn,
-          tasks: sourceTasks,
-        },
-        [destination.droppableId]: {
-          ...destColumn,
-          tasks: destTasks,
-        },
-      });
+        setColumns({
+          ...columns,
+          [source.droppableId]: {
+            ...sourceColumn,
+            tasks: sourceTasks,
+          },
+          [destination.droppableId]: {
+            ...destColumn,
+            tasks: destTasks,
+          },
+        });
+      } catch (error) {
+      console.error("Could not drag tasks", error);
+      }
+      
     } else {
       const column = columns[source.droppableId];
       const copiedTasks = [...column.tasks];

@@ -30,14 +30,29 @@ router.post("/add", async (req, res) => {
 router.post("/:id/delete", async (req, res) => {
   //We may be succeptible to a SQL injection here, Instead of using POST for the delete operation, mabye HTTP DELETE method? - Stretch
   try {
-    console.log("deleting tasks No.: ", req.params);
+    console.log("deleting tasks No.: ", req.params.id);
     await db.query("DELETE FROM tasks WHERE id=$1", [req.params.id]);
-    res.status(200).send();
-    console.log("----deleted");
+    res.status(200).send("deleted!");
   } catch (error) {
     console.error("Error during fetching tasks:", error);
     res.status(500).send("Server Error");
   }
 });
+
+router.post("/:id", async (req, res) => {
+    const { new_column_status, new_task_index} = req.body;
+    console.log("new_column_status:", new_column_status)
+    console.log("new_task_index:", new_task_index)
+    
+    const task_id = req.params.id
+    console.log("req.params:",req.params.id )
+    try{
+        await db.query(`UPDATE tasks SET status = $1, index = $2 WHERE id = $3`, [new_column_status, new_task_index, task_id]);
+        res.status(200).send("New location saved!");
+    } catch (error) {
+    console.error("Error during dragging tasks:", error);
+    res.status(500).send("Server Error");
+    }
+})
 
 module.exports = router;
