@@ -27,7 +27,7 @@ function NewProjectForm(props) {
     };
 
     console.log(formData);
-    addProject(formData); //does this need async/await to the handlesubmit?
+    addProject(formData);
     setView(1);
   };
 

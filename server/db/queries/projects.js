@@ -1,5 +1,4 @@
 const db = require('../../configs/db.config');
-//is this th eright connection?? that fiel exports "pool"
 
 
 const getProjectbyName = (name) => {
