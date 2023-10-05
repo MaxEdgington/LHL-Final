@@ -7,7 +7,6 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { columnsContext } from "../providers/ColumnsProvider";
 import { projectContext } from "../providers/ProjectProvider";
 
-
 const ColumnList = (props) => {
   const { columns, fetchTasks, onDragEnd } = useContext(columnsContext);
   const { project } = useContext(projectContext);
@@ -27,8 +26,8 @@ const ColumnList = (props) => {
       <ColumnListItem
         key={columnId}
         id={columnId}
-      // name={column.name}
-      // tasks={column.tasks}
+        // name={column.name}
+        // tasks={column.tasks}
       />
     );
   });
@@ -46,7 +45,8 @@ const ColumnList = (props) => {
       >
         <div>
           <span>
-            <h1>{project.name}</h1> {/* this needs to also come from the backend */}
+            <h1>{project.name}</h1>{" "}
+            {/* this needs to also come from the backend */}
             <ChatDrawer />
           </span>
           <ul className="columnlist">{columnArr}</ul>
