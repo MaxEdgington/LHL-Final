@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import ColumnListItem from "./ColumnListItem";
 import ChatDrawer from "./Chat/ChatDrawer";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Paper } from "@mui/material";
 import "../styles/ColumnList.scss";
 import { DragDropContext } from "react-beautiful-dnd";
 import { columnsContext } from "../providers/ColumnsProvider";
@@ -34,6 +34,8 @@ const ColumnList = (props) => {
     );
   });
 
+  const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
+
   return (
     <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
       <Box
@@ -46,12 +48,15 @@ const ColumnList = (props) => {
           // change to theme colours
         }}
       >
+
         <div>
           <span>
             <h1>{project.name}</h1> {/* this needs to also come from the backend */}
             <ChatDrawer />
           </span>
-          <ul className="columnlist">{columnArr}</ul>
+          <ul className="columnlist">
+            {columnArr}
+          </ul>
         </div>
       </Box>
     </DragDropContext>

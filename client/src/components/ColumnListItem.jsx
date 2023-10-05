@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import TaskList from "./TaskList";
-import { Box } from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import "../styles/ColumnListItem.scss";
 import { columnsContext } from "../providers/ColumnsProvider";
 
@@ -26,8 +26,11 @@ const ColumnListItem = (props) => {
     setIsAddingTask(false);
   };
 
+  const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
+
   return (
-    <Box
+    <Paper
+      elevation={10}
       sx={{
         flex: 1,
         paddingTop: "8px",
@@ -45,6 +48,7 @@ const ColumnListItem = (props) => {
         },
       }}
     >
+      {/* <Paper elevation={10} style={paperStyle}> */}
       <div className="column">
         <h2>{columns[id].name}</h2>
         <TaskList id={id} tasks={columns[id].tasks} />
@@ -66,7 +70,8 @@ const ColumnListItem = (props) => {
           </form>
         )}
       </div>
-    </Box>
+    </Paper>
+    // </Box>
   );
 };
 

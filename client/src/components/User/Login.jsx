@@ -13,6 +13,11 @@ const Login = () => {
     <Box
       style={{
         backgroundImage: `url(${background})`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center center",
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed",
+        height: "100%"
       }}>
       <Grid>
         <Paper elevation={10} style={paperStyle}>

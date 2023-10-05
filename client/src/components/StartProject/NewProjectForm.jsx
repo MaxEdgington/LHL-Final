@@ -9,22 +9,12 @@ import background from '../../../public/lens-img-darkmode.jpeg';
 
 function NewProjectForm(props) {
   const { setView } = props;
-  const { addProject } = useContext(projectContext);
+  const { projectAddFetchSet } = useContext(projectContext);
 
+  //these states are just to handle the data for the form
   const [projectName, setProjectName] = useState('');
   const [projectDescription, setProjectDescription] = useState('');
   const [projectDueDate, setProjectDueDate] = useState(null);
-
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //     [description]: value,
-  //     [due_date]: value
-  //   });
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,16 +27,23 @@ function NewProjectForm(props) {
     };
 
     console.log(formData);
-    addProject(formData);
+    projectAddFetchSet(formData); //does this need async/await to the handlesubmit?
     setView(1);
   };
+
+
   const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
 
   return (
     <Box
       style={{
         backgroundImage: `url(${background})`,
-        height: '100%'
+        // height: '100%'
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center center",
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed",
+        height: "100%"
       }}>
       <Grid>
         <Paper elevation={10} style={paperStyle}>
