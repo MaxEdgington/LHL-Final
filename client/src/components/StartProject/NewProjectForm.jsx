@@ -46,7 +46,7 @@ function NewProjectForm(props) {
     <Box
       style={{
         backgroundImage: `url(${background})`,
-        height: '100vh'
+        height: '100%'
       }}>
       <Grid>
         <Paper elevation={10} style={paperStyle}>
