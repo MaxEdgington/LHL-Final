@@ -26,7 +26,18 @@ const deleteTask = async(taskId) => {
     throw error;
   }
 }
+
+const getUserbyTaskId = async(task_id) => {
+  try{
+    const result = await db.query("SELECT users.username FROM users JOIN tasks ON tasks.assigned_user=users.id WHERE tasks.id=$1", [task_id]);
+    return result.rows[0].username
+  } catch (error) {
+    console.error("Error during showing assigned user name:", error);
+    throw error;
+  }
+}
 module.exports = {
   addNewTask,
   deleteTask,
+  getUserbyTaskId
 };

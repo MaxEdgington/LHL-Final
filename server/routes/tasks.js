@@ -68,4 +68,19 @@ router.post("/:id/onecolumn", async (req, res) => {
     }
 })
 
+router.get("/:id/assigned_user", async(req, res) => {
+    const task_id = req.params.id
+
+    console.log("Task_id", task_id)
+
+    try {
+      const user_name = await tasksQueries.getUserbyTaskId(task_id)
+      res.status(200).json(user_name)
+      console.log("user_name is:", user_name)
+    } catch (error) {
+      console.error("Error during showing assigned user  name:", error);
+      res.status(500).send("Server Error");
+    }
+})
+
 module.exports = router;
