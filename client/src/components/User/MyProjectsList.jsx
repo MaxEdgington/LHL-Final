@@ -13,17 +13,33 @@ const MyProjectsList = () => {
 
   useEffect(() => {
     fetchMyProjects(loggedinUser.id);
-    console.log(myProjects);
-  }, []);
+    // console.log("got them ", myProjects);
+  }, [loggedinUser.id]);
+
+  console.log("don't got them", myProjects);
+  const projectArr = myProjects.map((project) => {
+    return (
+      <MyProjectListItem
+        key={project.id}
+        id={project.id}
+        name={project.name}
+      // desc={project.description}
+      // date={project.due_date}
+
+      />
+    );
+  });
+
 
   return (
     <>
       <Box>
         <img src={loggedinUser.avatar} alt="syntax" height="50px" />
         <h1>{loggedinUser.username}'s Projects</h1>
-        <ul>
-          <MyProjectListItem />
+        <ul className="mylist">
+          {projectArr}
         </ul>
+
       </Box>
     </>
   );

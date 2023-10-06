@@ -18,7 +18,7 @@ const Login = (props) => {
       email: formEmail
     };
     console.log("move handle funct", formData);
-    setCookie(formData);
+    await setCookie(formData);
     setView(5);
     e.target.reset();
   };
