@@ -14,13 +14,7 @@ router.post("/", async (req, res) => {
       { role: "system", content: "You are a helpful assistant." },
       {
         role: "user",
-        content: `Using the below description create an array of objects, at least 25, with the following keys: 
-                - taskTitle: The title of the task to be completed   
-                - taskDescription: The description of the task to be completed 
-      
-                The tasks should be generic so that they can apply to javascript or typescript and should assume a SQL based database. 
-                The tasks should be web development Kanban tasks associated with the following description:
-                ${description}`,
+        content: `Generate a list of 25 tasks related to web development in JavaScript or TypeScript with an SQL database. Each task should be in the format: "task title: task description". Based on the following project description, provide the tasks: ${description}`,
       },
     ];
 
