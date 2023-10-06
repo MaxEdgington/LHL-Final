@@ -27,6 +27,38 @@ router.post("/add", async (req, res) => {
   }
 });
 
+router.post("/add-batch", async (req, res) => {
+  console.log("POST /add-batch route hit. Body:", req.body);
+
+  const client = await db.connect();
+  try {
+    const { tasks } = req.body;
+
+    if (!Array.isArray(tasks)) {
+      res.status(400).json({ error: "Tasks should be an array" });
+      return;
+    }
+
+    await client.query("BEGIN");
+    const addedTasks = [];
+    for (const task of tasks) {
+      const newTask = await tasksQueries.addNewTask(
+        task.title,
+        task.description
+      );
+      addedTasks.push(newTask);
+    }
+    await client.query("COMMIT");
+
+    res.status(201).json(addedTasks);
+  } catch (error) {
+    await client.query("ROLLBACK");
+    res.status(500).json({ error: "Failed to add tasks" });
+  } finally {
+    client.release();
+  }
+});
+
 router.post("/:id/delete", async (req, res) => {
   //We may be succeptible to a SQL injection here, Instead of using POST for the delete operation, mabye HTTP DELETE method? - Stretch
   try {
