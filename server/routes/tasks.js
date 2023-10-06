@@ -28,15 +28,13 @@ router.post("/add", async (req, res) => {
 });
 
 router.post("/:id/delete", async (req, res) => {
-  //We may be succeptible to a SQL injection here, Instead of using POST for the delete operation, mabye HTTP DELETE method? - Stretch
-  try {
-    console.log("deleting tasks No.: ", req.params.id);
-    await db.query("DELETE FROM tasks WHERE id=$1", [req.params.id]);
+  try{
+    const taskId = req.params.id
+    await tasksQueries.deleteTask(taskId);
     res.status(200).send();
     console.log("deleted!")
   } catch (error) {
-    console.error("Error during fetching tasks:", error);
-    res.status(500).send("Server Error");
+    res.status(500).json({ error: "Failed to delete task" });
   }
 });
 
@@ -66,6 +64,21 @@ router.post("/:id/onecolumn", async (req, res) => {
         console.log("New location saved in one column!", new_task_index)
     } catch (error) {
       console.error("Error during dragging tasks:", error);
+      res.status(500).send("Server Error");
+    }
+})
+
+router.get("/:id/assigned_user", async(req, res) => {
+    const task_id = req.params.id
+
+    console.log("Task_id", task_id)
+
+    try {
+      const user_name = await tasksQueries.getUserbyTaskId(task_id)
+      res.status(200).json(user_name)
+    //   console.log("user_name is:", user_name)
+    } catch (error) {
+      console.error("Error during showing assigned user  name:", error);
       res.status(500).send("Server Error");
     }
 })

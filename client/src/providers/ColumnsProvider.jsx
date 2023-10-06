@@ -111,7 +111,7 @@ export default function ColumnsProvider(props) {
     if (source.droppableId !== destination.droppableId) {
       
       try{
-        await axios.post(`http://localhost:8080/api/tasks/${Number(taskId)}`, {
+        await axios.post(`/api/tasks/${Number(taskId)}`, {
           new_column_status : destination.droppableId,
           // destination.droppableId is a string
           new_task_index : destination.index
@@ -145,7 +145,7 @@ export default function ColumnsProvider(props) {
     } else {
 
       try{ 
-        await axios.post(`http://localhost:8080/api/tasks/${Number(taskId)}/onecolumn`, {
+        await axios.post(`/api/tasks/${Number(taskId)}/onecolumn`, {
           new_task_index : destination.index
           // destination.index is INT
         });

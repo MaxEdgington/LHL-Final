@@ -11,7 +11,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 500,
-  height: 350,
+  height: 450,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -39,6 +39,9 @@ const TaskDetailModel = (props) => {
       </Typography>
       <Typography id="modal-modal-description" sx={{ mt: 2 }} fontSize={28} mb={2}> 
         Due Date: {due_date}
+      </Typography>
+      <Typography id="modal-modal-description" sx={{ mt: 2 }} fontSize={28} mb={2}> 
+        Assigned User: {assigned_user}
       </Typography>
       <Stack direction="column" spacing={2} sx={{ '& button': { m: 1 } }}>
         <Button variant="contained" startIcon={<DeleteIcon />}
