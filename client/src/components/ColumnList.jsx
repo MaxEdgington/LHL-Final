@@ -17,7 +17,7 @@ const ColumnList = (props) => {
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [project]);
 
   // End of new code
 
