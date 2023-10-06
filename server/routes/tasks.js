@@ -76,7 +76,7 @@ router.get("/:id/assigned_user", async(req, res) => {
     try {
       const user_name = await tasksQueries.getUserbyTaskId(task_id)
       res.status(200).json(user_name)
-      console.log("user_name is:", user_name)
+    //   console.log("user_name is:", user_name)
     } catch (error) {
       console.error("Error during showing assigned user  name:", error);
       res.status(500).send("Server Error");
