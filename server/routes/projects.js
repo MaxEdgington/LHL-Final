@@ -3,18 +3,24 @@ const router = express.Router();
 // const db = require('../configs/db.config');
 const projectQueries = require('../db/queries/projects');
 
+//this gets each project by name inorder to set the state
 router.get('/:name', async (req, res) => {
   console.log(`thisis the req ${req}and this is the res ${res}`);
   try {
     console.log("PARAMS", req.params);
     const selectedProject = await projectQueries.getProjectbyName(req.params.name);
-    console.log("checkign in the router", selectedProject); ///// is this not logging just because its out of sync?
+    console.log("checkign in the router", selectedProject);
     res.status(200).json(selectedProject); ////
   } catch (error) {
     console.error('Error during fetching projects-server side:', error);
     res.status(500).send('Server Error');
   }
 });
+
+
+
+
+//this adds a project
 router.post('/add', async (req, res) => {
   console.log("adding project in route", req.body);
   try {

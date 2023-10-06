@@ -19,6 +19,9 @@ export default function ColumnsProvider(props) {
       const res = await axios.get("/api/tasks");
       console.log("Tasks received from server:", res.data);
 
+      projectData = res.data.filter((task) => task.project_id === 2);
+      ///this is hard-coded until i figure out cookies or how to put a context inside a provider
+
       const todoTasks = res.data.filter((task) => task.status === "1");
       const todoTasksSorted = todoTasks.sort((a, b) => a.index - b.index);
 

@@ -5,7 +5,9 @@ import Checkbox from '@mui/material/Checkbox';
 import background from '../../../public/lots-of-lenses.jpg';
 import { userContext } from '../../providers/UserProvider';
 
-const Login = () => {
+const Login = (props) => {
+  const { setView } = props;
+
   const { loggedinUser, setCookie } = useContext(userContext);
   const [formEmail, setFormEmail] = useState();
 
@@ -17,6 +19,7 @@ const Login = () => {
     };
     console.log("move handle funct", formData);
     setCookie(formData);
+    setView(5);
     e.target.reset();
   };
 

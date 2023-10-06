@@ -187,14 +187,15 @@ function Header(props) {
             >
               {/* {settings.map((setting) => ( */}
               {loggedinUser ?
-                <>
+                <div>
                   <MenuItem key={'My Projects'} onClick={handleMyProjects}>
                     <Typography textAlign="center">My Projects</Typography>
                   </MenuItem>
                   <MenuItem key={'Logout'} onClick={handleLogout}>
                     <Typography textAlign="center">LogOut</Typography>
                   </MenuItem>
-                </> :
+                </div>
+                :
                 <MenuItem key={'Sign In'} onClick={() => setView(4)}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>

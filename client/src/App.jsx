@@ -38,7 +38,7 @@ function App() {
       case 3:
         return <NewTasksForm />;
       case 4:
-        return <Login />;
+        return <Login setView={setView} />;
       case 5:
         return <MyProjectsList />;
       default:
