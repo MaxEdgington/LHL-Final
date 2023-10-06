@@ -7,7 +7,8 @@ import MyProjectListItem from './MyProjectListItem';
 import { userContext } from '../../providers/UserProvider';
 import { projectContext } from '../../providers/ProjectProvider';
 
-const MyProjectsList = () => {
+const MyProjectsList = (props) => {
+  const { setView } = props;
   const { loggedinUser } = useContext(userContext);
   const { project, myProjects, addProject, selectProject, fetchMyProjects } = useContext(projectContext);
 
@@ -16,6 +17,7 @@ const MyProjectsList = () => {
     // console.log("got them ", myProjects);
   }, [loggedinUser.id]);
 
+
   console.log("don't got them", myProjects);
   const projectArr = myProjects.map((project) => {
     return (
@@ -23,9 +25,9 @@ const MyProjectsList = () => {
         key={project.id}
         id={project.id}
         name={project.name}
-      // desc={project.description}
-      // date={project.due_date}
-
+        // desc={project.description}
+        // date={project.due_date}
+        setView={setView}
       />
     );
   });

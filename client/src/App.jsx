@@ -40,7 +40,7 @@ function App() {
       case 4:
         return <Login setView={setView} />;
       case 5:
-        return <MyProjectsList />;
+        return <MyProjectsList setView={setView} />;
       default:
         return <Login />;
     }
