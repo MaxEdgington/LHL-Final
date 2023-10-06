@@ -40,6 +40,9 @@ const TaskDetailModel = (props) => {
       <Typography id="modal-modal-description" sx={{ mt: 2 }} fontSize={28} mb={2}> 
         Due Date: {due_date}
       </Typography>
+      <Typography id="modal-modal-description" sx={{ mt: 2 }} fontSize={28} mb={2}> 
+        Assigned User: {assigned_user}
+      </Typography>
       <Stack direction="column" spacing={2} sx={{ '& button': { m: 1 } }}>
         <Button variant="contained" startIcon={<DeleteIcon />}
         onClick={deleteTask}>

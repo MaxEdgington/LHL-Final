@@ -17,6 +17,16 @@ const addNewTask = async (title, column_id) => {
   }
 };
 
+const deleteTask = async(taskId) => {
+  try {
+    console.log("deleting tasks No.: ", taskId);
+    await db.query("DELETE FROM tasks WHERE id=$1", [taskId]);
+  } catch (error) {
+    console.error("Error during deleting tasks:", error);
+    throw error;
+  }
+}
 module.exports = {
   addNewTask,
+  deleteTask,
 };
