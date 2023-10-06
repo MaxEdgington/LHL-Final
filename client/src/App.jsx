@@ -7,6 +7,7 @@ import ColumnList from "./components/ColumnList";
 import StartNewProject from "./components/StartProject/StartNewProject";
 import NewTasksForm from "./components/NewTasksForm";
 import Login from "./components/User/Login";
+import MyProjects from "./components/User/MyProjects";
 import background from '../public/lots-of-lenses.jpg';
 
 import UserProvider from "./providers/UserProvider";
@@ -38,6 +39,8 @@ function App() {
         return <NewTasksForm />;
       case 4:
         return <Login />;
+      case 5:
+        return <MyProjects />;
       default:
         return <Login />;
     }
@@ -78,9 +81,9 @@ function App() {
 
   return (
     <>
-      <Header setView={setView} />
+      <UserProvider setView={setView} >
+        <Header setView={setView} />
 
-      <UserProvider>
         <ProjectProvider>
           <ColumnsProvider>
             {ActiveView()}

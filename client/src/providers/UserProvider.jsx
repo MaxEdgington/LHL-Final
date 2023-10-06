@@ -5,6 +5,7 @@ export const userContext = createContext();
 
 export default function UserProvider(props) {
   const [loggedinUser, setLoggedinUser] = useState({}); //inital?
+  const { setView } = props;
 
   const setCookie = async (formData) => {
     console.log("this IS being logged in the handleSignIn function", formData.email);
@@ -21,7 +22,14 @@ export default function UserProvider(props) {
     // e.target.reset(); //is this needed?
     // setLoggedinUser();
   };
-  const userData = { loggedinUser, setCookie };
+
+  const logOut = () => {
+    setLoggedinUser({});
+    setView(4);
+    console.log("loggedinuser should be OUT", loggedinUser);
+  };
+
+  const userData = { loggedinUser, setCookie, logOut };
 
   return (
     <userContext.Provider value={userData}>
