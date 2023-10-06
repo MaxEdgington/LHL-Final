@@ -6,7 +6,7 @@ const addNewTask = async (title, column_id) => {
     // Here, we're only adding name (title from frontend) and column_id. We can expand this later.
     const result = await db.query(
       "INSERT INTO tasks (name, project_id) VALUES ($1, $2) RETURNING *",
-      [title,1]
+      [title, 1]
       // We hard coded project_id as 1
     );
 
@@ -17,6 +17,20 @@ const addNewTask = async (title, column_id) => {
   }
 };
 
+const getTasksbyProject = async (project_id) => {
+  return db
+    .query(`SELECT * FROM tasks WHERE project_id = $1`, [project_id])
+    .then(data => {
+      console.log("checking in the query", data.rows[0]);
+      return data.rows[0];
+    }).catch(err => {
+      console.error("Error finding tasks for your project", err);
+      throw err;
+    });
+};
+
+
 module.exports = {
   addNewTask,
+  getTasksbyProject
 };

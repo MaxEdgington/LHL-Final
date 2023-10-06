@@ -14,22 +14,22 @@ export default function ColumnsProvider(props) {
   const [columns, setColumns] = useState(initialColumnData);
 
   // useEffect(() => {
-  const fetchTasks = async () => {
+  const fetchTasks = async () => {  //need to change this to fetch tasks of PROJECT
     try {
       const res = await axios.get("/api/tasks");
       console.log("Tasks received from server:", res.data);
 
       const todoTasks = res.data.filter((task) => task.status === "1");
-      const todoTasksSorted = todoTasks.sort((a,b) => a.index - b.index);
+      const todoTasksSorted = todoTasks.sort((a, b) => a.index - b.index);
 
       const inProgressTasks = res.data.filter((task) => task.status === "2");
-      const inProgressTasksSorted = inProgressTasks.sort((a,b) => a.index - b.index);
+      const inProgressTasksSorted = inProgressTasks.sort((a, b) => a.index - b.index);
 
       const inReviewTasks = res.data.filter((task) => task.status === "3");
-      const inReviewTasksSorted = inReviewTasks.sort((a,b) => a.index - b.index);
+      const inReviewTasksSorted = inReviewTasks.sort((a, b) => a.index - b.index);
 
       const completedTasks = res.data.filter((task) => task.status === "4");
-      const completedTasksSorted = completedTasks.sort((a,b) => a.index - b.index);
+      const completedTasksSorted = completedTasks.sort((a, b) => a.index - b.index);
 
       setColumns({
         1: { ...columns[1], tasks: todoTasksSorted },
@@ -74,7 +74,7 @@ export default function ColumnsProvider(props) {
 
       console.log("*****deleted task id:", taskId);
       console.log("Columns data here:", columns);
-      
+
       // get an array of key-column objects, use .reduce to create a new columns object which removes the task whose id it taskId
       const newColumns = Object.entries(columns).reduce(
         (acc, [key, column]) => {
@@ -100,33 +100,33 @@ export default function ColumnsProvider(props) {
     // it only updates the dragged card, it does not update the index of other cards that are also moved passively
 
     if (!result.destination) return;
-    
-    console.log("result:",result)
+
+    console.log("result:", result);
     const { source, destination } = result;
-    const taskId = result.draggableId
-    console.log("taskId:", taskId) 
+    const taskId = result.draggableId;
+    console.log("taskId:", taskId);
     // taskId is a string
-   
+
 
     if (source.droppableId !== destination.droppableId) {
-      
-      try{
+
+      try {
         await axios.post(`http://localhost:8080/api/tasks/${Number(taskId)}`, {
-          new_column_status : destination.droppableId,
+          new_column_status: destination.droppableId,
           // destination.droppableId is a string
-          new_task_index : destination.index
+          new_task_index: destination.index
           // destination.index is INT
         });
 
         // console.log("destination.index:", destination.index)
-        
+
         const sourceColumn = columns[source.droppableId];
         const destColumn = columns[destination.droppableId];
         const sourceTasks = [...sourceColumn.tasks];
         const destTasks = [...destColumn.tasks];
         const [removed] = sourceTasks.splice(source.index, 1);
         destTasks.splice(destination.index, 0, removed);
-      // add axio post request here to change the tasks table's status colomn
+        // add axio post request here to change the tasks table's status colomn
         setColumns({
           ...columns,
           [source.droppableId]: {
@@ -139,14 +139,14 @@ export default function ColumnsProvider(props) {
           },
         });
       } catch (error) {
-      console.error("Could not drag tasks", error);
+        console.error("Could not drag tasks", error);
       }
-      
+
     } else {
 
-      try{ 
+      try {
         await axios.post(`http://localhost:8080/api/tasks/${Number(taskId)}/onecolumn`, {
-          new_task_index : destination.index
+          new_task_index: destination.index
           // destination.index is INT
         });
 
@@ -162,7 +162,7 @@ export default function ColumnsProvider(props) {
             ...column,
             tasks: copiedTasks,
           },
-      });
+        });
       } catch (error) {
         console.error("Could not drag tasks", error);
       }

@@ -15,6 +15,16 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("", async (req, res) => { //new route? or just slash to replace above?
+  try {
+    const tasks = await tasksQueries.getTasksbyProject(project_id);
+    res.status(200).json(tasks.rows);
+  } catch (error) {
+    console.error("Error during fetching tasks:", error);
+    res.status(500).send("Server Error");
+  }
+});
+
 router.post("/add", async (req, res) => {
   console.log("POST /add route hit. Body:", req.body);
 
@@ -33,7 +43,7 @@ router.post("/:id/delete", async (req, res) => {
     console.log("deleting tasks No.: ", req.params.id);
     await db.query("DELETE FROM tasks WHERE id=$1", [req.params.id]);
     res.status(200).send();
-    console.log("deleted!")
+    console.log("deleted!");
   } catch (error) {
     console.error("Error during fetching tasks:", error);
     res.status(500).send("Server Error");
@@ -41,33 +51,33 @@ router.post("/:id/delete", async (req, res) => {
 });
 
 router.post("/:id", async (req, res) => {
-    const { new_column_status, new_task_index} = req.body;
-    const task_id = req.params.id
-    
-    // console.log("destination.index:", new_task_index)
+  const { new_column_status, new_task_index } = req.body;
+  const task_id = req.params.id;
 
-    try{
-        await db.query(`UPDATE tasks SET status=$1, index=$2 WHERE id=$3`, [new_column_status, new_task_index, task_id]);
-        res.status(200).send();
-        console.log("New location saved!", new_task_index)
-    } catch (error) {
+  // console.log("destination.index:", new_task_index)
+
+  try {
+    await db.query(`UPDATE tasks SET status=$1, index=$2 WHERE id=$3`, [new_column_status, new_task_index, task_id]);
+    res.status(200).send();
+    console.log("New location saved!", new_task_index);
+  } catch (error) {
     console.error("Error during dragging tasks:", error);
     res.status(500).send("Server Error");
-    }
-})
+  }
+});
 
 router.post("/:id/onecolumn", async (req, res) => {
-    const { new_task_index } = req.body;
-    const task_id = req.params.id
- 
-    try{
-        await db.query(`UPDATE tasks SET index=$1 WHERE id=$2`, [new_task_index, task_id]);
-        res.status(200).send();
-        console.log("New location saved in one column!", new_task_index)
-    } catch (error) {
-      console.error("Error during dragging tasks:", error);
-      res.status(500).send("Server Error");
-    }
-})
+  const { new_task_index } = req.body;
+  const task_id = req.params.id;
+
+  try {
+    await db.query(`UPDATE tasks SET index=$1 WHERE id=$2`, [new_task_index, task_id]);
+    res.status(200).send();
+    console.log("New location saved in one column!", new_task_index);
+  } catch (error) {
+    console.error("Error during dragging tasks:", error);
+    res.status(500).send("Server Error");
+  }
+});
 
 module.exports = router;
