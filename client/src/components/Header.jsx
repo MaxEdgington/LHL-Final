@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,14 +16,16 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 import { useTheme } from '@mui/material/styles';
 
+import { userContext } from '../providers/UserProvider';
 
 const pages = ['New Project', 'What Links?'];
 const settings = ['My Projects', 'Logout'];
 
 function Header(props) {
   const { setView } = props;
-
+  const { logOut, loggedinUser } = useContext(userContext);
   const theme = useTheme();
+
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [PaletteMode, setMode] = useState('light');
@@ -42,6 +44,13 @@ function Header(props) {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+  const handleLogout = () => {
+    logOut();
+  };
+  const handleMyProjects = () => {
+    setView(5);
+    handleCloseUserMenu();
   };
 
   const toggleColorMode = () => {
@@ -172,7 +181,7 @@ function Header(props) {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={setting === 'Logout' ? handleLogout : handleMyProjects}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

@@ -9,7 +9,7 @@ import background from '../../../public/lens-img-darkmode.jpeg';
 
 function NewProjectForm(props) {
   const { setView } = props;
-  const { projectAddFetchSet } = useContext(projectContext);
+  const { addProject } = useContext(projectContext);
 
   //these states are just to handle the data for the form
   const [projectName, setProjectName] = useState('');
@@ -27,7 +27,7 @@ function NewProjectForm(props) {
     };
 
     console.log(formData);
-    projectAddFetchSet(formData); //does this need async/await to the handlesubmit?
+    addProject(formData);
     setView(1);
   };
 

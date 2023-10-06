@@ -16,7 +16,7 @@ export default function ColumnsProvider(props) {
   // useEffect(() => {
   const fetchTasks = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/tasks");
+      const res = await axios.get("/api/tasks");
       console.log("Tasks received from server:", res.data);
 
       const todoTasks = res.data.filter((task) => task.status === "1");
@@ -47,7 +47,7 @@ export default function ColumnsProvider(props) {
   const addNewTask = async (taskTitle) => {
     // give this form params from form
     try {
-      const response = await axios.post("http://localhost:8080/api/tasks/add", {
+      const response = await axios.post("/api/tasks/add", {
         title: taskTitle, // You can set a default title for now
       });
       console.log("New task added:", response.data);
@@ -70,7 +70,7 @@ export default function ColumnsProvider(props) {
   const handleDelete = async (taskId) => {
     // console.log("tasks No:", taskId)
     try {
-      await axios.post(`http://localhost:8080/api/tasks/${taskId}/delete`);
+      await axios.post(`/api/tasks/${taskId}/delete`);
 
       console.log("*****deleted task id:", taskId);
       console.log("Columns data here:", columns);

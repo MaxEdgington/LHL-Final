@@ -27,8 +27,8 @@ const ColumnList = (props) => {
       <ColumnListItem
         key={columnId}
         id={columnId}
-        // name={column.name}
-        // tasks={column.tasks}
+      // name={column.name}
+      // tasks={column.tasks}
       />
     );
   });
