@@ -1,5 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 import axios from "axios";
+// import { userContext } from "./UserProvider";
 
 export const projectContext = createContext();
 
@@ -7,6 +8,7 @@ export default function ProjectProvider(props) {
   const [project, setProject] = useState({});
   //project is an object with all the keys from db,
   const [myProjects, setMyProjects] = useState([]);
+
 
   const addProject = async (formData) => {
     console.log("this is what projProvider-add gets:", formData);

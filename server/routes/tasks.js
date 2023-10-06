@@ -29,8 +29,9 @@ router.post("/add", async (req, res) => {
   console.log("POST /add route hit. Body:", req.body);
 
   try {
-    const { title } = req.body;
-    const newTask = await tasksQueries.addNewTask(title);
+    const title = req.body.title; //used to be an object?
+    const project = req.body.project_id;
+    const newTask = await tasksQueries.addNewTask(title, project);
     res.status(201).json(newTask);
   } catch (error) {
     res.status(500).json({ error: "Failed to add new task" });

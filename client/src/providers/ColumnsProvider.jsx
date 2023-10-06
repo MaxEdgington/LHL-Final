@@ -1,9 +1,13 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 import axios from "axios";
+import { projectContext } from "./ProjectProvider";
+
 
 export const columnsContext = createContext();
 
 export default function ColumnsProvider(props) {
+  const { project } = useContext(projectContext);
+
   const initialColumnData = {
     1: { name: "To Do", tasks: [] },
     2: { name: "In Progress", tasks: [] },
@@ -17,21 +21,22 @@ export default function ColumnsProvider(props) {
   const fetchTasks = async () => {  //need to change this to fetch tasks of PROJECT
     try {
       const res = await axios.get("/api/tasks");
-      console.log("Tasks received from server:", res.data);
+      console.log("1 ALL Tasks received from server:", res.data);
 
-      projectData = res.data.filter((task) => task.project_id === 2);
-      ///this is hard-coded until i figure out cookies or how to put a context inside a provider
+      console.log("2 do i have a project", project);
+      const projectData = res.data.filter((task) => task.project_id === project.id);
+      console.log("3 can i filter", projectData);
 
-      const todoTasks = res.data.filter((task) => task.status === "1");
+      const todoTasks = projectData.filter((task) => task.status === "1");
       const todoTasksSorted = todoTasks.sort((a, b) => a.index - b.index);
 
-      const inProgressTasks = res.data.filter((task) => task.status === "2");
+      const inProgressTasks = projectData.filter((task) => task.status === "2");
       const inProgressTasksSorted = inProgressTasks.sort((a, b) => a.index - b.index);
 
-      const inReviewTasks = res.data.filter((task) => task.status === "3");
+      const inReviewTasks = projectData.filter((task) => task.status === "3");
       const inReviewTasksSorted = inReviewTasks.sort((a, b) => a.index - b.index);
 
-      const completedTasks = res.data.filter((task) => task.status === "4");
+      const completedTasks = projectData.filter((task) => task.status === "4");
       const completedTasksSorted = completedTasks.sort((a, b) => a.index - b.index);
 
       setColumns({
@@ -41,7 +46,7 @@ export default function ColumnsProvider(props) {
         4: { ...columns[4], tasks: completedTasksSorted },
       });
 
-      console.log("After data transformation:", columns);
+      console.log("4 After data transformation:", columns);
     } catch (error) {
       console.error("Could not fetch tasks", error);
     }
@@ -49,9 +54,11 @@ export default function ColumnsProvider(props) {
 
   const addNewTask = async (taskTitle) => {
     // give this form params from form
+    console.log("do i have the data", project);
+    console.log("do i have the data", taskTitle);
     try {
       const response = await axios.post("/api/tasks/add", {
-        title: taskTitle, // You can set a default title for now
+        title: taskTitle, project_id: project.id
       });
       console.log("New task added:", response.data);
 
