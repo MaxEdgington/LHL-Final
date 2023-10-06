@@ -20,15 +20,22 @@ export default function ColumnsProvider(props) {
       console.log("Tasks received from server:", res.data);
 
       const todoTasks = res.data.filter((task) => task.status === "1");
+      const todoTasksSorted = todoTasks.sort((a,b) => a.index - b.index);
+
       const inProgressTasks = res.data.filter((task) => task.status === "2");
+      const inProgressTasksSorted = inProgressTasks.sort((a,b) => a.index - b.index);
+
       const inReviewTasks = res.data.filter((task) => task.status === "3");
+      const inReviewTasksSorted = inReviewTasks.sort((a,b) => a.index - b.index);
+
       const completedTasks = res.data.filter((task) => task.status === "4");
+      const completedTasksSorted = completedTasks.sort((a,b) => a.index - b.index);
 
       setColumns({
-        1: { ...columns[1], tasks: todoTasks },
-        2: { ...columns[2], tasks: inProgressTasks },
-        3: { ...columns[3], tasks: inReviewTasks },
-        4: { ...columns[4], tasks: completedTasks },
+        1: { ...columns[1], tasks: todoTasksSorted },
+        2: { ...columns[2], tasks: inProgressTasksSorted },
+        3: { ...columns[3], tasks: inReviewTasksSorted },
+        4: { ...columns[4], tasks: completedTasksSorted },
       });
 
       console.log("After data transformation:", columns);
@@ -88,7 +95,10 @@ export default function ColumnsProvider(props) {
     }
   };
 
+
   const onDragEnd = async (result) => {
+    // it only updates the dragged card, it does not update the index of other cards that are also moved passively
+
     if (!result.destination) return;
     
     console.log("result:",result)
@@ -96,14 +106,19 @@ export default function ColumnsProvider(props) {
     const taskId = result.draggableId
     console.log("taskId:", taskId) 
     // taskId is a string
+   
 
     if (source.droppableId !== destination.droppableId) {
       
       try{
         await axios.post(`http://localhost:8080/api/tasks/${Number(taskId)}`, {
           new_column_status : destination.droppableId,
+          // destination.droppableId is a string
           new_task_index : destination.index
+          // destination.index is INT
         });
+
+        // console.log("destination.index:", destination.index)
         
         const sourceColumn = columns[source.droppableId];
         const destColumn = columns[destination.droppableId];
@@ -128,17 +143,29 @@ export default function ColumnsProvider(props) {
       }
       
     } else {
-      const column = columns[source.droppableId];
-      const copiedTasks = [...column.tasks];
-      const [removed] = copiedTasks.splice(source.index, 1);
-      copiedTasks.splice(destination.index, 0, removed);
-      setColumns({
-        ...columns,
-        [source.droppableId]: {
-          ...column,
-          tasks: copiedTasks,
-        },
+
+      try{ 
+        await axios.post(`http://localhost:8080/api/tasks/${Number(taskId)}/onecolumn`, {
+          new_task_index : destination.index
+          // destination.index is INT
+        });
+
+        const column = columns[source.droppableId];
+        const copiedTasks = [...column.tasks];
+        const [removed] = copiedTasks.splice(source.index, 1);
+        copiedTasks.splice(destination.index, 0, removed);
+        // copiedTasks.map(task => task.index = destination.index)
+
+        setColumns({
+          ...columns,
+          [source.droppableId]: {
+            ...column,
+            tasks: copiedTasks,
+          },
       });
+      } catch (error) {
+        console.error("Could not drag tasks", error);
+      }
     }
   };
 

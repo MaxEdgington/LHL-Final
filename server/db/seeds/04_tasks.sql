@@ -3,9 +3,9 @@
 
 INSERT INTO tasks (name, description, due_date, status, index, project_id, assigned_user)
 VALUES
-  ('Project Planning and Ideation', 'Define project objectives, create a timeline, and brainstorm unique features.', '2023-10-12', '1',0, 1, 1),
+  ('Project Planning and Ideation', 'Define project objectives, create a timeline, and brainstorm unique features.', '2023-10-12', '1', 0, 1, 1),
 
-  ('Market Research', 'Research pet and cat-related social media platforms for insights and opportunities.', '2023-11-12', '1',1, 1, 2),
+  ('Market Research', 'Research pet and cat-related social media platforms for insights and opportunities.', '2023-11-12', '1', 1, 1, 2),
 
   ('Technology Stack Selection', 'Choose front-end and back-end technologies, including programming languages and databases.', '2023-12-12', '2', 0, 1, 3),
 
