@@ -13,8 +13,9 @@ router.post('/set-session', async (req, res) => {
     const requestedUser = await usersQueries.getUserByEmail(req.body.email);
     console.log("query response in the route", requestedUser);
     req.session.user = requestedUser; //this is totally a guess??
-    console.log("No session???", req.session);
-    res.status(200);
+    console.log("set session in route", req.session);
+    // return req.session;
+    res.json(req.session);
   } catch (error) {
     console.error('Error during adding project-server side:', error);
     res.status(500).send('Server Error');
@@ -27,4 +28,11 @@ router.post('/set-session', async (req, res) => {
   // res.status(200).send('Session data set successfully');
   // });
 });
+
+router.post("/logout", (req, res) => {
+  res.clearCookie('session');
+  console.log("clear session in route", req.session);
+  res.redirect("/");
+});
+
 module.exports = router;

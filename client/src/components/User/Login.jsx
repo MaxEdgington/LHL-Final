@@ -6,7 +6,7 @@ import background from '../../../public/lots-of-lenses.jpg';
 import { userContext } from '../../providers/UserProvider';
 
 const Login = () => {
-  const { setCookie } = useContext(userContext);
+  const { loggedinUser, setCookie } = useContext(userContext);
   const [formEmail, setFormEmail] = useState();
 
   const handleSignIn = async (e) => {
@@ -37,6 +37,7 @@ const Login = () => {
           <Grid align='center'>
             <Avatar src="../../../public/lens-line.jpg"></Avatar>
             <h2>Sign In</h2>
+            <h4>--{loggedinUser.email}--</h4>
           </Grid>
 
           <form onSubmit={handleSignIn}>

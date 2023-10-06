@@ -43,6 +43,9 @@ function Header(props) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const handleLogout = () => {
+
+  };
 
   const toggleColorMode = () => {
     setMode((PaletteMode) =>
@@ -172,7 +175,7 @@ function Header(props) {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={setting === 'Logout' ? handleLogout : handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

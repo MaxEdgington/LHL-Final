@@ -12,13 +12,14 @@ export default function UserProvider(props) {
     try {
       const response = await axios.post('/api/set-session', { email: formData.email });
       console.log("resp in provider", response.data);
-      // setLoggedinUser(response.data);
+      setLoggedinUser(response.data.user);
       // console.log("i can set state loggedinuser", loggedinUser);
       return response.data;
     } catch (error) {
       console.error(error);
     }
     // e.target.reset(); //is this needed?
+    // setLoggedinUser();
   };
   const userData = { loggedinUser, setCookie };
 
