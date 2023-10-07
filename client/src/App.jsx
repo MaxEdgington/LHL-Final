@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Link, Route, Routes } from 'react-router-dom';
 import axios from "axios";
 import { Box } from "@mui/material";
 
@@ -8,6 +9,7 @@ import StartNewProject from "./components/StartProject/StartNewProject";
 import NewTasksForm from "./components/NewTasksForm";
 import Login from "./components/User/Login";
 import MyProjectsList from "./components/User/MyProjectsList";
+import ErrorPage from "./components/ErrorPage";
 import background from '../public/lots-of-lenses.jpg';
 
 import UserProvider from "./providers/UserProvider";
@@ -36,7 +38,7 @@ function App() {
       case 2:
         return <StartNewProject setView={setView} />;
       case 3:
-        return <NewTasksForm />;
+        return <NewTasksForm />; //this is not being used afterall
       case 4:
         return <Login setView={setView} />;
       case 5:
@@ -45,6 +47,8 @@ function App() {
         return <Login />;
     }
   };
+
+  <Link to="/myProjects">My Projects</Link>;
 
   // const theme = createTheme({
   //   palette: {
@@ -86,7 +90,15 @@ function App() {
 
         <ProjectProvider>
           <ColumnsProvider>
-            {ActiveView()}
+            {/* {ActiveView()} */}
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/myProjects" element={<MyProjectsList />} />
+              <Route path="/projectboard" element={<ColumnList />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/newProject" element={<StartNewProject />} />
+              <Route path="*" element={<ErrorPage />} />
+            </Routes>
           </ColumnsProvider>
         </ProjectProvider>
       </UserProvider>

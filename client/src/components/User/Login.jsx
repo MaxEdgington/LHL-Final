@@ -38,7 +38,7 @@ const Login = (props) => {
       <Grid>
         <Paper elevation={10} style={paperStyle}>
           <Grid align='center'>
-            <Avatar src="../../../public/lens-line.jpg"></Avatar>
+            <Avatar src="../../../public/lens-line.png"></Avatar>
             <h2>Sign In</h2>
             <h4>--{loggedinUser.email}--</h4>
           </Grid>
