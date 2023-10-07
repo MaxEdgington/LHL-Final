@@ -6,7 +6,7 @@ INSERT INTO users (username, email, password, avatar)
     ('Edwin', 'edwin@example.com', 'passwrd', 'https://github.com/MaxEdgington/LHL-Final/blob/main/server/avatars/avatar4.png?raw=true'),
     ('Curtis', 'curtis@example.com', 'passwrd','https://github.com/MaxEdgington/LHL-Final/blob/main/server/avatars/avatar5.png?raw=true'),
     ('Salman', 'salman@example.com', 'passwrd', 'https://github.com/MaxEdgington/LHL-Final/blob/main/server/avatars/avatar6.png?raw=true'),
-    ('Shani', 'shani@example.com', 'passwrd', 'https://github.com/MaxEdgington/LHL-Final/blob/main/server/avatars/avatar6.png?raw=true')
+    ('Shani', 'shani@example.com', 'passwrd', 'https://github.com/MaxEdgington/LHL-Final/blob/main/server/avatars/avatar7.png?raw=true')
 
 ;
 
