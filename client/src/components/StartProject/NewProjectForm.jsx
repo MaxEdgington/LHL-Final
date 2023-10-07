@@ -29,7 +29,7 @@ function NewProjectForm() {
 
     console.log(formData);
     addProject(formData);
-    navigate('/projectBoard');
+    navigate(`/projectBoard/${projectName}`);
   };
 
 
