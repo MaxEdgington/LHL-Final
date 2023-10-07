@@ -8,13 +8,12 @@ export default function UserProvider(props) {
   const { setView } = props;
 
   const setCookie = async (formData) => {
-    console.log("this IS being logged in the handleSignIn function", formData.email);
+    // console.log("this IS being logged in the handleSignIn function", formData.email);
 
     try {
       const response = await axios.post('/api/set-session', { email: formData.email });
-      console.log("resp in provider", response.data);
+      // console.log("resp in provider", response.data);
       setLoggedinUser(response.data.user);
-      // console.log("i can set state loggedinuser", loggedinUser);
       return response.data;
     } catch (error) {
       console.error(error);

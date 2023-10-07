@@ -7,7 +7,7 @@ import ColumnList from "./components/ColumnList";
 import StartNewProject from "./components/StartProject/StartNewProject";
 import NewTasksForm from "./components/NewTasksForm";
 import Login from "./components/User/Login";
-import MyProjects from "./components/User/MyProjects";
+import MyProjectsList from "./components/User/MyProjectsList";
 import background from '../public/lots-of-lenses.jpg';
 
 import UserProvider from "./providers/UserProvider";
@@ -38,9 +38,9 @@ function App() {
       case 3:
         return <NewTasksForm />;
       case 4:
-        return <Login />;
+        return <Login setView={setView} />;
       case 5:
-        return <MyProjects />;
+        return <MyProjectsList setView={setView} />;
       default:
         return <Login />;
     }
