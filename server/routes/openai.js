@@ -3,7 +3,7 @@ const axios = require("axios");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.send("OpenAI route is working!");
+  res.json({ message: "OpenAI route is working!" });
 });
 
 router.post("/", async (req, res) => {

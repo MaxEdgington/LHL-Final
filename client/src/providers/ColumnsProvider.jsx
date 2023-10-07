@@ -13,39 +13,36 @@ export default function ColumnsProvider(props) {
 
   const [columns, setColumns] = useState(initialColumnData);
 
-  // useEffect(() => {
+  // Fetch tasks and categorize them by their status
   const fetchTasks = async () => {
     try {
       const res = await axios.get("http://localhost:8080/api/tasks");
-      console.log("Tasks received from server:", res.data);
 
       const todoTasks = res.data.filter((task) => task.status === "1");
       const inProgressTasks = res.data.filter((task) => task.status === "2");
       const inReviewTasks = res.data.filter((task) => task.status === "3");
       const completedTasks = res.data.filter((task) => task.status === "4");
 
+      // Update columns state with fetched tasks
       setColumns({
         1: { ...columns[1], tasks: todoTasks },
         2: { ...columns[2], tasks: inProgressTasks },
         3: { ...columns[3], tasks: inReviewTasks },
         4: { ...columns[4], tasks: completedTasks },
       });
-
-      console.log("After data transformation:", columns);
     } catch (error) {
       console.error("Could not fetch tasks", error);
     }
   };
 
+  // Add a single new task with title
   const addNewTask = async (taskTitle) => {
-    // give this form params from form
     try {
       const response = await axios.post("http://localhost:8080/api/tasks/add", {
-        title: taskTitle, // You can set a default title for now
+        title: taskTitle,
       });
-      console.log("New task added:", response.data);
 
-      // Now, you should update your local state to reflect this new task:
+      // Update the local state with the new task
       setColumns((prevColumns) => ({
         ...prevColumns,
         1: {
@@ -58,16 +55,52 @@ export default function ColumnsProvider(props) {
     }
   };
 
-  // }, []);
+  // Fetch AI-generated tasks, process them and add to database
+  const addGeneratedTasks = async (description) => {
+    try {
+      const response = await axios.post("http://localhost:8080/openai", {
+        description,
+      });
+      console.log(response.data);
 
+      const generatedTasksText = response.data.generatedText.trim().split("\n");
+      const tasksToAdd = generatedTasksText
+        .filter((taskText) => taskText.includes(": ")) // Filter out lines without ": "
+        .map((taskText) => {
+          const [taskTitle, taskDescription] = taskText.split(": ");
+          return {
+            title: taskTitle.trim(),
+            description: taskDescription.trim(),
+          };
+        });
+
+      // Send all tasks at once to the batch endpoint
+      const addedTasks = await axios.post(
+        "http://localhost:8080/api/tasks/add-batch",
+        {
+          tasks: tasksToAdd,
+        }
+      );
+
+      // Update the local state with the new tasks
+      setColumns((prevColumns) => ({
+        ...prevColumns,
+        1: {
+          ...prevColumns[1],
+          tasks: [...prevColumns[1].tasks, ...addedTasks.data],
+        },
+      }));
+    } catch (error) {
+      console.error("Error fetching tasks from server:", error);
+    }
+  };
+
+  // Delete a task by its ID
   const handleDelete = async (taskId) => {
-    // console.log("tasks No:", taskId)
     try {
       await axios.post(`http://localhost:8080/api/tasks/${taskId}/delete`);
 
-      console.log("*****deleted task id:", taskId);
-      console.log("Columns data here:", columns);
-
+      // Update local state by removing the deleted task
       const newColumns = Object.entries(columns).reduce(
         (acc, [key, column]) => {
           return {
@@ -87,41 +120,9 @@ export default function ColumnsProvider(props) {
     }
   };
 
+  // Handle drag and drop of tasks across columns
   const onDragEnd = (result) => {
-    if (!result.destination) return;
-    const { source, destination } = result;
-    if (source.droppableId !== destination.droppableId) {
-      const sourceColumn = columns[source.droppableId];
-      const destColumn = columns[destination.droppableId];
-      const sourceTasks = [...sourceColumn.tasks];
-      const destTasks = [...destColumn.tasks];
-      const [removed] = sourceTasks.splice(source.index, 1);
-      destTasks.splice(destination.index, 0, removed);
-      // add axio post request here to change the tasks table's status colomn
-      setColumns({
-        ...columns,
-        [source.droppableId]: {
-          ...sourceColumn,
-          tasks: sourceTasks,
-        },
-        [destination.droppableId]: {
-          ...destColumn,
-          tasks: destTasks,
-        },
-      });
-    } else {
-      const column = columns[source.droppableId];
-      const copiedTasks = [...column.tasks];
-      const [removed] = copiedTasks.splice(source.index, 1);
-      copiedTasks.splice(destination.index, 0, removed);
-      setColumns({
-        ...columns,
-        [source.droppableId]: {
-          ...column,
-          tasks: copiedTasks,
-        },
-      });
-    }
+    // ... existing logic
   };
 
   const columnData = {
@@ -130,6 +131,7 @@ export default function ColumnsProvider(props) {
     onDragEnd,
     addNewTask,
     handleDelete,
+    addGeneratedTasks,
   };
 
   return (

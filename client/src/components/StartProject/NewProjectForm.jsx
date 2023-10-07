@@ -1,20 +1,30 @@
 import React, { useContext, useState } from "react";
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { FormControl, FormLabel, Box, Paper, Grid } from '@mui/material';
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { FormControl, Box, Paper, Grid } from "@mui/material";
 import { DateField } from "@mui/x-date-pickers";
 import { projectContext } from "../../providers/ProjectProvider";
-import background from '../../../public/lens-img-darkmode.jpeg';
-
+import { columnsContext } from "../../providers/ColumnsProvider";
+import background from "../../../public/lens-img-darkmode.jpeg";
 
 function NewProjectForm(props) {
   const { setView } = props;
   const { projectAddFetchSet } = useContext(projectContext);
+  const { addGeneratedTasks } = useContext(columnsContext); // import addGeneratedTasks from ColumnsProvider
 
-  //these states are just to handle the data for the form
-  const [projectName, setProjectName] = useState('');
-  const [projectDescription, setProjectDescription] = useState('');
+  // states for the form
+  const [projectName, setProjectName] = useState("");
+  const [projectDescription, setProjectDescription] = useState("");
   const [projectDueDate, setProjectDueDate] = useState(null);
+
+  const handleLensAIClick = async () => {
+    try {
+      await addGeneratedTasks(projectDescription); // Call addGeneratedTasks directly here
+      setView(1); // Redirect to main board after adding tasks
+    } catch (error) {
+      console.error("Error adding generated tasks:", error);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,54 +33,54 @@ function NewProjectForm(props) {
       project_name: projectName,
       project_description: projectDescription,
       project_due_date: projectDueDate,
-      //     // loggedin user will need to go here from session
+      // logged-in user will need to go here from session
     };
 
     console.log(formData);
-    projectAddFetchSet(formData); //does this need async/await to the handlesubmit?
+    projectAddFetchSet(formData);
     setView(1);
   };
 
-
-  const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
+  const paperStyle = {
+    padding: 20,
+    height: "70vh",
+    width: 280,
+    margin: "20px auto",
+  };
 
   return (
     <Box
       style={{
         backgroundImage: `url(${background})`,
-        // height: '100%'
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
-        height: "100%"
-      }}>
+        height: "100%",
+      }}
+    >
       <Grid>
         <Paper elevation={10} style={paperStyle}>
-          <Grid align='center'>
+          <Grid align="center">
             <h2>Start a New Project</h2>
           </Grid>
 
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <FormControl>
-              {/* <FormLabel></FormLabel> */}
               <TextField
                 label="Project Name"
                 name="project_name"
                 value={projectName}
                 onChange={(e) => setProjectName(e.target.value)}
-
                 variant="outlined"
-              >
-              </TextField>
+              ></TextField>
               <TextField
                 label="Project Description"
                 name="project_description"
                 value={projectDescription}
                 onChange={(e) => setProjectDescription(e.target.value)}
                 variant="outlined"
-              >
-              </TextField>
+              ></TextField>
               <DateField
                 label="Project Due Date"
                 name="project_due_date"
@@ -78,17 +88,21 @@ function NewProjectForm(props) {
                 variant="outlined"
                 onChange={(date) => setProjectDueDate(date)}
               />
-
-
-              <h3>Would you like to use our Lens AI to help you get started?</h3>
-              <Button variant="contained">Yes, use LensAI</Button> {/* this button will need to open a different Form*/}
-              <Button variant="contained" type="Submit"> No, I'll enter the tasks myself</Button>
+              <h3>
+                Would you like to use our Lens AI to help you get started?
+              </h3>
+              <Button variant="contained" onClick={handleLensAIClick}>
+                Yes, use LensAI
+              </Button>
+              <Button variant="contained" type="Submit">
+                No, I'll enter the tasks myself
+              </Button>
             </FormControl>
-          </form >
+          </form>
         </Paper>
       </Grid>
     </Box>
   );
-};
+}
 
 export default NewProjectForm;
