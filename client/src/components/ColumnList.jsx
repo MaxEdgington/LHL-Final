@@ -63,5 +63,3 @@ const ColumnList = (props) => {
 };
 
 export default ColumnList;
-
-//mock data

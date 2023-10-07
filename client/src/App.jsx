@@ -73,20 +73,20 @@ function App() {
 
         <ProjectProvider>
           <ColumnsProvider>
-            {/* {ActiveView()} */}
+
             <Routes>
               <Route path="/" element={<Login />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/myProjects" element={<MyProjectsList />} />
               {/* <Route path="/projectboard" element={<ColumnList />} /> */}
-              <Route path="/login" element={<Login />} />
+              <Route path='/projectboard/:name' element={<ColumnList />} />
               <Route path="/newProject" element={<StartNewProject />} />
               <Route path="*" element={<ErrorPage />} />
-              <Route path='/projectboard/:name' element={<ColumnList />} />
 
               {/* YULI - something like this maybe??? */}
               {/* <Route path='/task/:id' element={???} /> */}
-
             </Routes>
+
           </ColumnsProvider>
         </ProjectProvider>
       </UserProvider>

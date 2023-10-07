@@ -5,7 +5,7 @@ import axios from "axios";
 export const userContext = createContext();
 
 export default function UserProvider(props) {
-  const [loggedinUser, setLoggedinUser] = useState({}); //inital?
+  const [loggedinUser, setLoggedinUser] = useState({});
   const navigate = useNavigate();
 
   const setCookie = async (formData) => {

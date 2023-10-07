@@ -1,8 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Box, Grid, Paper, Avatar, Button, Typography, Link, FormControlLabel, TextField } from '@mui/material';
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-// import Checkbox from '@mui/material/Checkbox';
-// import background from '../../../public/XXXXX';
+
+// import background from '../../../public/do i want a background picture?'; 
 import MyProjectListItem from './MyProjectListItem';
 import { userContext } from '../../providers/UserProvider';
 import { projectContext } from '../../providers/ProjectProvider';
@@ -14,7 +13,7 @@ const MyProjectsList = () => {
   useEffect(() => {
     fetchMyProjects(loggedinUser.id);
     // console.log("got them ", myProjects);
-  }, [loggedinUser.id]);
+  }, [loggedinUser]);
 
 
   console.log("don't got them", myProjects);

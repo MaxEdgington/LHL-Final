@@ -163,7 +163,8 @@ function Header() {
                 {loggedinUser ? (
                   <AccountCircleIcon stroke='white' />
                 ) : (
-                  <Avatar alt="L" src={loggedinUser.avatar} />
+                  // <Avatar alt="L" src={loggedinUser.avatar} />
+                  <></>
                 )}
               </IconButton>
             </Tooltip>
@@ -202,7 +203,7 @@ function Header() {
                 </div>
                 :
                 <MenuItem key={'Sign In'} onClick={() => navigate('/login')}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center">Sign In</Typography>
                 </MenuItem>
               }
             </Menu>

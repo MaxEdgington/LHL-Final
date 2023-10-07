@@ -17,7 +17,7 @@ export default function ColumnsProvider(props) {
 
   const [columns, setColumns] = useState(initialColumnData);
 
-  // useEffect(() => {
+
   const fetchTasks = async () => {  //need to change this to fetch tasks of PROJECT
     try {
       const res = await axios.get("/api/tasks");
@@ -75,7 +75,7 @@ export default function ColumnsProvider(props) {
     }
   };
 
-  // }, []);
+
 
   const handleDelete = async (taskId) => {
     // console.log("tasks No:", taskId)
