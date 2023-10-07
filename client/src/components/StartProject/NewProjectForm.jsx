@@ -6,6 +6,7 @@ import { DateField } from "@mui/x-date-pickers";
 import { projectContext } from "../../providers/ProjectProvider";
 import { columnsContext } from "../../providers/ColumnsProvider";
 import background from "../../../public/lens-img-darkmode.jpeg";
+import { ClipLoader } from "react-spinners";
 
 function NewProjectForm(props) {
   const { setView } = props;
@@ -16,14 +17,17 @@ function NewProjectForm(props) {
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [projectDueDate, setProjectDueDate] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLensAIClick = async () => {
+    setIsLoading(true);
     try {
       await addGeneratedTasks(projectDescription); // Call addGeneratedTasks directly here
       setView(1); // Redirect to main board after adding tasks
     } catch (error) {
       console.error("Error adding generated tasks:", error);
     }
+    setIsLoading(false);
   };
 
   const handleSubmit = (e) => {
@@ -59,50 +63,69 @@ function NewProjectForm(props) {
         height: "100%",
       }}
     >
-      <Grid>
-        <Paper elevation={10} style={paperStyle}>
-          <Grid align="center">
-            <h2>Start a New Project</h2>
-          </Grid>
+      {isLoading ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
+        >
+          <ClipLoader color="#123abc" size={150} />
+        </div>
+      ) : (
+        <Grid>
+          <Paper elevation={10} style={paperStyle}>
+            <Grid align="center">
+              <h2>Start a New Project</h2>
+            </Grid>
 
-          <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-            <FormControl>
-              <TextField
-                label="Project Name"
-                name="project_name"
-                value={projectName}
-                onChange={(e) => setProjectName(e.target.value)}
-                variant="outlined"
-              ></TextField>
-              <TextField
-                label="Project Description"
-                name="project_description"
-                value={projectDescription}
-                onChange={(e) => setProjectDescription(e.target.value)}
-                variant="outlined"
-              ></TextField>
-              <DateField
-                label="Project Due Date"
-                name="project_due_date"
-                value={projectDueDate}
-                variant="outlined"
-                onChange={(date) => setProjectDueDate(date)}
-              />
-              <h3>
-                Would you like to use our Lens AI to help you get started?
-              </h3>
-              <Button variant="contained" onClick={handleLensAIClick}>
-                Yes, use LensAI
-              </Button>
-              <Button variant="contained" type="Submit">
-                No, I'll enter the tasks myself
-              </Button>
-            </FormControl>
-          </form>
-        </Paper>
-      </Grid>
+            <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+              <FormControl>
+                <TextField
+                  label="Project Name"
+                  name="project_name"
+                  value={projectName}
+                  onChange={(e) => setProjectName(e.target.value)}
+                  variant="outlined"
+                ></TextField>
+                <TextField
+                  label="Project Description"
+                  name="project_description"
+                  value={projectDescription}
+                  onChange={(e) => setProjectDescription(e.target.value)}
+                  variant="outlined"
+                ></TextField>
+                <DateField
+                  label="Project Due Date"
+                  name="project_due_date"
+                  value={projectDueDate}
+                  variant="outlined"
+                  onChange={(date) => setProjectDueDate(date)}
+                />
+                <h3>
+                  Would you like to use our Lens AI to help you get started?
+                </h3>
+                <Button
+                  variant="contained"
+                  onClick={handleLensAIClick}
+                  disabled={isLoading}
+                >
+                  Yes, use LensAI
+                </Button>
+                <Button variant="contained" type="Submit">
+                  No, I'll enter the tasks myself
+                </Button>
+              </FormControl>
+            </form>
+          </Paper>
+        </Grid>
+      )}
     </Box>
   );
 }
 
 export default NewProjectForm;
+
+//  ternary condition based on isLoading. If isLoading is true, we display the loading spinner. Otherwise, we render the main content of the component.
