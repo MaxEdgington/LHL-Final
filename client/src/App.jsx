@@ -27,45 +27,28 @@ function App() {
   const [error, setError] = useState(null);
   const [active, setActive] = useState(4);
 
-  const setView = (active) => {
-    setActive(active);
-  };
+  // const setView = (active) => {
+  //   setActive(active);
+  // };
 
-  const ActiveView = () => {
-    switch (active) {
-      case 1:
-        return <ColumnList />;
-      case 2:
-        return <StartNewProject setView={setView} />;
-      case 3:
-        return <NewTasksForm />; //this is not being used afterall
-      case 4:
-        return <Login setView={setView} />;
-      case 5:
-        return <MyProjectsList setView={setView} />;
-      default:
-        return <Login />;
-    }
-  };
+  // const ActiveView = () => {
+  //   switch (active) {
+  //     case 1:
+  //       return <ColumnList />;
+  //     case 2:
+  //       return <StartNewProject setView={setView} />;
+  //     case 3:
+  //       return <NewTasksForm />; //this is not being used afterall
+  //     case 4:
+  //       return <Login setView={setView} />;
+  //     case 5:
+  //       return <MyProjectsList setView={setView} />;
+  //     default:
+  //       return <Login />;
+  //   }
+  // };
 
   <Link to="/myProjects">My Projects</Link>;
-
-  // const theme = createTheme({
-  //   palette: {
-  //     primary: {
-  //       light: '#e4e1df',
-  //       main: '#dedad7',
-  //       dark: '#9b9896',
-  //       contrastText: '#fff',
-  //     },
-  //     secondary: {
-  //       light: '#e53637',
-  //       main: '#df0405',
-  //       dark: '#9c0203',
-  //       contrastText: '#000',
-  //     },
-  //   },
-  // });
 
   // useEffect(() => {
   //   const url = 'http://localhost:8080/cats';
@@ -85,8 +68,8 @@ function App() {
 
   return (
     <>
-      <UserProvider setView={setView} >
-        <Header setView={setView} />
+      <UserProvider >
+        <Header />
 
         <ProjectProvider>
           <ColumnsProvider>
@@ -94,10 +77,15 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/myProjects" element={<MyProjectsList />} />
-              <Route path="/projectboard" element={<ColumnList />} />
+              {/* <Route path="/projectboard" element={<ColumnList />} /> */}
               <Route path="/login" element={<Login />} />
               <Route path="/newProject" element={<StartNewProject />} />
               <Route path="*" element={<ErrorPage />} />
+              <Route path='/projectboard/:name' element={<ColumnList />} />
+
+              {/* YULI - something like this maybe??? */}
+              {/* <Route path='/task/:id' element={???} /> */}
+
             </Routes>
           </ColumnsProvider>
         </ProjectProvider>

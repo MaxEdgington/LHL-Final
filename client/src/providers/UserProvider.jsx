@@ -1,11 +1,12 @@
 import { createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const userContext = createContext();
 
 export default function UserProvider(props) {
   const [loggedinUser, setLoggedinUser] = useState({}); //inital?
-  const { setView } = props;
+  const navigate = useNavigate();
 
   const setCookie = async (formData) => {
     // console.log("this IS being logged in the handleSignIn function", formData.email);
@@ -24,7 +25,7 @@ export default function UserProvider(props) {
 
   const logOut = () => {
     setLoggedinUser({});
-    setView(4);
+    navigate('/login');
     console.log("loggedinuser should be OUT", loggedinUser);
   };
 

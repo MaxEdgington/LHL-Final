@@ -1,21 +1,26 @@
 import React, { useContext } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Grid, Paper, Avatar, Button, Typography, Link } from '@mui/material';
 import { userContext } from '../../providers/UserProvider';
 import { projectContext } from '../../providers/ProjectProvider';
 
 const MyProjectListItem = (props) => {
-  const { id, name, setView } = props;
+  const params = useParams();
+  const { id, name, desc, due_date, ownerID } = props;
   const { loggedinUser } = useContext(userContext);
-  const { myProjects, addProject, selectProject } = useContext(projectContext);
+  const { project, myProjects, addProject, selectProject } = useContext(projectContext);
+  const navigate = useNavigate();
 
-  const handleClick = (name) => {
-    selectProject(name);
-    setView(1);
+  const handleClick = async (name) => {
+    await selectProject(name);
+    navigate(`/projectboard/${name}`);
+
   };
   return (
     <Box>
       <Paper>
-        Project Name: {name} <span onClick={() => handleClick(name)}>Link</span>
+        <span onClick={() => handleClick(name)}>Link</span>
+        Project Name: {name}... Description: {desc}... Due Date: {due_date}... ownerID: {ownerID}
       </Paper>
     </Box>
   );

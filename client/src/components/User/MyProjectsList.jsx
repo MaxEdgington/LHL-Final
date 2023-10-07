@@ -7,8 +7,7 @@ import MyProjectListItem from './MyProjectListItem';
 import { userContext } from '../../providers/UserProvider';
 import { projectContext } from '../../providers/ProjectProvider';
 
-const MyProjectsList = (props) => {
-  const { setView } = props;
+const MyProjectsList = () => {
   const { loggedinUser } = useContext(userContext);
   const { project, myProjects, addProject, selectProject, fetchMyProjects } = useContext(projectContext);
 
@@ -25,9 +24,10 @@ const MyProjectsList = (props) => {
         key={project.id}
         id={project.id}
         name={project.name}
-        // desc={project.description}
-        // date={project.due_date}
-        setView={setView}
+        desc={project.description}
+        date={project.due_date}
+        ownerID={project.owner_id
+        }
       />
     );
   });
