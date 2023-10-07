@@ -4,12 +4,13 @@ import { Box, Grid, Paper, Avatar, Button, Typography, Link, FormControlLabel, T
 import Checkbox from '@mui/material/Checkbox';
 import background from '../../../public/lots-of-lenses.jpg';
 import { userContext } from '../../providers/UserProvider';
+import { useNavigate } from 'react-router-dom';
 
-const Login = (props) => {
-  const { setView } = props;
+const Login = () => {
 
   const { loggedinUser, setCookie } = useContext(userContext);
   const [formEmail, setFormEmail] = useState();
+  const navigate = useNavigate();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -19,7 +20,7 @@ const Login = (props) => {
     };
     console.log("move handle funct", formData);
     await setCookie(formData);
-    setView(5);
+    navigate('/myProjects');
     e.target.reset();
   };
 
@@ -38,9 +39,10 @@ const Login = (props) => {
       <Grid>
         <Paper elevation={10} style={paperStyle}>
           <Grid align='center'>
-            <Avatar src="../../../public/lens-line.jpg"></Avatar>
+            <Avatar src="../../../public/lens-line.png"></Avatar>
             <h2>Sign In</h2>
-            <h4>--{loggedinUser.email}--</h4>
+            <h4>{loggedinUser.email}</h4>
+            {/* this h4 wont show because as soon as you're logged in it will redirect */}
           </Grid>
 
           <form onSubmit={handleSignIn}>
@@ -63,11 +65,7 @@ const Login = (props) => {
               label="Remember me"
             />
             <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
-            {/* <Typography >
-          <Link href="#" >
-            Forgot password ?
-          </Link>
-        </Typography> */}
+
             <Typography > Do you have an account ?
               <Link href="#" >
                 Sign Up

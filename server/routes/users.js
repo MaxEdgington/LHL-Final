@@ -16,6 +16,7 @@ router.post('/set-session', async (req, res) => {
     console.log("set session in route", req.session);
     // return req.session;
     res.json(req.session);
+    // res.json(requestedUser);
   } catch (error) {
     console.error('Error during adding project-server side:', error);
     res.status(500).send('Server Error');
