@@ -3,22 +3,40 @@ const router = express.Router();
 // const db = require('../configs/db.config');
 const projectQueries = require('../db/queries/projects');
 
+//this gets each project by name inorder to set the state
 router.get('/:name', async (req, res) => {
   try {
     console.log("PARAMS", req.params);
-    const selectedProject = await projectQueries.getProjectbyName(req);
-    console.log("checkign in the router", selectedProject.rows);
-    // res.status(200).json(selectedProject.rows);
+    const selectedProject = await projectQueries.getProjectbyName(req.params.name);
+    console.log("checkign in the router", selectedProject);
+    res.status(200).json(selectedProject); ////
   } catch (error) {
     console.error('Error during fetching projects-server side:', error);
     res.status(500).send('Server Error');
   }
 });
+
+//gets all the projects of a specific user
+router.get('/myprojects/:id', async (req, res) => {
+  try {
+    console.log("PARAMS", req.params);
+    const myProjects = await projectQueries.getAllProjectsOfUser(Number(req.params.id));
+    console.log("checkign in the router", myProjects);
+    res.status(200).json(myProjects); ////
+  } catch (error) {
+    console.error('Error during fetching projects-server side:', error);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+//this adds a project
 router.post('/add', async (req, res) => {
   console.log("adding project in route", req.body);
   try {
     const newProject = await projectQueries.addProject(req.body.project_name, req.body.project_description, req.body.project_due_date); //do i need to destructure req
-    // res.status(200).json(newProject.rows);
+    console.log("newProject.rows", newProject[0]);
+    res.status(200).json(newProject[0]);
   } catch (error) {
     console.error('Error during adding project-server side:', error);
     res.status(500).send('Server Error');

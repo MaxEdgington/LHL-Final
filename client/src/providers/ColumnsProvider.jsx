@@ -1,9 +1,12 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 import axios from "axios";
+import { projectContext } from "./ProjectProvider";
 
 export const columnsContext = createContext();
 
 export default function ColumnsProvider(props) {
+  const { project } = useContext(projectContext);
+
   const initialColumnData = {
     1: { name: "To Do", tasks: [] },
     2: { name: "In Progress", tasks: [] },
@@ -13,23 +16,46 @@ export default function ColumnsProvider(props) {
 
   const [columns, setColumns] = useState(initialColumnData);
 
-  // Fetch tasks and categorize them by their status
+  // useEffect(() => {
   const fetchTasks = async () => {
+    //need to change this to fetch tasks of PROJECT
     try {
-      const res = await axios.get("http://localhost:8080/api/tasks");
+      const res = await axios.get("/api/tasks");
+      console.log("1 ALL Tasks received from server:", res.data);
 
-      const todoTasks = res.data.filter((task) => task.status === "1");
-      const inProgressTasks = res.data.filter((task) => task.status === "2");
-      const inReviewTasks = res.data.filter((task) => task.status === "3");
-      const completedTasks = res.data.filter((task) => task.status === "4");
+      console.log("2 do i have a project", project);
+      const projectData = res.data.filter(
+        (task) => task.project_id === project.id
+      );
+      console.log("3 can i filter", projectData);
+
+      const todoTasks = projectData.filter((task) => task.status === "1");
+      const todoTasksSorted = todoTasks.sort((a, b) => a.index - b.index);
+
+      const inProgressTasks = projectData.filter((task) => task.status === "2");
+      const inProgressTasksSorted = inProgressTasks.sort(
+        (a, b) => a.index - b.index
+      );
+
+      const inReviewTasks = projectData.filter((task) => task.status === "3");
+      const inReviewTasksSorted = inReviewTasks.sort(
+        (a, b) => a.index - b.index
+      );
+
+      const completedTasks = projectData.filter((task) => task.status === "4");
+      const completedTasksSorted = completedTasks.sort(
+        (a, b) => a.index - b.index
+      );
 
       // Update columns state with fetched tasks
       setColumns({
-        1: { ...columns[1], tasks: todoTasks },
-        2: { ...columns[2], tasks: inProgressTasks },
-        3: { ...columns[3], tasks: inReviewTasks },
-        4: { ...columns[4], tasks: completedTasks },
+        1: { ...columns[1], tasks: todoTasksSorted },
+        2: { ...columns[2], tasks: inProgressTasksSorted },
+        3: { ...columns[3], tasks: inReviewTasksSorted },
+        4: { ...columns[4], tasks: completedTasksSorted },
       });
+
+      console.log("4 After data transformation:", columns);
     } catch (error) {
       console.error("Could not fetch tasks", error);
     }
@@ -37,9 +63,13 @@ export default function ColumnsProvider(props) {
 
   // Add a single new task with title
   const addNewTask = async (taskTitle) => {
+    // give this form params from form
+    console.log("do i have the data", project);
+    console.log("do i have the data", taskTitle);
     try {
-      const response = await axios.post("http://localhost:8080/api/tasks/add", {
+      const response = await axios.post("/api/tasks/add", {
         title: taskTitle,
+        project_id: project.id,
       });
 
       // Update the local state with the new task
@@ -98,9 +128,12 @@ export default function ColumnsProvider(props) {
   // Delete a task by its ID
   const handleDelete = async (taskId) => {
     try {
-      await axios.post(`http://localhost:8080/api/tasks/${taskId}/delete`);
+      await axios.post(`/api/tasks/${taskId}/delete`);
 
-      // Update local state by removing the deleted task
+      console.log("*****deleted task id:", taskId);
+      console.log("Columns data here:", columns);
+
+      // get an array of key-column objects, use .reduce to create a new columns object which removes the task whose id it taskId
       const newColumns = Object.entries(columns).reduce(
         (acc, [key, column]) => {
           return {
@@ -120,9 +153,73 @@ export default function ColumnsProvider(props) {
     }
   };
 
-  // Handle drag and drop of tasks across columns
-  const onDragEnd = (result) => {
-    // ... existing logic
+  const onDragEnd = async (result) => {
+    // it only updates the dragged card, it does not update the index of other cards that are also moved passively
+
+    if (!result.destination) return;
+
+    console.log("result:", result);
+    const { source, destination } = result;
+    const taskId = result.draggableId;
+    console.log("taskId:", taskId);
+    // taskId is a string
+
+    if (source.droppableId !== destination.droppableId) {
+      try {
+        await axios.post(`/api/tasks/${Number(taskId)}`, {
+          new_column_status: destination.droppableId,
+          // destination.droppableId is a string
+          new_task_index: destination.index,
+          // destination.index is INT
+        });
+
+        // console.log("destination.index:", destination.index)
+
+        const sourceColumn = columns[source.droppableId];
+        const destColumn = columns[destination.droppableId];
+        const sourceTasks = [...sourceColumn.tasks];
+        const destTasks = [...destColumn.tasks];
+        const [removed] = sourceTasks.splice(source.index, 1);
+        destTasks.splice(destination.index, 0, removed);
+        // add axio post request here to change the tasks table's status colomn
+        setColumns({
+          ...columns,
+          [source.droppableId]: {
+            ...sourceColumn,
+            tasks: sourceTasks,
+          },
+          [destination.droppableId]: {
+            ...destColumn,
+            tasks: destTasks,
+          },
+        });
+      } catch (error) {
+        console.error("Could not drag tasks", error);
+      }
+    } else {
+      try {
+        await axios.post(`/api/tasks/${Number(taskId)}/onecolumn`, {
+          new_task_index: destination.index,
+          // destination.index is INT
+        });
+
+        const column = columns[source.droppableId];
+        const copiedTasks = [...column.tasks];
+        const [removed] = copiedTasks.splice(source.index, 1);
+        copiedTasks.splice(destination.index, 0, removed);
+        // copiedTasks.map(task => task.index = destination.index)
+
+        setColumns({
+          ...columns,
+          [source.droppableId]: {
+            ...column,
+            tasks: copiedTasks,
+          },
+        });
+      } catch (error) {
+        console.error("Could not drag tasks", error);
+      }
+    }
   };
 
   const columnData = {

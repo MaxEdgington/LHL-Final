@@ -1,13 +1,12 @@
 const db = require('../../configs/db.config');
-//is this th eright connection?? that fiel exports "pool"
 
 
 const getProjectbyName = (name) => {
   return db
-    .query(`SELECT * FROM projects WHERE name = ${name}`)
+    .query(`SELECT * FROM projects WHERE name = $1`, [name])
     .then(data => {
-      console.log("checking in the query", data.rows);
-      return data.rows;
+      console.log("checking in the query", data.rows[0]);
+      return data.rows[0];
     }).catch(err => {
       console.error("Error executing query: ", err);
       throw err;
@@ -29,4 +28,36 @@ const addProject = (name, description, due_date) => {
     });
 };
 
-module.exports = { getProjectbyName, addProject };
+const getProjectsByOwner = (id) => {
+  return db.query('SELECT * FROM projects WEHRE owner_id =$1', [id])
+    .then(data => {
+      console.log("checking in the query", data.rows[0]);
+      return data.rows[0];
+    }).catch(err => {
+      console.error("Error executing query: ", err);
+      throw err;
+    });
+};
+
+const getAllProjectsOfUser = (id) => {
+  return db.query(
+    `SELECT p.* 
+    FROM projects AS p
+    JOIN user_project_bridge AS upb ON p.id = upb.project_id
+    WHERE upb.user_id = $1 
+    
+    UNION
+    
+    SELECT * FROM projects AS p
+    WHERE p.owner_id = $1;`,
+    [id])
+    .then(data => {
+      console.log("checking in the query", data.rows);
+      return data.rows;
+    }).catch(err => {
+      console.error("Error executing query: ", err);
+      throw err;
+    });
+};
+
+module.exports = { getProjectbyName, addProject, getProjectsByOwner, getAllProjectsOfUser };

@@ -2,13 +2,15 @@
 require("dotenv").config();
 const cors = require("cors");
 const { ENVIROMENT, PORT } = process.env;
-const express = require("express");
-const morgan = require("morgan");
-const bodyParser = require("body-parser");
+const express = require('express');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const cookieSession = require('cookie-session');
 
-// routes import
-const tasksRoutes = require("./routes/tasks");
-const projectRoutes = require("./routes/projects");
+// routes import 
+const tasksRoutes = require('./routes/tasks');
+const projectRoutes = require('./routes/projects');
+const userRoutes = require('./routes/users');
 const openaiRoutes = require("./routes/openai");
 
 console.log("Tasks Routes Imported"); // This will log when the tasks routes are imported.
@@ -20,6 +22,14 @@ const app = express();
 // middleware setup
 app.use(morgan(ENVIROMENT));
 app.use(bodyParser.json());
+
+// Initialize cookie-session middleware
+app.use(cookieSession({
+  name: 'session',
+  keys: ["Caroline", "Yuli", "Max"],
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
 
 // corsObject to whitelist ORIGIN with appropriate credentials
 
@@ -39,12 +49,15 @@ app.use("/api/tasks", tasksRoutes); // Adjust the path as per your project’s U
 app.use("/api/projects", projectRoutes);
 console.log("Tasks Routes Setup"); // This will log when the tasks routes are set up.
 app.use("/openai", openaiRoutes);
+app.use('/api', userRoutes);
 // app.use("/generate-tasks", openaiRoutes);
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack); // This logs the full error stack trace.
   res.status(500).send("Something went wrong!");
 });
+
+
 
 app.get("/", (req, res) => {
   res.json({ greetings: "hello world" });

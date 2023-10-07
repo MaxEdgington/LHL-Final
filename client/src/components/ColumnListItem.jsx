@@ -38,14 +38,14 @@ const ColumnListItem = (props) => {
         margin: "16px",
         width: "25%",
         bgcolor: "white",
-        "&:first-child": {
-          paddingLeft: "5px",
-          borderTopLeftRadius: 5,
-        },
-        "&:last-child": {
-          paddingRight: "5px",
-          borderTopRightRadius: 5,
-        },
+        // "&:first-child": {
+        //   paddingLeft: "5px",
+        //   borderTopLeftRadius: 5,
+        // },
+        // "&:last-child": {
+        //   paddingRight: "5px",
+        //   borderTopRightRadius: 5,
+        // },
       }}
     >
       {/* <Paper elevation={10} style={paperStyle}> */}

@@ -10,7 +10,7 @@ import { ClipLoader } from "react-spinners";
 
 function NewProjectForm(props) {
   const { setView } = props;
-  const { projectAddFetchSet } = useContext(projectContext);
+  const { addProject, projectAddFetchSet } = useContext(projectContext);
   const { addGeneratedTasks } = useContext(columnsContext); // import addGeneratedTasks from ColumnsProvider
 
   // states for the form
@@ -42,6 +42,7 @@ function NewProjectForm(props) {
 
     console.log(formData);
     projectAddFetchSet(formData);
+    addProject(formData);
     setView(1);
   };
 

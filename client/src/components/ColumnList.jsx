@@ -17,7 +17,7 @@ const ColumnList = (props) => {
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [project]);
 
   // End of new code
 
@@ -27,8 +27,8 @@ const ColumnList = (props) => {
       <ColumnListItem
         key={columnId}
         id={columnId}
-        // name={column.name}
-        // tasks={column.tasks}
+      // name={column.name}
+      // tasks={column.tasks}
       />
     );
   });
@@ -50,8 +50,7 @@ const ColumnList = (props) => {
 
         <div>
           <span>
-            <h1>{project.name}</h1>{" "}
-            {/* this needs to also come from the backend */}
+            <h1>{project.name}</h1>
             <ChatDrawer />
           </span>
           <ul className="columnlist">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,19 +11,22 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 import { useTheme } from '@mui/material/styles';
 
+import { userContext } from '../providers/UserProvider';
 
 const pages = ['New Project', 'What Links?'];
-const settings = ['My Projects', 'Logout'];
+// const settings = ['My Projects', 'Logout'];
 
 function Header(props) {
   const { setView } = props;
-
+  const { logOut, loggedinUser } = useContext(userContext);
   const theme = useTheme();
+
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [PaletteMode, setMode] = useState('light');
@@ -42,6 +45,13 @@ function Header(props) {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+  const handleLogout = () => {
+    logOut();
+  };
+  const handleMyProjects = () => {
+    setView(5);
+    handleCloseUserMenu();
   };
 
   const toggleColorMode = () => {
@@ -145,7 +155,11 @@ function Header(props) {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="User settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="L" src="../../public/avatars/avatar5.png" />
+                {loggedinUser ? (
+                  <AccountCircleIcon stroke='white' />
+                ) : (
+                  <Avatar alt="L" src={loggedinUser.avatar} />
+                )}
               </IconButton>
             </Tooltip>
 
@@ -171,11 +185,21 @@ function Header(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+              {/* {settings.map((setting) => ( */}
+              {loggedinUser ?
+                <div>
+                  <MenuItem key={'My Projects'} onClick={handleMyProjects}>
+                    <Typography textAlign="center">My Projects</Typography>
+                  </MenuItem>
+                  <MenuItem key={'Logout'} onClick={handleLogout}>
+                    <Typography textAlign="center">LogOut</Typography>
+                  </MenuItem>
+                </div>
+                :
+                <MenuItem key={'Sign In'} onClick={() => setView(4)}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
-              ))}
+              }
             </Menu>
           </Box>
         </Toolbar>
