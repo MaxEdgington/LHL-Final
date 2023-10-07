@@ -16,16 +16,17 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
 import { userContext } from '../providers/UserProvider';
 
 const pages = ['New Project', 'What Links?'];
 // const settings = ['My Projects', 'Logout'];
 
-function Header(props) {
-  const { setView } = props;
+function Header() {
   const { logOut, loggedinUser } = useContext(userContext);
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -50,7 +51,7 @@ function Header(props) {
     logOut();
   };
   const handleMyProjects = () => {
-    setView(5);
+    navigate(`/myProjects`);
     handleCloseUserMenu();
   };
 
@@ -66,12 +67,16 @@ function Header(props) {
       {/* <AppBar position="static"> */}
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ background: 'secondary' }}>
-          <img src={"../../public/lens-line.jpg"} width="3.5%" sx={{ display: { xs: 'none', md: 'flex' }, mx: 2, px: 2 }} />
+          <img src={"../../public/lens-line.png"}
+            onClick={() => navigate('/login')}
+            width="3.5%"
+            sx={{ display: { xs: 'none', md: 'flex' }, mx: 2, px: 2 }} />
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            onClick={() => setView(1)}
+            // component="a"
+            // onClick={() => navigate('/projectBoard/')}
+            // should there be an onclick here???
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -144,7 +149,7 @@ function Header(props) {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={() => setView(2)}
+                onClick={() => navigate('/newProject')}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
@@ -158,7 +163,8 @@ function Header(props) {
                 {loggedinUser ? (
                   <AccountCircleIcon stroke='white' />
                 ) : (
-                  <Avatar alt="L" src={loggedinUser.avatar} />
+                  // <Avatar alt="L" src={loggedinUser.avatar} />
+                  <></>
                 )}
               </IconButton>
             </Tooltip>
@@ -196,8 +202,8 @@ function Header(props) {
                   </MenuItem>
                 </div>
                 :
-                <MenuItem key={'Sign In'} onClick={() => setView(4)}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={'Sign In'} onClick={() => navigate('/login')}>
+                  <Typography textAlign="center">Sign In</Typography>
                 </MenuItem>
               }
             </Menu>

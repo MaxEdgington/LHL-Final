@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { FormControl, FormLabel, Box, Paper, Grid } from '@mui/material';
@@ -7,9 +8,9 @@ import { projectContext } from "../../providers/ProjectProvider";
 import background from '../../../public/lens-img-darkmode.jpeg';
 
 
-function NewProjectForm(props) {
-  const { setView } = props;
+function NewProjectForm() {
   const { addProject } = useContext(projectContext);
+  const navigate = useNavigate();
 
   //these states are just to handle the data for the form
   const [projectName, setProjectName] = useState('');
@@ -23,12 +24,12 @@ function NewProjectForm(props) {
       project_name: projectName,
       project_description: projectDescription,
       project_due_date: projectDueDate,
-      //     // loggedin user will need to go here from session
+      //     // loggedin user will need to go here from state!
     };
 
     console.log(formData);
     addProject(formData);
-    setView(1);
+    navigate(`/projectBoard/${projectName}`);
   };
 
 
