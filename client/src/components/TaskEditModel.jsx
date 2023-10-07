@@ -1,9 +1,7 @@
-import React, {useContext, useState} from "react";
+import React, { useState } from "react";
 import {Box, Typography} from "@mui/material";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { columnsContext } from "../providers/ColumnsProvider";
 import { Link } from 'react-router-dom';
 
 const style = {
@@ -19,32 +17,17 @@ const style = {
   p: 4,
 };
 
-const TaskDetailModel = (props) => {
+const TaskEditModel = (props) => {
   const {name, id, description, project_id, due_date, assigned_user, handleClose} = props
-
-  const { handleDelete, columns } = useContext(columnsContext)
-
-  const deleteTask = () => {
-    handleDelete(id)
-    // console.log("++++New Columns data here:", columns)
-    handleClose()
-  }
-  
-  const editTask = () => {
-    // first open a new model
-    // second make controlled input components
-    // third make post request to update tasks table
-    // setState
-  }
 
   return (
     <Box sx={style}>  
       <Typography id="modal-modal-title" variant="h6" component="h2" align="center" fontSize={36}>
-        {name}
+        Task Name: {name}
       </Typography>
 
       <Typography id="modal-modal-description" sx={{ mt: 2 }} fontSize={28}> 
-        {description}
+        Description: {description}
       </Typography>
 
       <Typography id="modal-modal-description" sx={{ mt: 2 }} fontSize={28} mb={2}> 
@@ -56,19 +39,15 @@ const TaskDetailModel = (props) => {
       </Typography>
 
       <Stack direction="column" spacing={2} sx={{ '& button': { m: 1 } }}>
-
-        <Button variant="contained" startIcon={<DeleteIcon />}
-        onClick={deleteTask}>
-          Delete
-        </Button>
         
-        {/* link to the edit route whose component is TaskEditModel */}
-        <Link to="/edit"><Button variant="outlined" size="small" >
-          Edit
+        {/* link back to the 'home' route whose component is TaskDetailModel */}
+        <Link to="/"><Button variant="outlined" size="small" >
+            Save
         </Button></Link>
+
       </Stack>
   </Box>
   )
 }
 
-export default TaskDetailModel;
+export default TaskEditModel;

@@ -17,6 +17,7 @@ import ProjectProvider from "./providers/ProjectProvider";
 // import CustomThemeProvider from './providers/ThemeProvider';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import {BrowserRouter} from 'react-router-dom';
 
 import "./App.css";
 
@@ -32,7 +33,7 @@ function App() {
   const ActiveView = () => {
     switch (active) {
       case 1:
-        return <ColumnList />;
+        return <ColumnList />      
       case 2:
         return <StartNewProject setView={setView} />;
       case 3:
@@ -86,7 +87,7 @@ function App() {
 
         <ProjectProvider>
           <ColumnsProvider>
-            {ActiveView()}
+          <BrowserRouter>{ActiveView()}</BrowserRouter>
           </ColumnsProvider>
         </ProjectProvider>
       </UserProvider>
