@@ -20,6 +20,11 @@ const style = {
 const TaskEditModel = (props) => {
   const {name, id, description, project_id, due_date, assigned_user, handleClose} = props
 
+  // useEffect(()={
+    // make an axios post request to update tasks table
+    //then set the new state
+  // }, [name])
+
   return (
     <Box sx={style}>  
       <Typography id="modal-modal-title" variant="h6" component="h2" align="center" fontSize={36}>
