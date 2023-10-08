@@ -9,7 +9,7 @@ import background from '../../../public/lens-img-darkmode.jpeg';
 
 
 function NewProjectForm() {
-  const { addProject } = useContext(projectContext);
+  const { addProject, project } = useContext(projectContext);
   const navigate = useNavigate();
 
   //these states are just to handle the data for the form
@@ -29,7 +29,8 @@ function NewProjectForm() {
 
     console.log(formData);
     addProject(formData);
-    navigate(`/projectBoard/${projectName}`);
+    console.log("can i see the project id in the form submit function", project.id);
+    navigate(`/projectBoard/${project.id}`);
   };
 
 

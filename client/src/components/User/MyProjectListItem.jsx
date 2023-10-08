@@ -13,7 +13,7 @@ const MyProjectListItem = (props) => {
 
   const handleClick = async (name) => {
     await selectProject(name);
-    navigate(`/projectboard/${name}`);
+    navigate(`/projectboard/${id}`);
 
   };
   return (
