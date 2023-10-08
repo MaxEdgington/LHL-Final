@@ -5,6 +5,7 @@ import { Button, Drawer, Tooltip, Card, Typography, CardContent, } from "@mui/ma
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import CommentIcon from '@mui/icons-material/Comment';
 import { projectContext } from "../../providers/ProjectProvider";
+
 import ChatList from "./ChatList";
 
 const ChatDrawer = () => {
@@ -22,7 +23,9 @@ const ChatDrawer = () => {
   };
   console.log("In the chat drawer", project);
 
+
   return (
+
     // {(['Cat'] as const).map((anchor) => (
     < >
       {/* change this to icon? */}
@@ -56,7 +59,6 @@ const ChatDrawer = () => {
 
 
         <ChatList />
-
 
       </Drawer>
     </ >
