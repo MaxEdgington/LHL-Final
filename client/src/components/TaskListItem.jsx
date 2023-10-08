@@ -61,7 +61,7 @@ const TaskListItem = (props) => {
             <CardActionArea> 
 
               <Modal open={ModalOpen} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-              
+                <div>
                 {/* define the react-router routes here */}
                 <Routes>
                   
@@ -80,7 +80,7 @@ const TaskListItem = (props) => {
                        } />
                   
                 </Routes>
-               
+                </div>
               </Modal>
       
               <CardContent onClick={handleOpen}>

@@ -30,12 +30,12 @@ const TaskDetailModel = (props) => {
     handleClose()
   }
   
-  const editTask = () => {
-    // first open a new model
-    // second make controlled input components
-    // third make post request to update tasks table
-    // setState
-  }
+  // const editTask = () => {
+  //   // first open a new model
+  //   // second make controlled input components
+  //   // third make post request to update tasks table
+  //   // setState
+  // }
 
   return (
     <Box sx={style}>  
@@ -62,10 +62,18 @@ const TaskDetailModel = (props) => {
           Delete
         </Button>
         
-        link to the edit route whose component is TaskEditModel
-        <Link to="model/edit"><Button variant="outlined" size="small" >
+        {/* link to the edit route whose component is TaskEditModel */}
+        {/* <Link to="model/edit"><Button variant="outlined" size="small" >
           Edit
-        </Button></Link>
+        </Button></Link> */}
+        <Button 
+          variant="outlined" 
+          size="small" 
+          component={Link} 
+          to="model/edit"
+        >
+          Edit
+        </Button>
         
       </Stack>
   </Box>
