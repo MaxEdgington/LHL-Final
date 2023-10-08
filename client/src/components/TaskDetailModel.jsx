@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { columnsContext } from "../providers/ColumnsProvider";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const style = {
   position: 'absolute',
@@ -24,10 +24,14 @@ const TaskDetailModel = (props) => {
 
   const { handleDelete, columns } = useContext(columnsContext)
 
+  const navigate = useNavigate();
+  const projectName = useParams().name
+
   const deleteTask = () => {
     handleDelete(id)
     // console.log("++++New Columns data here:", columns)
     handleClose()
+    navigate(`/projectboard/${projectName}`);
   }
   
   // const editTask = () => {
