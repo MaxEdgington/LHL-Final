@@ -8,15 +8,15 @@ import { projectContext } from "../../providers/ProjectProvider";
 
 
 const ChatListItem = (props) => {
-  const { msg } = props;
+  const { msg, user_name, time } = props;
   const { project } = useContext(projectContext);
-  console.log("what is item", msg);
+  console.log("what is item", msg, user_name, time);
   return (
     <Box
       sx={{ margin: 2.5 }}>
       <Paper
         sx={{ margin: 1 }}>
-        {msg}
+        {user_name}:  {msg}
         {/* <ChatBubble messages={msg.message} /> */}
       </Paper>
     </Box>

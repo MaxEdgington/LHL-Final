@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Box, Paper, Button, Drawer, Tooltip, Card, Typography, CardContent, listClasses, } from "@mui/material";
+import { Box, Paper, Button, Drawer, Tooltip, Card, Typography, CardContent } from "@mui/material";
 import ChatListItem from "./ChatListItem";
 import { projectContext } from "../../providers/ProjectProvider";
 import { messageContext } from "../../providers/MessageProvider";
 import ChatBubble from 'react-chat-bubble';
+
 
 
 
@@ -31,6 +32,10 @@ const ChatList = () => {
       <ChatListItem
         key={item.message_id}
         msg={item.message}
+        user_name={item.username}
+        time={item.timestamp}
+      // avatar={item.avatar}
+
       />
     );
   });
@@ -40,7 +45,7 @@ const ChatList = () => {
 
   return (
     <>
-      something inside chat list
+      inside chat list
 
       <Box
         sx={{ margin: 2.5 }}>
@@ -53,7 +58,6 @@ const ChatList = () => {
         </ul>
         {/* </Paper> */}
       </Box>
-
 
     </>
   );
