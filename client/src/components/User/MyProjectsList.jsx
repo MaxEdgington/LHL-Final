@@ -25,8 +25,7 @@ const MyProjectsList = () => {
         name={project.name}
         desc={project.description}
         date={project.due_date}
-        ownerID={project.owner_id
-        }
+        ownerID={project.owner_id}
       />
     );
   });
