@@ -20,15 +20,12 @@ const style = {
 const TaskEditModel = (props) => {
   const {name, id, description, project_id, due_date, assigned_user, handleClose} = props
 
-  // useEffect(()={
-    // make an axios post request to update tasks table
-    //then set the new state
-  // }, [name])
   
   const projectId = useParams().id
   // console.log("Params:", Params)
   
   const handleSave = () => {
+    // make axois post request here to update the tasks table
     handleClose();
   }
 
