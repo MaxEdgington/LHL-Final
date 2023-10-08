@@ -19,22 +19,18 @@ const ChatList = () => {
     // console.log("got them ", myProjects);
   }, [project]);
 
-  // this.state.messages = messagesState.map((item, avatar) => {
-  //   type: 0,
-  //     image: { avatar; },
-  //   text: { item; }
-  // });
 
   // const mockList = ["this5", "that66", "the other", "one more"];
   // const mockArr = mockList.map((item) => {
   const messagesArr = messages.map((item) => {
+    //need to put these in order by timestamp
     return (
       <ChatListItem
         key={item.message_id}
         msg={item.message}
         user_name={item.username}
         time={item.timestamp}
-      // avatar={item.avatar}
+        avatar={item.avatar}
 
       />
     );

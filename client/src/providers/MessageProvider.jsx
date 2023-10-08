@@ -10,11 +10,13 @@ export default function MessageProvider(props) {
     try {
       console.log('fetchMessagesforProject is running');
       const response = await axios.get(`/api/messages/${project_id}`);
-      console.log("my proejcts provider", response.data);
+      console.log("message provider", response.data);
       setMessages(response.data);
     } catch (error) {
       console.error("Could not find your projects", error.message);
     }
+    console.log('Axios request URL:', `/api/messages/${project_id}`);
+    console.log("message state in provider", messages);
   };
 
 

@@ -7,6 +7,8 @@ const messagesQueries = require('../db/queries/messages');
 router.get('/:id', async (req, res) => {
   try {
     console.log("PARAMS", req.params);
+    console.log("req", req);
+    console.log('Server-side route URL:', req.url);
     const projectMessages = await messagesQueries.getMessagesofProjectWithUserInfo(req.params.id);
     console.log("checkign in the router", projectMessages);
     res.status(200).json(projectMessages); ////
