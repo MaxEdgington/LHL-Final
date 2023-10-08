@@ -19,6 +19,7 @@ import ProjectProvider from "./providers/ProjectProvider";
 // import CustomThemeProvider from './providers/ThemeProvider';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 import "./App.css";
+import TaskDetailModel from "./components/TaskDetailModel";
 
 function App() {
   const [data, setData] = useState(null);
@@ -79,6 +80,7 @@ function App() {
               {/* <Route path="/projectboard" element={<ColumnList />} /> */}
               <Route path="/projectboard/:name/*" element={<ColumnList />} />
               <Route path="/newProject" element={<StartNewProject />} />
+              {/* <Route path="/model/*" element={<TaskDetailModel />} /> */}
               <Route path="*" element={<ErrorPage />} />
             </Routes>
 

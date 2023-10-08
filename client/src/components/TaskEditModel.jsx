@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {Box, Typography} from "@mui/material";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const style = {
   position: 'absolute',
@@ -24,6 +24,13 @@ const TaskEditModel = (props) => {
     // make an axios post request to update tasks table
     //then set the new state
   // }, [name])
+  
+  const projectName = useParams().name
+  // console.log("Params:", Params)
+  
+  const handleSave = () => {
+    handleClose();
+  }
 
   return (
     <Box sx={style}>  
@@ -46,17 +53,16 @@ const TaskEditModel = (props) => {
       <Stack direction="column" spacing={2} sx={{ '& button': { m: 1 } }}>
         
         {/* link back to the 'home' route whose component is TaskDetailModel */}
-        {/* <Link to="model"><Button variant="outlined" size="small" >
+        <Link to={`/projectboard/${projectName}`}><Button variant="outlined" size="small" onClick={handleSave}>
             Save
-        </Button></Link> */}
-        <Button 
+        </Button></Link>
+        {/* <Button 
           variant="outlined" 
           size="small" 
-          component={Link} 
-          to="model"
+          onClick={()=> navigate("/projectboard/:name")}
         >
           Save
-        </Button>
+        </Button> */}
 
       </Stack>
   </Box>

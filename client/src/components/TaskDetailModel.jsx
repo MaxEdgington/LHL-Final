@@ -36,6 +36,8 @@ const TaskDetailModel = (props) => {
   //   // third make post request to update tasks table
   //   // setState
   // }
+  
+  // const navigate = useNavigate();
 
   return (
     <Box sx={style}>  
@@ -63,17 +65,10 @@ const TaskDetailModel = (props) => {
         </Button>
         
         {/* link to the edit route whose component is TaskEditModel */}
-        {/* <Link to="model/edit"><Button variant="outlined" size="small" >
+        <Link to="edit"><Button variant="outlined" size="small" >
           Edit
-        </Button></Link> */}
-        <Button 
-          variant="outlined" 
-          size="small" 
-          component={Link} 
-          to="model/edit"
-        >
-          Edit
-        </Button>
+        </Button></Link>
+        
         
       </Stack>
   </Box>

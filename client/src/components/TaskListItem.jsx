@@ -9,7 +9,7 @@ import TaskDetailModel from "./TaskDetailModel";
 import TaskEditModel from "./TaskEditModel";
 import axios from "axios";
 
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes, Link} from 'react-router-dom';
 
 const TaskListItem = (props) => {
   const { id, name, index } = props;
@@ -66,14 +66,15 @@ const TaskListItem = (props) => {
                 <Routes>
                   
                 {/* path="/projectboard/:name/model" */}
-                  <Route path="model" element = 
+                  <Route path="modal" element = 
                     { <div>
                       <TaskDetailModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={Assigned_user_name} handleClose={handleClose} />
                       </div>
-                     } />
-                  
+                     } /> 
+
+                 {/* <Routes>   */}
                   {/* define the /edit route as TaskEditModel */}
-                  <Route path="model/edit" element = 
+                  <Route path="modal/edit" element = 
                     { <div>
                       <TaskEditModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={Assigned_user_name} handleClose={handleClose} />
                       </div>
@@ -82,9 +83,10 @@ const TaskListItem = (props) => {
                 </Routes>
                 </div>
               </Modal>
-      
+              
+              <Link to="modal">
               <CardContent onClick={handleOpen}>
-                <Typography variant="h5" component="div">
+                <Typography variant="h5" component="div" >
                   <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
                     style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}>
 
@@ -93,6 +95,7 @@ const TaskListItem = (props) => {
                   </div>
                 </Typography>
               </CardContent>
+              </Link>
 
             </CardActionArea>
           </Card>

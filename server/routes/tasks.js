@@ -15,15 +15,15 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("", async (req, res) => { //new route? or just slash to replace above?
-  try {
-    const tasks = await tasksQueries.getTasksbyProject(project_id);
-    res.status(200).json(tasks.rows);
-  } catch (error) {
-    console.error("Error during fetching tasks:", error);
-    res.status(500).send("Server Error");
-  }
-});
+// router.get("", async (req, res) => { //new route? or just slash to replace above?
+//   try {
+//     const tasks = await tasksQueries.getTasksbyProject(project_id);
+//     res.status(200).json(tasks.rows);
+//   } catch (error) {
+//     console.error("Error during fetching tasks:", error);
+//     res.status(500).send("Server Error");
+//   }
+// });
 
 router.post("/add", async (req, res) => {
   console.log("POST /add route hit. Body:", req.body);
