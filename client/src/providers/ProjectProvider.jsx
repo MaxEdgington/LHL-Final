@@ -24,7 +24,7 @@ export default function ProjectProvider(props) {
     try {
       console.log('selectProjects is running', id);
       const response = await axios.get(`/api/projects/${id}`);
-      console.log("can i set the proj?", response.data);
+      // console.log("can i set the proj?", response.data);
       setProject(response.data);
     } catch (error) {
       console.error("Could not find project", error);

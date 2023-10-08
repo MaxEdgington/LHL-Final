@@ -19,15 +19,15 @@ export default function ColumnsProvider(props) {
 
 
   const fetchTasks = async (projectparam) => {  //need to change this to fetch tasks of PROJECT
-    console.log("is fetch task func getting the right parameter?", projectparam);
+    // console.log("is fetch task func getting the right parameter?", projectparam);
     try {
       const res = await axios.get("/api/tasks");
-      console.log("1 ALL Tasks received from server:", res.data);
-      console.log("2 do i have a project", projectparam);
+      // console.log("1 ALL Tasks received from server:", res.data);
+      // console.log("2 do i have a project", projectparam);
 
       const response = res.data;
       const projectData = response.filter((task) => task.project_id === parseInt(projectparam));
-      console.log("3 can i filter", projectData);
+      // console.log("3 can i filter", projectData);
 
       const todoTasks = projectData.filter((task) => task.status === "1");
       const todoTasksSorted = todoTasks.sort((a, b) => a.index - b.index);
@@ -48,7 +48,7 @@ export default function ColumnsProvider(props) {
         4: { ...columns[4], tasks: completedTasksSorted },
       });
 
-      console.log("4 After data transformation:", columns);
+      // console.log("4 After data transformation:", columns);
     } catch (error) {
       console.error("Could not fetch tasks", error);
     }

@@ -13,10 +13,10 @@ import { projectContext } from "../providers/ProjectProvider";
 const ColumnList = (props) => {
   const { columns, fetchTasks, onDragEnd } = useContext(columnsContext);
   const { project, selectProject } = useContext(projectContext);
-  console.log("am i getting the project?", project);
+  // console.log("am i getting the project?", project);
   const params = useParams();
 
-  console.log("useparams?", params);
+  // console.log("useparams?", params);
   // Start of new code
 
   useEffect(() => {
