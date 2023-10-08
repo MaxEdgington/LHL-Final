@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useParams } from 'react-router-dom';
+
 import ColumnListItem from "./ColumnListItem";
 import ChatDrawer from "./Chat/ChatDrawer";
 import { Box, Typography, Paper } from "@mui/material";
@@ -12,11 +14,13 @@ const ColumnList = (props) => {
   const { columns, fetchTasks, onDragEnd } = useContext(columnsContext);
   const { project } = useContext(projectContext);
   console.log("am i getting the project?", project);
+  const params = useParams();
 
+  console.log("useparams?", params);
   // Start of new code
 
   useEffect(() => {
-    fetchTasks();
+    fetchTasks(params.name);
   }, [project]);
 
   // End of new code

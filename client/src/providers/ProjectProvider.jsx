@@ -40,7 +40,7 @@ export default function ProjectProvider(props) {
     }
   };
 
-  const projectData = { project, myProjects, addProject, selectProject, fetchMyProjects };
+  const projectData = { project, setProject, myProjects, addProject, selectProject, fetchMyProjects };
 
   return (
     <projectContext.Provider value={projectData}>

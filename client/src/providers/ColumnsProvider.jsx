@@ -1,4 +1,5 @@
 import { createContext, useState, useContext } from "react";
+// import { useParams } from 'react-router-dom';
 import axios from "axios";
 import { projectContext } from "./ProjectProvider";
 
@@ -7,6 +8,7 @@ export const columnsContext = createContext();
 
 export default function ColumnsProvider(props) {
   const { project } = useContext(projectContext);
+  // const params = useParams();
 
   const initialColumnData = {
     1: { name: "To Do", tasks: [] },
@@ -18,13 +20,15 @@ export default function ColumnsProvider(props) {
   const [columns, setColumns] = useState(initialColumnData);
 
 
-  const fetchTasks = async () => {  //need to change this to fetch tasks of PROJECT
+  const fetchTasks = async (projectparam) => {  //need to change this to fetch tasks of PROJECT
+    console.log("is fetch task func getting the right parameter?", projectparam);
     try {
       const res = await axios.get("/api/tasks");
       console.log("1 ALL Tasks received from server:", res.data);
 
       console.log("2 do i have a project", project);
-      const projectData = res.data.filter((task) => task.project_id === project.id);
+      // console.log("22 do i have a project", params);
+      const projectData = res.data.filter((task) => task.project_name === projectparam);
       console.log("3 can i filter", projectData);
 
       const todoTasks = projectData.filter((task) => task.status === "1");
