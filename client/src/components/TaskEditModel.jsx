@@ -25,7 +25,7 @@ const TaskEditModel = (props) => {
     //then set the new state
   // }, [name])
   
-  const projectName = useParams().name
+  const projectId = useParams().id
   // console.log("Params:", Params)
   
   const handleSave = () => {
@@ -53,7 +53,7 @@ const TaskEditModel = (props) => {
       <Stack direction="column" spacing={2} sx={{ '& button': { m: 1 } }}>
         
         {/* link back to the 'home' route whose component is TaskDetailModel */}
-        <Link to={`/projectboard/${projectName}`}><Button variant="outlined" size="small" onClick={handleSave}>
+        <Link to={`/projectboard/${projectId}`}><Button variant="outlined" size="small" onClick={handleSave}>
             Save
         </Button></Link>
         {/* <Button 
