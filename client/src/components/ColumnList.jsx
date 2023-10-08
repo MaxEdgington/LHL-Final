@@ -12,7 +12,7 @@ import { projectContext } from "../providers/ProjectProvider";
 
 const ColumnList = (props) => {
   const { columns, fetchTasks, onDragEnd } = useContext(columnsContext);
-  const { project } = useContext(projectContext);
+  const { project, selectProject } = useContext(projectContext);
   console.log("am i getting the project?", project);
   const params = useParams();
 
@@ -20,8 +20,9 @@ const ColumnList = (props) => {
   // Start of new code
 
   useEffect(() => {
-    fetchTasks(params.name);
-  }, [project]);
+    selectProject(params.id);
+    fetchTasks(params.id);
+  }, [project, params]);
 
   // End of new code
 
@@ -54,7 +55,7 @@ const ColumnList = (props) => {
 
         <div>
           <span>
-            <h1>{project.name}</h1>
+            <h1>Lens Project Board{project.name}</h1>
             <ChatDrawer />
           </span>
           <ul className="columnlist">
