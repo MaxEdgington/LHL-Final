@@ -20,9 +20,8 @@ const style = {
 const TaskEditModel = (props) => {
   const {name, id, description, project_id, due_date, assigned_user, handleClose} = props
 
-  
-  const projectId = useParams().id
-  // console.log("Params:", Params)
+  const projectName = useParams().name
+  // const projectId = useParams().id
   
   const handleSave = () => {
     // make axois post request here to update the tasks table
@@ -50,7 +49,8 @@ const TaskEditModel = (props) => {
       <Stack direction="column" spacing={2} sx={{ '& button': { m: 1 } }}>
         
         {/* link back to the 'home' route whose component is TaskDetailModel */}
-        <Link to={`/projectboard/${projectId}`}><Button variant="outlined" size="small" onClick={handleSave}>
+        {/* need to change to ${projectId} */}
+        <Link to={`/projectboard/${projectName}`}><Button variant="outlined" size="small" onClick={handleSave}>
             Save
         </Button></Link>
         {/* <Button 
