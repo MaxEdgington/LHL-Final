@@ -62,10 +62,11 @@ const TaskDetailModel = (props) => {
           Delete
         </Button>
         
-        {/* link to the edit route whose component is TaskEditModel */}
-        <Link to="/edit"><Button variant="outlined" size="small" >
+        link to the edit route whose component is TaskEditModel
+        <Link to="model/edit"><Button variant="outlined" size="small" >
           Edit
         </Button></Link>
+        
       </Stack>
   </Box>
   )

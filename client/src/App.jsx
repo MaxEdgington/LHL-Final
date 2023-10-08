@@ -77,12 +77,9 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/myProjects" element={<MyProjectsList />} />
               {/* <Route path="/projectboard" element={<ColumnList />} /> */}
-              <Route path='/projectboard/:name' element={<ColumnList />} />
+              <Route path="/projectboard/:name/*" element={<ColumnList />} />
               <Route path="/newProject" element={<StartNewProject />} />
               <Route path="*" element={<ErrorPage />} />
-
-              {/* YULI - something like this maybe??? */}
-              {/* <Route path='/task/:id' element={???} /> */}
             </Routes>
 
           </ColumnsProvider>

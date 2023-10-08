@@ -61,21 +61,26 @@ const TaskListItem = (props) => {
             <CardActionArea> 
 
               <Modal open={ModalOpen} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-
+              
                 {/* define the react-router routes here */}
                 <Routes>
-                  {/* define the home route as TaskDetailModel, when Modal opens, first goes here "/" */}
-                  <Route path="/" element = 
-                    {<div>
+                  
+                {/* path="/projectboard/:name/model" */}
+                  <Route path="model" element = 
+                    { <div>
                       <TaskDetailModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={Assigned_user_name} handleClose={handleClose} />
-                    </div> } />
+                      </div>
+                     } />
                   
                   {/* define the /edit route as TaskEditModel */}
-                  <Route path="/edit" element = 
-                    {<div>
+                  <Route path="model/edit" element = 
+                    { <div>
                       <TaskEditModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={Assigned_user_name} handleClose={handleClose} />
-                      </div> } />
-                  </Routes>
+                      </div>
+                       } />
+                  
+                </Routes>
+               
               </Modal>
       
               <CardContent onClick={handleOpen}>

@@ -45,8 +45,8 @@ const TaskEditModel = (props) => {
 
       <Stack direction="column" spacing={2} sx={{ '& button': { m: 1 } }}>
         
-        {/* link back to the 'home' route whose component is TaskDetailModel */}
-        <Link to="/"><Button variant="outlined" size="small" >
+        link back to the 'home' route whose component is TaskDetailModel
+        <Link to="model"><Button variant="outlined" size="small" >
             Save
         </Button></Link>
 
