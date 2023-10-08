@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { FormControl, Box, Paper, Grid } from "@mui/material";
+import { FormControl, FormLabel, Box, Paper, Grid } from "@mui/material";
 import { DateField } from "@mui/x-date-pickers";
 import { projectContext } from "../../providers/ProjectProvider";
 import { columnsContext } from "../../providers/ColumnsProvider";
@@ -9,11 +10,11 @@ import background from "../../../public/lens-img-darkmode.jpeg";
 import { ClipLoader } from "react-spinners";
 
 function NewProjectForm(props) {
-  const { setView } = props;
-  const { projectAddFetchSet } = useContext(projectContext);
-  const { addGeneratedTasks } = useContext(columnsContext); // import addGeneratedTasks from ColumnsProvider
+  // const { setView } = props;
+  const { projectAddFetchSet, addProject } = useContext(projectContext);
+  const { addGeneratedTasks } = useContext(columnsContext);
+  const navigate = useNavigate();
 
-  // states for the form
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [projectDueDate, setProjectDueDate] = useState(null);
@@ -22,8 +23,9 @@ function NewProjectForm(props) {
   const handleLensAIClick = async () => {
     setIsLoading(true);
     try {
-      await addGeneratedTasks(projectDescription); // Call addGeneratedTasks directly here
-      setView(1); // Redirect to main board after adding tasks
+      await addGeneratedTasks(projectDescription, projectName, projectDueDate);
+      navigate(`/projectBoard/${projectName}`);
+      // setView(1);
     } catch (error) {
       console.error("Error adding generated tasks:", error);
     }
@@ -37,12 +39,12 @@ function NewProjectForm(props) {
       project_name: projectName,
       project_description: projectDescription,
       project_due_date: projectDueDate,
-      // logged-in user will need to go here from session
     };
 
     console.log(formData);
     projectAddFetchSet(formData);
-    setView(1);
+    navigate(`/projectBoard/${projectName}`);
+    // setView(1);
   };
 
   const paperStyle = {

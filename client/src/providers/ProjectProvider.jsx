@@ -1,48 +1,46 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 import axios from "axios";
+// import { userContext } from "./UserProvider";
 
 export const projectContext = createContext();
 
 export default function ProjectProvider(props) {
-  const [project, setProject] = useState({}); //inital?
-  //project is an object with all the keys from db, same as res.data below
+  const [project, setProject] = useState({});
+  //project is an object with all the keys from db,
+  const [myProjects, setMyProjects] = useState([]);
+
 
   const addProject = async (formData) => {
     console.log("this is what projProvider-add gets:", formData);
     try {
-      console.log("Before axios.post");
-      await axios.post(`http://localhost:8080/api/projects/add`, formData);
-      // console.log("what async stuff is keeping this from logging?", formData);
-      console.log("After axios.post");
-      console.log("After axios.post", formData.project_name);
-      return formData.project_name;
+      const response = await axios.post(`/api/projects/add`, formData);
+      setProject(response.data);
     } catch (error) {
       console.error("Could not add project", error);
     }
   };
 
-  const fetchProjectbyName = async (name) => {
-    console.log("this is what projProvider-fetch gets:", name);
+  const selectProject = async (name) => {
     try {
-      const get = await axios.get(`http://localhost:8080/api/projects/${name}`);
-      console.log("project form fetch", res.data);
+      const response = await axios.get(`/api/projects/${name}`);
+      setProject(response.data);
     } catch (error) {
-      console.error("Could not fetch projects", error);
+      console.error("Could not find project", error);
     }
   };
 
-
-  const projectAddFetchSet = async (formData) => {
+  const fetchMyProjects = async (id) => {
     try {
-      const resultFromAdd = await addProject(formData);
-      const resultFromFetch = await fetchProjectbyName(resultFromAdd);
-      // setProject(resultFromFetch); // will this work here? or need to be in async funct as well??
+      console.log('fetchMyProjects is running');
+      const response = await axios.get(`/api/projects/myprojects/${id}`);
+      console.log("my proejcts provider", response.data);
+      setMyProjects(response.data);
     } catch (error) {
-      console.error('An error occurred:', error);
+      console.error("Could not find your projects", error.message);
     }
   };
 
-  const projectData = { project, projectAddFetchSet };
+  const projectData = { project, myProjects, addProject, selectProject, fetchMyProjects };
 
   return (
     <projectContext.Provider value={projectData}>

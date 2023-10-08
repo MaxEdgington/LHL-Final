@@ -12,7 +12,7 @@ function NewTasksForm() {
   };
   const handleMoreTasksClick = (event) => {
     event.preventDefault();
-    setView(3);
+    (3);
     console.log("MORE event", event);
     // this function will need to query the db and add a task 
   };

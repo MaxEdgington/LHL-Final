@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Box, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -11,9 +11,9 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 500,
-  height: 350,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
+  height: 450, // height from `main`
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
   boxShadow: 24,
   p: 4,
 };
@@ -23,7 +23,7 @@ const TaskDetailModel = (props) => {
     name,
     id,
     description,
-    project_id,
+    project_id,  // If you don't use this prop, consider removing it
     due_date,
     assigned_user,
     handleClose,
@@ -61,12 +61,11 @@ const TaskDetailModel = (props) => {
       >
         Due Date: {due_date}
       </Typography>
-      <Stack direction="column" spacing={2} sx={{ "& button": { m: 1 } }}>
-        <Button
-          variant="contained"
-          startIcon={<DeleteIcon />}
-          onClick={deleteTask}
-        >
+      <Typography id="modal-modal-description" sx={{ mt: 2 }} fontSize={28} mb={2}> 
+        Assigned User: {assigned_user}
+      </Typography>
+      <Stack direction="column" spacing={2} sx={{ '& button': { m: 1 } }}>
+        <Button variant="contained" startIcon={<DeleteIcon />} onClick={deleteTask}>
           Delete
         </Button>
         <Button variant="outlined" size="small">

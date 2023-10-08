@@ -6,6 +6,7 @@ import { Box, Card, CardContent, CardActions, Typography, Avatar, CardActionArea
 import { Draggable } from "react-beautiful-dnd";
 import Modal from '@mui/material/Modal';
 import TaskDetailModel from "./TaskDetailModel";
+import axios from "axios";
 
 const TaskListItem = (props) => {
   const { id, name, index } = props;
@@ -13,6 +14,7 @@ const TaskListItem = (props) => {
   const theme = useTheme();
 
   const [ModalOpen, setModalOpen] = useState(false);
+  const [Assigned_user_name, setAssigned_user_name] = useState("")
 
   const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -27,8 +29,20 @@ const TaskListItem = (props) => {
     ...draggableStyle
   });
 
-  const handleOpen = () => {
-    setModalOpen(true);
+  const handleOpen = async() => {
+    try{
+      const userResult = await axios.get(`/api/tasks/${id}/assigned_user`);
+
+      console.log("Get assigned user name:", userResult)
+      
+      const user_name = userResult.data
+      setAssigned_user_name(user_name)
+      setModalOpen(true);
+
+    } catch (error) {
+      console.error("Could not show TaskDetailModel", error);
+      console.log("Get assigned_user_id:", assigned_user)
+    }
   };
 
   const handleClose = () => {
@@ -44,7 +58,7 @@ const TaskListItem = (props) => {
             <CardActionArea>
               <Modal open={ModalOpen} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
                 <div>
-                  <TaskDetailModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={assigned_user} handleClose={handleClose} />
+                  <TaskDetailModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={Assigned_user_name} handleClose={handleClose} />
                 </div>
               </Modal>
 
