@@ -20,7 +20,7 @@ export default function ProjectProvider(props) {
       console.log("is this the whole project or the id", response.data);
       setProject(response.data);
       const idNUM = parseInt(response.data.id);
-      console.log("did i parse it?", idNUM);
+      // console.log("did i parse it?", idNUM);
       navigate(`/projectBoard/${idNUM}`);
 
       // selectProject(parseInt(response.data.id));
@@ -43,8 +43,8 @@ export default function ProjectProvider(props) {
 
   const fetchMyProjects = async (id) => {
     try {
-      console.log('fetchMyProjects is running');
-      const response = await axios.get(`/api/projects/myprojects/${id}`);
+      console.log('fetchMyProjects is running', id);
+      const response = await axios.get(`/api/myprojects/${id}`);
       setMyProjects(response.data);
     } catch (error) {
       console.error("Could not find your projects", error.message);

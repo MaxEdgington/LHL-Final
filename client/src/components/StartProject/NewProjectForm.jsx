@@ -5,11 +5,13 @@ import Button from '@mui/material/Button';
 import { FormControl, FormLabel, Box, Paper, Grid } from '@mui/material';
 import { DateField } from "@mui/x-date-pickers";
 import { projectContext } from "../../providers/ProjectProvider";
+import { userContext } from "../../providers/UserProvider";
 import background from '../../../public/lens-img-darkmode.jpeg';
 
 
 function NewProjectForm() {
   const { addProject, project } = useContext(projectContext);
+  const { loggedinUser } = useContext(userContext);
   const navigate = useNavigate();
 
   //these states are just to handle the data for the form
@@ -19,12 +21,12 @@ function NewProjectForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    /// need a way to handle error if no one is logged in
     const formData = {
       project_name: projectName,
       project_description: projectDescription,
       project_due_date: projectDueDate,
-      //     // loggedin user could go here from state/context?
+      // owner_id: loggedinUser.id //owner currently hard coded
     };
 
     console.log(formData);

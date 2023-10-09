@@ -22,7 +22,7 @@ const ColumnList = (props) => {
   useEffect(() => {
     selectProject(params.id);
     fetchTasks(params.id);
-  }, [project, params]);
+  }, [params]);
 
   // End of new code
 
@@ -56,8 +56,8 @@ const ColumnList = (props) => {
 
         <div>
           <span>
-            <h1>Lens Project Board{project.name}</h1>
-            <ChatDrawer />
+            <h1>{project.name}</h1>
+            <ChatDrawer url_param={params} />
           </span>
           <ul className="columnlist">
             {columnArr}
