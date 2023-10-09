@@ -13,7 +13,7 @@ import { userContext } from '../../providers/UserProvider';
 import { projectContext } from '../../providers/ProjectProvider';
 
 const MyProjectsList = () => {
-  const { loggedinUser, selectUser } = useContext(userContext);
+  const { loggedinUser, selectUser, findUserInfo } = useContext(userContext);
   const { project, myProjects, addProject, selectProject, fetchMyProjects } = useContext(projectContext);
   const params = useParams();
   const navigate = useNavigate();
@@ -40,14 +40,17 @@ const MyProjectsList = () => {
   return (
     <>
       <Grid container sx={{ justifyContent: 'center' }}>
-        <Box>
-          <img src={loggedinUser.avatar} alt="syntax" height="50px" />
-          <h1>{loggedinUser.username}'s Projects</h1>
-          {/* this need to be a cookie, not state */}
 
+        <Box>
+          <h1>
+            <img src={loggedinUser.avatar} alt="syntax" height="50px" />
+            {loggedinUser.username}'s Projects
+          </h1>
+          {/* this need to be a cookie, not state */}
         </Box>
-        <Box sx={{ justifyContent: 'center' }}>
-          <TableContainer component={Paper} sx={{ width: `90%` }}>
+
+        <Box sx={{ m: 10, justifyContent: 'center' }}>
+          <TableContainer component={Paper} sx={{ width: `95%` }}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead sx={{ backgroundColor: '#a3a2a9' }}>
                 <TableRow>
@@ -61,6 +64,7 @@ const MyProjectsList = () => {
               </TableHead>
               <TableBody>
                 {myProjects.map((row) => (
+                  console.log("the results of the function", findUserInfo(row.owner_id)),
 
                   <TableRow
                     key={row.name}
@@ -81,7 +85,10 @@ const MyProjectsList = () => {
                     <TableCell align="right">{row.due_date}</TableCell>
                     {/* how can we format this date better? */}
                     <TableCell align="right">{row.owner_id}</TableCell>
-                    <TableCell align="right">avatar</TableCell>
+                    {/* <TableCell align="right">
+                      {findUserInfo(row.owner_id)}
+                      <img src={findUserInfo(row.owner_id)} alt='avatar' />
+                    </TableCell> */}
                   </TableRow>
 
                 ))}
@@ -89,7 +96,7 @@ const MyProjectsList = () => {
             </Table>
           </TableContainer>
         </Box>
-      </Grid>
+      </Grid >
     </>
   );
 };

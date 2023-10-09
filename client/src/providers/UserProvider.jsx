@@ -48,13 +48,25 @@ export default function UserProvider(props) {
     }
   };
 
+  const findUserInfo = async (id) => {
+    const idNum = parseInt(id);
+    try {
+      console.log('findUserInfo is running', idNum);
+      const responseForUser = await axios.get(`/api/users/${idNum}`);
+      console.log("FIND USER INFO", responseForUser.data);
+      return responseForUser.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const logOut = () => {
     setLoggedinUser({});
     navigate('/login');
     console.log("loggedinuser should be OUT", loggedinUser);
   };
 
-  const userData = { loggedinUser, selectUser, setCookie, logOut };
+  const userData = { loggedinUser, selectUser, findUserInfo, setCookie, logOut };
 
   return (
     <userContext.Provider value={userData}>

@@ -61,7 +61,7 @@ const ChatDrawer = (props) => {
               <Grid item xs={11}>
                 <TextField id="outlined-basic-email" name="sendMessage" label="Send A Message" fullWidth />
               </Grid>
-              <Grid xs={1} align="right">
+              <Grid item xs={1} align="right">
                 <Fab size="small" color="primary" aria-label="add"><SendIcon /></Fab>
               </Grid>
             </Grid>
