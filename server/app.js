@@ -2,6 +2,7 @@
 require("dotenv").config();
 const cors = require("cors");
 const { ENVIROMENT, PORT } = process.env;
+
 const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
@@ -12,6 +13,7 @@ const tasksRoutes = require("./routes/tasks");
 const projectRoutes = require("./routes/projects");
 const openaiRoutes = require("./routes/openai");
 const userRoutes = require("./routes/users");
+const messagesRoutes = require("./routes/messages");
 const catsRoutes = require("./routes/catsRoutes");
 
 const app = express();
@@ -41,11 +43,13 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
 app.use("/cats", catsRoutes);
 app.use("/api/tasks", tasksRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api", userRoutes);
 app.use("/openai", openaiRoutes);
+app.use("/api/messages", messagesRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

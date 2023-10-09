@@ -32,7 +32,8 @@ router.post("/add", async (req, res) => {
   try {
     const title = req.body.title; //used to be an object?
     const project = req.body.project_id;
-    const newTask = await tasksQueries.addNewTask(title, project);
+    const description = req.body.description;
+    const newTask = await tasksQueries.addNewTask(title, description, project);
     res.status(201).json(newTask);
   } catch (error) {
     res.status(500).json({ error: "Failed to add new task" });

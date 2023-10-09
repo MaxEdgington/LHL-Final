@@ -13,8 +13,10 @@ export default function UserProvider(props) {
 
     try {
       const response = await axios.post('/api/set-session', { email: formData.email });
-      // console.log("resp in provider", response.data);
+      console.log("resp in USER provider", response.data.user);
+      const user_id = response.data.user.id;
       setLoggedinUser(response.data.user);
+      navigate(`/myProjects/${user_id}`);
       return response.data;
     } catch (error) {
       console.error(error);
@@ -23,13 +25,48 @@ export default function UserProvider(props) {
     // setLoggedinUser();
   };
 
+  const selectUser = async (id) => {
+    const idNum = parseInt(id);
+    try {
+      console.log('selectUser is running', idNum);
+
+      const responseForUser = await axios.get(`/api/users/${idNum}`);
+      // const [responseForProject, responseForUser] =
+      //   await Promise.all([
+      //     axios.get(`/api/myprojects/${idNum}`),
+      //     axios.get(`/api/users/${idNum}`),
+      //   ]);
+
+
+      setLoggedinUser(responseForUser.data);
+      // do i need to return the data?
+      // console.log("selectuser - responseForProject", responseForProject.data);
+      console.log("selectuser - responseForUser", responseForUser.data);
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const findUserInfo = async (id) => {
+    const idNum = parseInt(id);
+    try {
+      console.log('findUserInfo is running', idNum);
+      const responseForUser = await axios.get(`/api/users/${idNum}`);
+      console.log("FIND USER INFO", responseForUser.data);
+      return responseForUser.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const logOut = () => {
     setLoggedinUser({});
     navigate('/login');
     console.log("loggedinuser should be OUT", loggedinUser);
   };
 
-  const userData = { loggedinUser, setCookie, logOut };
+  const userData = { loggedinUser, selectUser, findUserInfo, setCookie, logOut };
 
   return (
     <userContext.Provider value={userData}>

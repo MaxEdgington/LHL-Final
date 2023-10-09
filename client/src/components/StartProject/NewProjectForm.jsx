@@ -8,10 +8,12 @@ import { projectContext } from "../../providers/ProjectProvider";
 import { columnsContext } from "../../providers/ColumnsProvider";
 import background from "../../../public/lens-img-darkmode.jpeg";
 import { ClipLoader } from "react-spinners";
+import { userContext } from "../../providers/UserProvider";
 
 function NewProjectForm() {
   // Removed 'props' since it's not needed
   const { addProject, project } = useContext(projectContext);
+  const { loggedinUser } = useContext(userContext);
   const navigate = useNavigate();
   const { addGeneratedTasks } = useContext(columnsContext);
 
@@ -24,8 +26,17 @@ function NewProjectForm() {
   const handleLensAIClick = async () => {
     setIsLoading(true);
     try {
-      await addGeneratedTasks(projectDescription);
-      navigate(`/projectBoard/${project.id}`); // Redirect to main board after adding tasks
+      const formData = {
+        project_name: projectName,
+        project_description: projectDescription,
+        project_due_date: projectDueDate,
+
+        // owner_id: loggedinUser.id //owner currently hard coded
+      };
+      const newProjectData = await addProject(formData);
+      console.log("Line 30 of NewProjectForm", newProjectData);
+      await addGeneratedTasks(projectDescription, newProjectData.id);
+      navigate(`/projectBoard/${newProjectData.id}`); // Redirect to main board after adding tasks
     } catch (error) {
       console.error("Error adding generated tasks:", error);
     }
@@ -34,11 +45,13 @@ function NewProjectForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    /// need a way to handle error if no one is logged in
     const formData = {
       project_name: projectName,
       project_description: projectDescription,
       project_due_date: projectDueDate,
+
+      // owner_id: loggedinUser.id //owner currently hard coded
     };
 
     try {
@@ -120,7 +133,7 @@ function NewProjectForm() {
                 >
                   Yes, use LensAI
                 </Button>
-                <Button variant="contained" type="Submit">
+                <Button variant="contained" onClick={handleSubmit}>
                   No, I'll enter the tasks myself
                 </Button>
               </FormControl>

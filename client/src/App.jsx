@@ -15,6 +15,8 @@ import background from '../public/lots-of-lenses.jpg';
 import UserProvider from "./providers/UserProvider";
 import ColumnsProvider from "./providers/ColumnsProvider";
 import ProjectProvider from "./providers/ProjectProvider";
+import MessageProvider from "./providers/MessageProvider";
+
 // import { columnsContext } from "./providers/ColumnsProvider";
 // import CustomThemeProvider from './providers/ThemeProvider';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -48,7 +50,6 @@ function App() {
   //   }
   // };
 
-  <Link to="/myProjects">My Projects</Link>;
 
   // useEffect(() => {
   //   const url = 'http://localhost:8080/cats';
@@ -72,22 +73,25 @@ function App() {
         <Header />
 
         <ProjectProvider>
-          <ColumnsProvider>
+          <MessageProvider>
+            <ColumnsProvider>
 
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/myProjects" element={<MyProjectsList />} />
-              {/* <Route path="/projectboard" element={<ColumnList />} /> */}
-              <Route path='/projectboard/:id' element={<ColumnList />} />
-              <Route path="/newProject" element={<StartNewProject />} />
-              <Route path="*" element={<ErrorPage />} />
+              <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/myProjects/:id" element={<MyProjectsList />} />
+                {/* <Route path="/projectboard" element={<ColumnList />} /> */}
+                <Route path='/projectboard/:id' element={<ColumnList />} />
+                <Route path="/newProject" element={<StartNewProject />} />
+                <Route path='/users/:id' />
+                <Route path="*" element={<ErrorPage />} />
 
-              {/* YULI - something like this maybe??? */}
-              {/* <Route path='/task/:id' element={???} /> */}
-            </Routes>
+                {/* YULI - something like this maybe??? */}
+                {/* <Route path='/task/:id' element={???} /> */}
+              </Routes>
 
-          </ColumnsProvider>
+            </ColumnsProvider>
+          </MessageProvider>
         </ProjectProvider>
       </UserProvider>
 

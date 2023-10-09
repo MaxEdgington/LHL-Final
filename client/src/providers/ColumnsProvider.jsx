@@ -81,12 +81,12 @@ export default function ColumnsProvider(props) {
   };
 
   // Fetch AI-generated tasks, process them and add to database
-  const addGeneratedTasks = async (description) => {
+  const addGeneratedTasks = async (description, project_id) => {
     console.log("addGeneratedTasks invoked");
-    console.log(
-      "Current project ID when addGeneratedTasks is invoked:",
-      project.id
-    );
+    // console.log(
+    //   "Current project ID when addGeneratedTasks is invoked:",
+    //   project
+    // );
 
     try {
       const response = await axios.post("http://localhost:8080/openai", {
@@ -110,7 +110,7 @@ export default function ColumnsProvider(props) {
         "http://localhost:8080/api/tasks/add-batch",
         {
           tasks: tasksToAdd,
-          project_id: project.id,
+          project_id: project_id,
         }
       );
 

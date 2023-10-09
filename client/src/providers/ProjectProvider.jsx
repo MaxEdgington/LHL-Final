@@ -16,8 +16,16 @@ export default function ProjectProvider(props) {
     try {
       const response = await axios.post(`/api/projects/add`, formData);
       console.log("is this the whole project or the id", response.data);
-      setProject(response.data);
-      return response.data; // Return the new project data
+      await setProject(response.data);
+
+      const idNUM = parseInt(response.data.id);
+      // console.log("did i parse it?", idNUM);
+      // navigate(`/projectBoard/${idNUM}`);
+
+      // selectProject(parseInt(response.data.id));
+
+      // Return the new project data
+      return response.data;
     } catch (error) {
       console.error("Could not add project", error);
       throw error; // Propagate the error so you can handle it in the calling function
@@ -38,8 +46,8 @@ export default function ProjectProvider(props) {
 
   const fetchMyProjects = async (id) => {
     try {
-      console.log("fetchMyProjects is running");
-      const response = await axios.get(`/api/projects/myprojects/${id}`);
+      console.log("fetchMyProjects is running", id);
+      const response = await axios.get(`/api/myprojects/${id}`);
       setMyProjects(response.data);
     } catch (error) {
       console.error("Could not find your projects", error.message);
