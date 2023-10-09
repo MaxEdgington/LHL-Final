@@ -23,8 +23,7 @@ const TaskEditModel = (props) => {
 
   const { saveEditedTask } = useContext(columnsContext)
 
-  const projectName = useParams().name
-  // const projectId = useParams().id
+  const projectId = useParams().id
 
   const initialTask = [
     name,
@@ -98,7 +97,7 @@ const TaskEditModel = (props) => {
         
         {/* link back to the 'home' route whose component is TaskDetailModel */}
         {/* need to change to ${projectId} */}
-        <Link to={`/projectboard/${projectName}`}>
+        <Link to={`/projectboard/${projectId}`}>
           <Button variant="outlined" size="small" onClick={handleSave}>
             Save
           </Button>
