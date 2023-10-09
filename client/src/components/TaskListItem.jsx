@@ -14,7 +14,7 @@ const TaskListItem = (props) => {
   const theme = useTheme();
 
   const [ModalOpen, setModalOpen] = useState(false);
-  const [Assigned_user_name, setAssigned_user_name] = useState("")
+  const [Assigned_user_name, setAssigned_user_name] = useState("");
 
   const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -29,19 +29,19 @@ const TaskListItem = (props) => {
     ...draggableStyle
   });
 
-  const handleOpen = async() => {
-    try{
+  const handleOpen = async () => {
+    try {
       const userResult = await axios.get(`/api/tasks/${id}/assigned_user`);
 
-      console.log("Get assigned user name:", userResult)
-      
-      const user_name = userResult.data
-      setAssigned_user_name(user_name)
+      console.log("Get assigned user name:", userResult);
+
+      const user_name = userResult.data;
+      setAssigned_user_name(user_name);
       setModalOpen(true);
 
     } catch (error) {
       console.error("Could not show TaskDetailModel", error);
-      console.log("Get assigned_user_id:", assigned_user)
+      console.log("Get assigned_user_id:", assigned_user);
     }
   };
 

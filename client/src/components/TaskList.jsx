@@ -1,6 +1,8 @@
 import React from "react";
 import TaskListItem from "./TaskListItem";
 // import "../styles/TaskList.scss";
+import { Box } from "@mui/material";
+
 import { Droppable } from "react-beautiful-dnd";
 import { useTheme } from '@mui/material/styles';
 
@@ -22,8 +24,8 @@ const TaskList = (props) => {
       index={index} />);
 
   return (
-    <div>
-      <Droppable key={id} droppableId={id}>
+    <Box sx={{ justifyContent: 'center' }}>
+      <Droppable key={id} droppableId={id} sx={{ justifyContent: 'center' }}>
 
         {(provided, snapshot) => {
           return (
@@ -38,7 +40,7 @@ const TaskList = (props) => {
           );
         }}
       </Droppable>
-    </div>
+    </Box>
   );
 };
 

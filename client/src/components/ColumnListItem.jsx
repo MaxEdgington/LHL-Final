@@ -38,6 +38,7 @@ const ColumnListItem = (props) => {
         margin: "16px",
         width: "25%",
         bgcolor: "white",
+        justifyContent: "center"
         // "&:first-child": {
         //   paddingLeft: "5px",
         //   borderTopLeftRadius: 5,
@@ -49,27 +50,30 @@ const ColumnListItem = (props) => {
       }}
     >
       {/* <Paper elevation={10} style={paperStyle}> */}
+      <h2 >{columns[id].name}</h2>
+
       <div className="column">
-        <h2>{columns[id].name}</h2>
         <TaskList id={id} tasks={columns[id].tasks} />
         {id == 1 && !isAddingTask && (
           <button onClick={() => setIsAddingTask(true)}>Add New Task</button>
         )}
-        {id == 1 && isAddingTask && (
-          <form onSubmit={handleAddNewTask}>
-            <input
-              type="text"
-              placeholder="New Task"
-              value={newTask}
-              onChange={(e) => setNewTask(e.target.value)}
-            />
-            <button type="submit">Submit</button>
-            <button type="button" onClick={() => setIsAddingTask(false)}>
-              Cancel
-            </button>
-          </form>
-        )}
       </div>
+
+      {id == 1 && isAddingTask && (
+        <form onSubmit={handleAddNewTask}>
+          <input
+            type="text"
+            placeholder="New Task"
+            value={newTask}
+            onChange={(e) => setNewTask(e.target.value)}
+          />
+          <button type="submit">Submit</button>
+          <button type="button" onClick={() => setIsAddingTask(false)}>
+            Cancel
+          </button>
+        </form>
+      )}
+
     </Paper>
   );
 };

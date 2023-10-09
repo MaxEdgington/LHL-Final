@@ -45,10 +45,10 @@ const ColumnList = (props) => {
     <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
       <Box
         sx={{
-          flex: 1,
-          paddingTop: "8px",
+          paddingTop: "80px",
           paddingBottom: "16px",
           bgcolor: "#eaeaee",
+          height: '90vh'
           // backgroundImage: `url(${background})`
           // change to theme colours
         }}
@@ -63,6 +63,7 @@ const ColumnList = (props) => {
             {columnArr}
           </ul>
         </div>
+
       </Box>
     </DragDropContext>
   );
