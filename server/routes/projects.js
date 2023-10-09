@@ -3,11 +3,11 @@ const router = express.Router();
 // const db = require('../configs/db.config');
 const projectQueries = require('../db/queries/projects');
 
-//this gets each project by name inorder to set the state
+//this gets each project by id inorder to set the state
 router.get('/:id', async (req, res) => {
   try {
     console.log("PARAMS", req.params);
-    const selectedProject = await projectQueries.getProjectbyName(req.params.id);
+    const selectedProject = await projectQueries.getProjectbyId(req.params.id);
     console.log("checkign in the router", selectedProject);
     res.status(200).json(selectedProject); ////
   } catch (error) {

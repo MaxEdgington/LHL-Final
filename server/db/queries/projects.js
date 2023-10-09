@@ -12,6 +12,18 @@ const getProjectbyName = (name) => {
       throw err;
     });
 };
+const getProjectbyId = (id) => {
+  return db
+    .query(`SELECT * FROM projects WHERE id = $1`, [id])
+    .then(data => {
+      console.log("checking in the query", data.rows[0]);
+      return data.rows[0];
+    }).catch(err => {
+      console.error("Error executing query: ", err);
+      throw err;
+    });
+};
+
 
 const addProject = (name, description, due_date) => {
   return db.query(
@@ -60,4 +72,4 @@ const getAllProjectsOfUser = (id) => {
     });
 };
 
-module.exports = { getProjectbyName, addProject, getProjectsByOwner, getAllProjectsOfUser };
+module.exports = { getProjectbyName, getProjectbyId, addProject, getProjectsByOwner, getAllProjectsOfUser };
