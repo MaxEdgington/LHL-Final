@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { columnsContext } from "../providers/ColumnsProvider";
-import {Box, Typography, TextField, FormControl, FormGroup, InputLabel, Input} from "@mui/material";
+import {Box, Typography, TextField, FormGroup} from "@mui/material";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { Link, useParams } from 'react-router-dom';
@@ -34,7 +34,7 @@ const TaskEditModel = (props) => {
 
   const [task, setTask] = useState(initialTask)
   // console.log("task here:", task)
-  // console.log("type of due_date:", typeof task[2])
+  console.log("due_date:", task[2])
   
   const handleSave = () => {
     // make axois post request here to update the tasks table(also need to change the id of assigned_user)
@@ -82,6 +82,8 @@ const TaskEditModel = (props) => {
         mb={2} 
         onChange={(event) => setTask(prevTask => [...prevTask.slice(0, 2), event.target.value, prevTask[3]])}
       />
+
+      {/* DateField expects it's value to be a 'moment' object but is getting a string instead */}
       
       {/* assigned_user */}
       <TextField 
