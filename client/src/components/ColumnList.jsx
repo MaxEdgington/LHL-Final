@@ -33,8 +33,8 @@ const ColumnList = (props) => {
         key={columnId}
         id={columnId}
         url_param={params.id}
-        // name={column.name}
-        // tasks={column.tasks}
+      // name={column.name}
+      // tasks={column.tasks}
       />
     );
   });
@@ -61,7 +61,9 @@ const ColumnList = (props) => {
         <div>
           <span>
             <h1>{project.name}</h1>
+
             <ChatDrawer url_param={params} />
+
           </span>
 
           <ul className="columnlist">{columnArr}</ul>
