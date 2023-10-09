@@ -13,8 +13,10 @@ export default function UserProvider(props) {
 
     try {
       const response = await axios.post('/api/set-session', { email: formData.email });
-      // console.log("resp in provider", response.data);
+      console.log("resp in USER provider", response.data.user);
+      const user_id = response.data.user.id;
       setLoggedinUser(response.data.user);
+      navigate(`/myProjects/${user_id}`);
       return response.data;
     } catch (error) {
       console.error(error);

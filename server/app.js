@@ -11,6 +11,7 @@ const cookieSession = require('cookie-session');
 const tasksRoutes = require('./routes/tasks');
 const projectRoutes = require('./routes/projects');
 const userRoutes = require('./routes/users');
+const messagesRoutes = require('./routes/messages');
 
 console.log('Tasks Routes Imported'); // This will log when the tasks routes are imported.
 
@@ -48,6 +49,7 @@ app.use('/cats', catsRoutes);
 app.use('/api/tasks', tasksRoutes); // Adjust the path as per your project’s URL structure.
 app.use('/api/projects', projectRoutes);
 app.use('/api', userRoutes);
+app.use('/api/messages', messagesRoutes);
 // console.log('Tasks Routes Setup'); // This will log when the tasks routes are set up.
 
 

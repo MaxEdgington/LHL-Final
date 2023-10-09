@@ -57,7 +57,7 @@ const ColumnList = (props) => {
         <div>
           <span>
             <h1>{project.name}</h1>
-            <ChatDrawer />
+            <ChatDrawer url_param={params} />
           </span>
           <ul className="columnlist">
             {columnArr}

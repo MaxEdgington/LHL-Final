@@ -20,7 +20,7 @@ export default function ProjectProvider(props) {
       console.log("is this the whole project or the id", response.data);
       setProject(response.data);
       const idNUM = parseInt(response.data.id);
-      console.log("did i parse it?", idNUM);
+      // console.log("did i parse it?", idNUM);
       navigate(`/projectBoard/${idNUM}`);
 
       // selectProject(parseInt(response.data.id));

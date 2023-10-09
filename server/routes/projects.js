@@ -16,19 +16,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// //gets all the projects of a specific user
-// router.get('/myprojects/:id', async (req, res) => {
-//   try {
-//     console.log("PARAMS", req.params);
-//     const myProjects = await projectQueries.getAllProjectsOfUser(Number(req.params.id));
-//     console.log("checkign in the router", myProjects);
-//     res.status(200).json(myProjects); ////
-//   } catch (error) {
-//     console.error('Error during fetching projects-server side:', error);
-//     res.status(500).send('Server Error');
-//   }
-// });
-
 
 //this adds a project
 router.post('/add', async (req, res) => {
