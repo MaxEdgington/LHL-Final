@@ -20,7 +20,7 @@ const Login = () => {
     };
     console.log("move handle funct", formData);
     await setCookie(formData);
-    navigate('/myProjects');
+    // navigate('/myProjects');
     e.target.reset();
   };
 

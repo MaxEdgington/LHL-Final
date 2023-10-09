@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useParams } from "react-router-dom";
+
 import ColumnListItem from "./ColumnListItem";
 import ChatDrawer from "./Chat/ChatDrawer";
 import { Box, Typography, Paper } from "@mui/material";
@@ -10,14 +12,17 @@ import { projectContext } from "../providers/ProjectProvider";
 
 const ColumnList = (props) => {
   const { columns, fetchTasks, onDragEnd } = useContext(columnsContext);
-  const { project } = useContext(projectContext);
-  console.log("am i getting the project?", project);
+  const { project, selectProject } = useContext(projectContext);
+  // console.log("am i getting the project?", project);
+  const params = useParams();
 
+  // console.log("useparams?", params);
   // Start of new code
 
   useEffect(() => {
-    fetchTasks();
-  }, [project]);
+    selectProject(params.id);
+    fetchTasks(params.id);
+  }, [params]);
 
   // End of new code
 
@@ -27,13 +32,19 @@ const ColumnList = (props) => {
       <ColumnListItem
         key={columnId}
         id={columnId}
-      // name={column.name}
-      // tasks={column.tasks}
+        url_param={params.id}
+        // name={column.name}
+        // tasks={column.tasks}
       />
     );
   });
 
-  const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
+  const paperStyle = {
+    padding: 20,
+    height: "70vh",
+    width: 280,
+    margin: "20px auto",
+  };
 
   return (
     <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
@@ -47,15 +58,13 @@ const ColumnList = (props) => {
           // change to theme colours
         }}
       >
-
         <div>
           <span>
             <h1>{project.name}</h1>
-            <ChatDrawer />
+            <ChatDrawer url_param={params} />
           </span>
-          <ul className="columnlist">
-            {columnArr}
-          </ul>
+
+          <ul className="columnlist">{columnArr}</ul>
         </div>
       </Box>
     </DragDropContext>

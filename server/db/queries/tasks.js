@@ -1,14 +1,17 @@
 const db = require("../../configs/db.config");
 
-const addNewTask = async (title, project_id) => {
+const addNewTask = async (title, description, project_id) => {
   try {
-    // As per our seed data, the tasks table have columns: name, description, due_date.
-    // Here, we're only adding name (title from frontend) and column_id. We can expand this later.
+    console.log("Inserting task with data:", {
+      title: title,
+      description: description,
+      project_id: project_id,
+    });
+
     const result = await db.query(
-      "INSERT INTO tasks (name, project_id) VALUES ($1, $2) RETURNING *",
-      [title, project_id]
+      "INSERT INTO tasks (name, description, project_id) VALUES ($1, $2, $3) RETURNING *",
+      [title, description, project_id]
     );
-    console.log("int eh add query", result.rows[0]);
     return result.rows[0];
   } catch (error) {
     console.error("Error during adding new task:", error);
@@ -27,7 +30,10 @@ const deleteTask = async (taskId) => {
 
 const getUserbyTaskId = async (task_id) => {
   try {
-    const result = await db.query("SELECT users.username FROM users JOIN tasks ON tasks.assigned_user=users.id WHERE tasks.id=$1", [task_id]);
+    const result = await db.query(
+      "SELECT users.username FROM users JOIN tasks ON tasks.assigned_user=users.id WHERE tasks.id=$1",
+      [task_id]
+    );
     console.log("result.rows:", result.rows);
 
     if (result.rows.length === 0) {
@@ -35,7 +41,6 @@ const getUserbyTaskId = async (task_id) => {
     }
 
     return result.rows[0].username;
-
   } catch (error) {
     console.error("Error during showing assigned user name:", error);
     throw error;
@@ -45,19 +50,19 @@ const getUserbyTaskId = async (task_id) => {
 const getTasksbyProject = async (project_id) => {
   return db
     .query(`SELECT * FROM tasks WHERE project_id = $1`, [project_id])
-    .then(data => {
-      console.log("checking in the query", data.rows[0]);
-      return data.rows[0];
-    }).catch(err => {
+    .then((data) => {
+      console.log("checking in the query", data.rows);
+      return data.rows;
+    })
+    .catch((err) => {
       console.error("Error finding tasks for your project", err);
       throw err;
     });
 };
 
-
 module.exports = {
   addNewTask,
   deleteTask,
   getUserbyTaskId,
-  getTasksbyProject
+  getTasksbyProject,
 };
