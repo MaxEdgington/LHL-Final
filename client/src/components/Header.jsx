@@ -63,8 +63,8 @@ function Header() {
 
 
   return (
-    <AppBar position="sticky">
-      {/* <AppBar position="static"> */}
+    // <AppBar position="sticky">
+    <AppBar position='fixed' top='0' zIndex='100'>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ background: 'secondary' }}>
           <img src={"../../public/lens-line.png"}

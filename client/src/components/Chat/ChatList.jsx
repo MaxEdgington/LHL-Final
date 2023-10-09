@@ -13,7 +13,8 @@ const ChatList = () => {
   useEffect(() => {
     fetchMessagesforProject(project.id);
     // console.log("got them ", myProjects);
-  }, [project]);
+  }, [project, Object.keys(messages).length]);
+
 
 
   const messagesArr = messages.map((item) => {

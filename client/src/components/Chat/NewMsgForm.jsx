@@ -40,18 +40,19 @@ function NewMsgForm(props) {
 
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <FormControl>
-
-              <TextField
-                id="outlined-basic-email"
-                name="sendMessage"
-                label="Send A Message"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                fullWidth />
+              <Grid container flexDirection={"row"}>
 
 
-              <Fab type="Submit" size="small" color="primary" aria-label="add"><SendIcon /></Fab>
+                <TextField
+                  id="outlined-basic-email"
+                  name="sendMessage"
+                  label="Send A Message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  fullWidth />
 
+                <Fab type="Submit" size="small" color="primary" aria-label="add"> <SendIcon /> </Fab>
+              </Grid>
 
             </FormControl>
           </form >
