@@ -17,20 +17,20 @@ function NewProjectForm() {
   const [projectDescription, setProjectDescription] = useState('');
   const [projectDueDate, setProjectDueDate] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = {
       project_name: projectName,
       project_description: projectDescription,
       project_due_date: projectDueDate,
-      //     // loggedin user will need to go here from state!
+      //     // loggedin user could go here from state/context?
     };
 
     console.log(formData);
-    addProject(formData);
+    await addProject(formData);
     console.log("can i see the project id in the form submit function", project.id);
-    navigate(`/projectBoard/${project.id}`);
+    // navigate(`/projectBoard/${project.id}`);
   };
 
 

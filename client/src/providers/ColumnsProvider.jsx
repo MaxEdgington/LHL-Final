@@ -18,7 +18,7 @@ export default function ColumnsProvider(props) {
   const [columns, setColumns] = useState(initialColumnData);
 
 
-  const fetchTasks = async (projectparam) => {  //need to change this to fetch tasks of PROJECT
+  const fetchTasks = async (projectparam) => {
     // console.log("is fetch task func getting the right parameter?", projectparam);
     try {
       const res = await axios.get("/api/tasks");
@@ -54,13 +54,13 @@ export default function ColumnsProvider(props) {
     }
   };
 
-  const addNewTask = async (taskTitle) => {
+  const addNewTask = async (taskTitle, project_id) => {
     // give this form params from form
-    console.log("do i have the data", project);
+    console.log("do i have the data", project_id);
     console.log("do i have the data", taskTitle);
     try {
       const response = await axios.post("/api/tasks/add", {
-        title: taskTitle, project_id: project.id
+        title: taskTitle, project_id: project_id
       });
       console.log("New task added:", response.data);
 

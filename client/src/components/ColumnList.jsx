@@ -32,6 +32,7 @@ const ColumnList = (props) => {
       <ColumnListItem
         key={columnId}
         id={columnId}
+        url_param={params.id}
       // name={column.name}
       // tasks={column.tasks}
       />
