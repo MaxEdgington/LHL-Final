@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
 router.post('/add', async (req, res) => {
   console.log("adding project in route", req.body);
   try {
-    const newProject = await projectQueries.addProject(req.body.project_name, req.body.project_description, req.body.project_due_date, req.body.owner_id); //do i need to destructure req
+    const newProject = await projectQueries.addProject(req.body.project_name, req.body.project_description, req.body.project_due_date); //need to add dynamic owner back in
     console.log("newProject.rows", newProject[0]);
     res.status(200).json(newProject[0]);
   } catch (error) {

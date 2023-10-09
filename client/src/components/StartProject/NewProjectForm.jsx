@@ -26,7 +26,7 @@ function NewProjectForm() {
       project_name: projectName,
       project_description: projectDescription,
       project_due_date: projectDueDate,
-      owner_id: loggedinUser.id
+      // owner_id: loggedinUser.id //owner currently hard coded
     };
 
     console.log(formData);

@@ -25,12 +25,12 @@ const getProjectbyId = (id) => {
 };
 
 
-const addProject = (name, description, due_date, owner_id) => {
+const addProject = (name, description, due_date) => {
   return db.query(
     `INSERT INTO projects (name, description, due_date, owner_id)
     VALUES ($1, $2, $3, $4)
     RETURNING *;`,
-    [name, description, due_date, owner_id] //owner_id was hard-coded 
+    [name, description, due_date, 3] //owner_id is currently hard coded 
   )
     .then(data => {
       return data.rows;
