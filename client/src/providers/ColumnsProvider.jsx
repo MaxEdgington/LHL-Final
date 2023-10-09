@@ -5,7 +5,7 @@ import { projectContext } from "./ProjectProvider";
 export const columnsContext = createContext();
 
 export default function ColumnsProvider(props) {
-  const { project } = useContext(projectContext);
+  const { project, setProject } = useContext(projectContext);
 
   const initialColumnData = {
     1: { name: "To Do", tasks: [] },
@@ -16,15 +16,12 @@ export default function ColumnsProvider(props) {
 
   const [columns, setColumns] = useState(initialColumnData);
 
-  const fetchTasks = async () => {
+  const fetchTasks = async (projectparam = project.id) => {
     try {
       const res = await axios.get("/api/tasks");
-      console.log("1 ALL Tasks received from server:", res.data);
-      console.log("2 do I have a project", project);
       const projectData = res.data.filter(
-        (task) => task.project_id === project.id
+        (task) => task.project_id === parseInt(projectparam)
       );
-      console.log("3 can I filter", projectData);
 
       const todoTasks = projectData.filter((task) => task.status === "1");
       const todoTasksSorted = todoTasks.sort((a, b) => a.index - b.index);
@@ -52,7 +49,7 @@ export default function ColumnsProvider(props) {
         4: { ...columns[4], tasks: completedTasksSorted },
       });
 
-      console.log("4 After data transformation:", columns);
+      // console.log("4 After data transformation:", columns);
     } catch (error) {
       console.error("Could not fetch tasks", error);
     }

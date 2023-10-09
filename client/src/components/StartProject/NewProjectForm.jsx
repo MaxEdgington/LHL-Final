@@ -10,9 +10,10 @@ import background from "../../../public/lens-img-darkmode.jpeg";
 import { ClipLoader } from "react-spinners";
 
 function NewProjectForm(props) {
-  // const { setView } = props;
-  const { projectAddFetchSet, addProject } = useContext(projectContext);
+  const { projectAddFetchSet, addProject, project } =
+    useContext(projectContext);
   const { addGeneratedTasks } = useContext(columnsContext);
+
   const navigate = useNavigate();
 
   const [projectName, setProjectName] = useState("");
@@ -42,9 +43,16 @@ function NewProjectForm(props) {
     };
 
     console.log(formData);
-    projectAddFetchSet(formData);
-    navigate(`/projectBoard/${projectName}`);
-    // setView(1);
+    projectAddFetchSet(formData); // From HEAD branch
+    addProject(formData); // From main branch
+
+    // Check where you want to navigate after adding the project
+    navigate(`/projectBoard/${projectName}`); // From HEAD branch
+    console.log(
+      "can i see the project id in the form submit function",
+      project.id
+    );
+    navigate(`/projectBoard/${project.id}`); // From main branch
   };
 
   const paperStyle = {
