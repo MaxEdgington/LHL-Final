@@ -75,8 +75,6 @@ export default function ColumnsProvider(props) {
     }
   };
 
-
-
   const handleDelete = async (taskId) => {
     // console.log("tasks No:", taskId)
     try {
@@ -105,6 +103,40 @@ export default function ColumnsProvider(props) {
     }
   };
 
+  const saveEditedTask = async(taskId, Editedtask) => {
+    try {
+      await axios.post(`/api/tasks/${Number(taskId)}/edit`, {
+        Editedtask: Editedtask
+      });
+
+      const newColumns = Object.entries(columns).reduce(
+        (acc, [key, column]) => {
+          return {
+            ...acc,
+            [key]: {
+              ...column,
+              tasks: column.tasks.map(task => {
+                if (task.id === taskId) {
+                  return {
+                    ...task,
+                    name: Editedtask[0],
+                    description: Editedtask[1],
+                    due_date: Editedtask[2]
+                  }
+                }
+                return task;
+              })
+            }
+          }
+        }, {}
+      )
+
+      setColumns(newColumns)
+
+    } catch (error) {
+      console.error("Could not edit tasks", error);
+    }
+  }
 
   const onDragEnd = async (result) => {
     // it only updates the dragged card, it does not update the index of other cards that are also moved passively
@@ -185,6 +217,7 @@ export default function ColumnsProvider(props) {
     onDragEnd,
     addNewTask,
     handleDelete,
+    saveEditedTask
   };
 
   return (

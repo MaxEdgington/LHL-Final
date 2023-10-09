@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { columnsContext } from "../providers/ColumnsProvider";
 import {Box, Typography, TextField, FormControl, FormGroup, InputLabel, Input} from "@mui/material";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -20,6 +21,8 @@ const style = {
 const TaskEditModel = (props) => {
   const {name, id, description, project_id, due_date, assigned_user, handleClose} = props
 
+  const { saveEditedTask } = useContext(columnsContext)
+
   const projectName = useParams().name
   // const projectId = useParams().id
 
@@ -31,10 +34,11 @@ const TaskEditModel = (props) => {
   ]
 
   const [task, setTask] = useState(initialTask)
-  console.log("task here:", task)
+  // console.log("task here:", task)
   
   const handleSave = () => {
-    // make axois post request here to update the tasks table
+    // make axois post request here to update the tasks table(also need to change the id of assigned_user)
+    saveEditedTask(id, task)
     handleClose();
   }
  
@@ -42,29 +46,35 @@ const TaskEditModel = (props) => {
   <Box sx={style}>
 
     <Typography id="modal-modal-title" variant="h6" component="h2" align="center" fontSize={36}>
-        {name} 
+        {task[0]} 
     </Typography>
 
     <FormGroup >
-      
+
+      {/* name */}
       <TextField 
-        id="outlined-controlled" 
+        id="outlined-controlled"
+        label="Edit Name" 
         value={task[0]} 
         sx={{ mt: 2 }} 
         fontSize={28} 
         onChange={(event) => setTask(prevTask => [event.target.value, ...prevTask.slice(1)])}
       />
-
+      
+      {/* description */}
       <TextField 
         id="outlined-controlled" 
+        label="Edit Description"
         value={task[1]} 
         sx={{ mt: 2 }} 
         fontSize={28} mb={2} 
         onChange={(event) => setTask(prevTask => [prevTask[0], event.target.value, ...prevTask.slice(2)])}
       />
 
+      {/* due_date */}
       <TextField 
         id="outlined-controlled" 
+        label="Edit Due Date"
         value={task[2]} 
         sx={{ mt: 2 }} 
         fontSize={28} 
@@ -72,8 +82,10 @@ const TaskEditModel = (props) => {
         onChange={(event) => setTask(prevTask => [...prevTask.slice(0, 2), event.target.value, prevTask[3]])}
       />
       
+      {/* assigned_user */}
       <TextField 
-        id="outlined-controlled" 
+        id="outlined-controlled"
+        label="Edit Assigned User" 
         value={task[3]} 
         sx={{ mt: 2 }} 
         fontSize={28} 
