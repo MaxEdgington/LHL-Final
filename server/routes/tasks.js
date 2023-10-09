@@ -138,4 +138,24 @@ router.get("/:id/assigned_user", async (req, res) => {
   }
 });
 
+ router.post("/:id/edit", async(req, res) => {
+    const task_id = req.params.id
+    const Editedtask = req.body.Editedtask
+    const name = Editedtask[0]
+    const description = Editedtask[1]
+    const due_date = Editedtask[2]
+    const assigned_userName = Editedtask[3]
+
+    console.log("Task_id", task_id)
+    try{
+      await db.query(`UPDATE tasks SET name=$1, description=$2, due_date=$3 WHERE id=$4`, [name, description, due_date, task_id])
+      res.status(200).send();
+      console.log("Task info updated", Editedtask);
+    } catch (error) {
+      console.error("Error during saving edited task info:", error);
+      res.status(500).send("Server Error");
+    }
+ })
+
+
 module.exports = router;

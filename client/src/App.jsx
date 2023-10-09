@@ -20,9 +20,8 @@ import MessageProvider from "./providers/MessageProvider";
 // import { columnsContext } from "./providers/ColumnsProvider";
 // import CustomThemeProvider from './providers/ThemeProvider';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-
 import "./App.css";
+import TaskDetailModel from "./components/TaskDetailModel";
 
 function App() {
   const [data, setData] = useState(null);
@@ -81,7 +80,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/myProjects/:id" element={<MyProjectsList />} />
                 {/* <Route path="/projectboard" element={<ColumnList />} /> */}
-                <Route path='/projectboard/:id' element={<ColumnList />} />
+                <Route path='/projectboard/:id/*' element={<ColumnList />} />
                 <Route path="/newProject" element={<StartNewProject />} />
                 <Route path='/users/:id' />
                 <Route path="*" element={<ErrorPage />} />

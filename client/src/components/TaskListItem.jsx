@@ -6,7 +6,10 @@ import { Box, Card, CardContent, CardActions, Typography, Avatar, CardActionArea
 import { Draggable } from "react-beautiful-dnd";
 import Modal from '@mui/material/Modal';
 import TaskDetailModel from "./TaskDetailModel";
+import TaskEditModel from "./TaskEditModel";
 import axios from "axios";
+
+import {Route, Routes, Link} from 'react-router-dom';
 
 const TaskListItem = (props) => {
   const { id, name, index } = props;
@@ -55,15 +58,35 @@ const TaskListItem = (props) => {
 
         <Box sx={{ marginBottom: 1 }}>
           <Card>
-            <CardActionArea>
+            <CardActionArea> 
+
               <Modal open={ModalOpen} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
                 <div>
-                  <TaskDetailModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={Assigned_user_name} handleClose={handleClose} />
+                {/* define the react-router routes here */}
+                <Routes>
+                  
+                {/* path="/projectboard/:name/model" */}
+                  <Route path="modal" element = 
+                    { <div>
+                      <TaskDetailModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={Assigned_user_name} handleClose={handleClose} />
+                      </div>
+                     } /> 
+
+                 {/* <Routes>   */}
+                  {/* define the /edit route as TaskEditModel */}
+                  <Route path="modal/edit" element = 
+                    { <div>
+                      <TaskEditModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={Assigned_user_name} handleClose={handleClose} />
+                      </div>
+                       } />
+                  
+                </Routes>
                 </div>
               </Modal>
-
+              
+              <Link to="modal">
               <CardContent onClick={handleOpen}>
-                <Typography variant="h5" component="div">
+                <Typography variant="h5" component="div" >
                   <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
                     style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}>
 
@@ -72,9 +95,9 @@ const TaskListItem = (props) => {
                   </div>
                 </Typography>
               </CardContent>
+              </Link>
 
             </CardActionArea>
-
           </Card>
         </Box>
       )}

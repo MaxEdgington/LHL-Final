@@ -4,6 +4,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { columnsContext } from "../providers/ColumnsProvider";
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const style = {
   position: "absolute",
@@ -11,7 +12,6 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 500,
-
   height: 450,
   bgcolor: "background.paper",
   border: "2px solid #000",
@@ -32,13 +32,15 @@ const TaskDetailModel = (props) => {
 
   const { handleDelete, columns } = useContext(columnsContext);
 
+  const navigate = useNavigate();
+  const projectId = useParams().id
+
   const deleteTask = () => {
     handleDelete(id);
     // console.log("++++New Columns data here:", columns)
-    handleClose();
-  };
-
-  console.log("Props received by TaskDetailModel:", props);
+    handleClose()
+    navigate(`/projectboard/${projectId}`);
+  }
 
   return (
     <Box sx={style}>
@@ -78,9 +80,9 @@ const TaskDetailModel = (props) => {
         >
           Delete
         </Button>
-        <Button variant="outlined" size="small">
+        <Link to="edit"><Button variant="outlined" size="small" >
           Edit
-        </Button>
+        </Button></Link>
       </Stack>
     </Box>
   );
