@@ -43,7 +43,6 @@ const ChatList = () => {
       <Box sx={{ margin: 2.5 }}>
         {/* <Paper
         sx={{ margin: 1 }}> */}
-        {/* <ChatBubble messages={messages} /> */}
         <ul>{messagesArr}</ul>
         {/* </Paper> */}
       </Box>
