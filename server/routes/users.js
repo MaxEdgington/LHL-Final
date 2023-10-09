@@ -45,7 +45,7 @@ router.get('/myprojects/:id', async (req, res) => {
 });
 
 //gets deatils of a user
-router.get(`/api/users/:id`, async (req, res) => {
+router.get(`/users/:id`, async (req, res) => {
   try {
     console.log("users PARAMS", req.params);
     const userData = await usersQueries.getUserById(Number(req.params.id));
