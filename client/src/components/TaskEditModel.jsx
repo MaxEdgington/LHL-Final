@@ -35,6 +35,7 @@ const TaskEditModel = (props) => {
 
   const [task, setTask] = useState(initialTask)
   // console.log("task here:", task)
+  // console.log("type of due_date:", typeof task[2])
   
   const handleSave = () => {
     // make axois post request here to update the tasks table(also need to change the id of assigned_user)
@@ -58,6 +59,7 @@ const TaskEditModel = (props) => {
         value={task[0]} 
         sx={{ mt: 2 }} 
         fontSize={28} 
+        // event.target.value is the value in the TextField
         onChange={(event) => setTask(prevTask => [event.target.value, ...prevTask.slice(1)])}
       />
       
@@ -74,7 +76,7 @@ const TaskEditModel = (props) => {
       {/* due_date */}
       <TextField 
         id="outlined-controlled" 
-        label="Edit Due Date"
+        label="yyyy-mm-dd"
         value={task[2]} 
         sx={{ mt: 2 }} 
         fontSize={28} 
