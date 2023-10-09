@@ -25,7 +25,9 @@ export default function MessageProvider(props) {
     try {
       const response = await axios.post(`/api/messages/add`, formData);
       // setMessages(response.data);
-      //does this need to set anything or spread prev
+      //HERE reurn ? or setState? or something spread prev?
+      return response.data;
+
     } catch (error) {
       console.error("Could not add message", error);
     }

@@ -27,10 +27,19 @@ WHERE
 };
 
 const addMessage = (message, timestamp, user_id, project_id) => {
-  `INSERT INTO chat_messages 
-  ($1, $2, $3, $4)`,
-    // how to timestamp?
-    [message, timestamp, user_id, project_id];
+  return db.query(
+    `INSERT INTO chat_messages (message, timestamp, user_id, project_id)
+    VALUES ($1, $2, $3, $4)
+    RETURNING *;`,
+    [message, timestamp, user_id, project_id]
+  )
+    .then(data => {
+      console.log("checking in the addMessage query", data.rows);
+      return data.rows;
+    }).catch(err => {
+      console.error("Error executing query: ", err);
+      throw err;
+    });
 };
 
 

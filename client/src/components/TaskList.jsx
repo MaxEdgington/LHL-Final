@@ -1,7 +1,8 @@
 import React from "react";
+import { Droppable } from "react-beautiful-dnd";
 import TaskListItem from "./TaskListItem";
 // import "../styles/TaskList.scss";
-import { Droppable } from "react-beautiful-dnd";
+import { Box } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 
 const getListStyle = (isDraggingOver) => ({
@@ -22,7 +23,7 @@ const TaskList = (props) => {
       index={index} />);
 
   return (
-    <div>
+    <Box sx={{ justifyContent: 'center' }}>
       <Droppable key={id} droppableId={id}>
 
         {(provided, snapshot) => {
@@ -38,7 +39,7 @@ const TaskList = (props) => {
           );
         }}
       </Droppable>
-    </div>
+    </Box>
   );
 };
 
