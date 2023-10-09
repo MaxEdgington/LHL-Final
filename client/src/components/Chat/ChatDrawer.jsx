@@ -7,6 +7,7 @@ import CommentIcon from '@mui/icons-material/Comment';
 import SendIcon from '@mui/icons-material/Send';
 import { projectContext } from "../../providers/ProjectProvider";
 import ChatList from "./ChatList";
+import NewMsgForm from "./NewMsgForm";
 
 const ChatDrawer = (props) => {
   const { url_param } = props;
@@ -25,10 +26,11 @@ const ChatDrawer = (props) => {
 
   return (
     < >
-      {/* change this to icon? */}
+
       <Tooltip title="Chat">
         <Button onClick={toggleDrawer(true)}>Open Chat</Button>
       </Tooltip>
+
 
       <Drawer
         anchor={'right'}
@@ -55,7 +57,17 @@ const ChatDrawer = (props) => {
 
         <Divider />
 
-        <Card>
+        <NewMsgForm project_id={url_param} />
+
+
+      </Drawer>
+    </ >
+  );
+};
+
+export default ChatDrawer;
+
+{/* <Card>
           <CardContent>
             <Grid container style={{ padding: '1px' }}>
               <Grid item xs={11}>
@@ -66,11 +78,4 @@ const ChatDrawer = (props) => {
               </Grid>
             </Grid>
           </CardContent>
-        </Card>
-
-      </Drawer>
-    </ >
-  );
-};
-
-export default ChatDrawer;
+        </Card> */}

@@ -26,6 +26,7 @@ export default function MessageProvider(props) {
       const response = await axios.post(`/api/messages/add`, formData);
       // setMessages(response.data);
       //does this need to set anything or spread prev
+      return response.data;
     } catch (error) {
       console.error("Could not add message", error);
     }

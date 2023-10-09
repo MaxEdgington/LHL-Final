@@ -3,10 +3,6 @@ import { Box, Paper, Button, Drawer, Tooltip, Card, Typography, CardContent } fr
 import ChatListItem from "./ChatListItem";
 import { projectContext } from "../../providers/ProjectProvider";
 import { messageContext } from "../../providers/MessageProvider";
-import ChatBubble from 'react-chat-bubble';
-
-
-
 
 
 const ChatList = () => {
@@ -39,8 +35,6 @@ const ChatList = () => {
 
   return (
     <>
-      inside chat list
-
       <Box
         sx={{ margin: 2.5 }}>
         {/* <Paper
