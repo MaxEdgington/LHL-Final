@@ -1,20 +1,29 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Box, Grid, Paper, Avatar, Button, Typography, Link, FormControlLabel, TextField } from '@mui/material';
+import React, { useContext, useState, useEffect } from "react";
+import {
+  Box,
+  Grid,
+  Paper,
+  Avatar,
+  Button,
+  Typography,
+  Link,
+  FormControlLabel,
+  TextField,
+} from "@mui/material";
 
-// import background from '../../../public/do i want a background picture?'; 
-import MyProjectListItem from './MyProjectListItem';
-import { userContext } from '../../providers/UserProvider';
-import { projectContext } from '../../providers/ProjectProvider';
+// import background from '../../../public/do i want a background picture?';
+import MyProjectListItem from "./MyProjectListItem";
+import { userContext } from "../../providers/UserProvider";
+import { projectContext } from "../../providers/ProjectProvider";
 
 const MyProjectsList = () => {
   const { loggedinUser } = useContext(userContext);
-  const { project, myProjects, addProject, selectProject, fetchMyProjects } = useContext(projectContext);
+  const { project, myProjects, addProject, selectProject, fetchMyProjects } =
+    useContext(projectContext);
 
   useEffect(() => {
     fetchMyProjects(loggedinUser.id);
-    // console.log("got them ", myProjects);
-  }, [loggedinUser]);
-
+  }, [loggedinUser.id]);
 
   console.log("don't got them", myProjects);
   const projectArr = myProjects.map((project) => {
@@ -25,26 +34,20 @@ const MyProjectsList = () => {
         name={project.name}
         desc={project.description}
         date={project.due_date}
-        ownerID={project.owner_id
-        }
+        ownerID={project.owner_id}
       />
     );
   });
-
 
   return (
     <>
       <Box>
         <img src={loggedinUser.avatar} alt="syntax" height="50px" />
         <h1>{loggedinUser.username}'s Projects</h1>
-        <ul className="mylist">
-          {projectArr}
-        </ul>
-
+        <ul className="mylist">{projectArr}</ul>
       </Box>
     </>
   );
-
 };
 
 export default MyProjectsList;

@@ -74,7 +74,7 @@ router.post("/add-batch", async (req, res) => {
     }
     await client.query("COMMIT");
 
-    res.status(201).json(addedTasks);
+    res.status(201).json({ addedTasks, project_id });
   } catch (error) {
     await client.query("ROLLBACK");
     res.status(500).json({ error: "Failed to add tasks" });

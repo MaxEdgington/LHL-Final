@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
 import ColumnListItem from "./ColumnListItem";
 import ChatDrawer from "./Chat/ChatDrawer";
@@ -19,10 +19,11 @@ const ColumnList = (props) => {
   // console.log("useparams?", params);
   // Start of new code
 
+  //remove project from the dependency array and only rely on params.id changes to refetch tasks
   useEffect(() => {
     selectProject(params.id);
     fetchTasks(params.id);
-  }, [project, params]);
+  }, [params.id]);
 
   // End of new code
 
@@ -32,13 +33,18 @@ const ColumnList = (props) => {
       <ColumnListItem
         key={columnId}
         id={columnId}
-      // name={column.name}
-      // tasks={column.tasks}
+        // name={column.name}
+        // tasks={column.tasks}
       />
     );
   });
 
-  const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
+  const paperStyle = {
+    padding: 20,
+    height: "70vh",
+    width: 280,
+    margin: "20px auto",
+  };
 
   return (
     <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
@@ -52,15 +58,12 @@ const ColumnList = (props) => {
           // change to theme colours
         }}
       >
-
         <div>
           <span>
             <h1>Lens Project Board{project.name}</h1>
             <ChatDrawer />
           </span>
-          <ul className="columnlist">
-            {columnArr}
-          </ul>
+          <ul className="columnlist">{columnArr}</ul>
         </div>
       </Box>
     </DragDropContext>

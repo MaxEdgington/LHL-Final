@@ -115,12 +115,12 @@ export default function ColumnsProvider(props) {
         }
       );
 
-      // Update the local state with the new tasks
+      // Directly update the state with the tasks you just added
       setColumns((prevColumns) => ({
         ...prevColumns,
         1: {
           ...prevColumns[1],
-          tasks: [...prevColumns[1].tasks, ...addedTasks.data],
+          tasks: [...prevColumns[1].tasks, ...tasksToAdd],
         },
       }));
     } catch (error) {
