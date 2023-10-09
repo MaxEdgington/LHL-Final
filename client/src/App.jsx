@@ -48,7 +48,6 @@ function App() {
   //   }
   // };
 
-  <Link to="/myProjects">My Projects</Link>;
 
   // useEffect(() => {
   //   const url = 'http://localhost:8080/cats';
@@ -77,10 +76,11 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/myProjects/" element={<MyProjectsList />} />
+              <Route path="/myProjects/:id" element={<MyProjectsList />} />
               {/* <Route path="/projectboard" element={<ColumnList />} /> */}
               <Route path='/projectboard/:id' element={<ColumnList />} />
               <Route path="/newProject" element={<StartNewProject />} />
+              <Route path='/users/:id' />
               <Route path="*" element={<ErrorPage />} />
 
               {/* YULI - something like this maybe??? */}

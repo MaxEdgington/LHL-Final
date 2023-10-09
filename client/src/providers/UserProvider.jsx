@@ -23,13 +23,36 @@ export default function UserProvider(props) {
     // setLoggedinUser();
   };
 
+  const selectUser = async (id) => {
+    const idNum = parseInt(id);
+    try {
+      console.log('selectUser is running', idNum);
+
+      const responseForUser = await axios.get(`/api/users/${idNum}`);
+      // const [responseForProject, responseForUser] =
+      //   await Promise.all([
+      //     axios.get(`/api/myprojects/${idNum}`),
+      //     axios.get(`/api/users/${idNum}`),
+      //   ]);
+
+
+      setLoggedinUser(responseForUser.data);
+      // do i need to return the data?
+      // console.log("selectuser - responseForProject", responseForProject.data);
+      console.log("selectuser - responseForUser", responseForUser.data);
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const logOut = () => {
     setLoggedinUser({});
     navigate('/login');
     console.log("loggedinuser should be OUT", loggedinUser);
   };
 
-  const userData = { loggedinUser, setCookie, logOut };
+  const userData = { loggedinUser, selectUser, setCookie, logOut };
 
   return (
     <userContext.Provider value={userData}>

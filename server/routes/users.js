@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 // const db = require('../configs/db.config');
 const usersQueries = require('../db/queries/users');
+const projectQueries = require('../db/queries/projects');
 
 
 //set the cookie-session
@@ -29,6 +30,33 @@ router.post('/set-session', async (req, res) => {
   // res.status(200).send('Session data set successfully');
   // });
 });
+
+//gets all the projects of a specific user
+router.get('/myprojects/:id', async (req, res) => {
+  try {
+    console.log("my projects PARAMS", req.params);
+    const myProjects = await projectQueries.getAllProjectsOfUser(Number(req.params.id));
+    console.log("checkign in the router", myProjects);
+    res.status(200).json(myProjects);
+  } catch (error) {
+    console.error('Error during fetching projects-server side:', error);
+    res.status(500).send('Server Error');
+  }
+});
+
+//gets deatils of a user
+router.get(`/api/users/:id`, async (req, res) => {
+  try {
+    console.log("users PARAMS", req.params);
+    const userData = await usersQueries.getUserById(Number(req.params.id));
+    console.log("checkign in the router", userData);
+    res.status(200).json(userData);
+  } catch (error) {
+    console.error('Error during fetching projects-server side:', error);
+    res.status(500).send('Server Error');
+  }
+});
+
 
 router.post("/logout", (req, res) => {
   res.clearCookie('session');

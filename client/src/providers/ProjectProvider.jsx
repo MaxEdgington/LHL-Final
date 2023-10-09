@@ -43,8 +43,8 @@ export default function ProjectProvider(props) {
 
   const fetchMyProjects = async (id) => {
     try {
-      console.log('fetchMyProjects is running');
-      const response = await axios.get(`/api/projects/myprojects/${id}`);
+      console.log('fetchMyProjects is running', id);
+      const response = await axios.get(`/api/myprojects/${id}`);
       setMyProjects(response.data);
     } catch (error) {
       console.error("Could not find your projects", error.message);
