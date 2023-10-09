@@ -2,7 +2,6 @@ import { createContext, useState, useContext } from "react";
 import axios from "axios";
 import { projectContext } from "./ProjectProvider";
 
-
 export const columnsContext = createContext();
 
 export default function ColumnsProvider(props) {
@@ -17,30 +16,36 @@ export default function ColumnsProvider(props) {
 
   const [columns, setColumns] = useState(initialColumnData);
 
-
   const fetchTasks = async (projectparam) => {
-    // console.log("is fetch task func getting the right parameter?", projectparam);
     try {
       const res = await axios.get("/api/tasks");
-      // console.log("1 ALL Tasks received from server:", res.data);
-      // console.log("2 do i have a project", projectparam);
 
       const response = res.data;
-      const projectData = response.filter((task) => task.project_id === parseInt(projectparam));
+      const projectData = response.filter(
+        (task) => task.project_id === parseInt(projectparam)
+      );
+
       // console.log("3 can i filter", projectData);
 
       const todoTasks = projectData.filter((task) => task.status === "1");
       const todoTasksSorted = todoTasks.sort((a, b) => a.index - b.index);
 
       const inProgressTasks = projectData.filter((task) => task.status === "2");
-      const inProgressTasksSorted = inProgressTasks.sort((a, b) => a.index - b.index);
+      const inProgressTasksSorted = inProgressTasks.sort(
+        (a, b) => a.index - b.index
+      );
 
       const inReviewTasks = projectData.filter((task) => task.status === "3");
-      const inReviewTasksSorted = inReviewTasks.sort((a, b) => a.index - b.index);
+      const inReviewTasksSorted = inReviewTasks.sort(
+        (a, b) => a.index - b.index
+      );
 
       const completedTasks = projectData.filter((task) => task.status === "4");
-      const completedTasksSorted = completedTasks.sort((a, b) => a.index - b.index);
+      const completedTasksSorted = completedTasks.sort(
+        (a, b) => a.index - b.index
+      );
 
+      // Update columns state with fetched tasks
       setColumns({
         1: { ...columns[1], tasks: todoTasksSorted },
         2: { ...columns[2], tasks: inProgressTasksSorted },
@@ -54,17 +59,15 @@ export default function ColumnsProvider(props) {
     }
   };
 
+  // Add a single new task with title
   const addNewTask = async (taskTitle, project_id) => {
-    // give this form params from form
-    console.log("do i have the data", project_id);
-    console.log("do i have the data", taskTitle);
     try {
       const response = await axios.post("/api/tasks/add", {
-        title: taskTitle, project_id: project_id
+        title: taskTitle,
+        project_id: project_id,
       });
-      console.log("New task added:", response.data);
 
-      // Now, you should update your local state to reflect this new task:
+      // Update the local state with the new task
       setColumns((prevColumns) => ({
         ...prevColumns,
         1: {
@@ -77,12 +80,59 @@ export default function ColumnsProvider(props) {
     }
   };
 
+  // Fetch AI-generated tasks, process them and add to database
+  const addGeneratedTasks = async (description, project_id) => {
+    console.log("addGeneratedTasks invoked");
+    // console.log(
+    //   "Current project ID when addGeneratedTasks is invoked:",
+    //   project
+    // );
 
+    try {
+      const response = await axios.post("http://localhost:8080/openai", {
+        description,
+      });
+      console.log(response.data);
 
+      const generatedTasksText = response.data.generatedText.trim().split("\n");
+      const tasksToAdd = generatedTasksText
+        .filter((taskText) => taskText.includes(": ")) // Filter out lines without ": "
+        .map((taskText) => {
+          const [taskTitle, taskDescription] = taskText.split(": ");
+          return {
+            title: taskTitle.trim(),
+            description: taskDescription.trim(),
+          };
+        });
+
+      // Send all tasks at once to the batch endpoint
+      const addedTasks = await axios.post(
+        "http://localhost:8080/api/tasks/add-batch",
+        {
+          tasks: tasksToAdd,
+          project_id: project_id,
+        }
+      );
+
+      // Update the local state with the new tasks
+      setColumns((prevColumns) => ({
+        ...prevColumns,
+        1: {
+          ...prevColumns[1],
+          tasks: [...prevColumns[1].tasks, ...addedTasks.data],
+        },
+      }));
+    } catch (error) {
+      console.error("Error fetching tasks from server:", error);
+    }
+  };
+
+  // Delete a task by its ID
   const handleDelete = async (taskId) => {
-    // console.log("tasks No:", taskId)
     try {
       await axios.post(`/api/tasks/${taskId}/delete`);
+
+      // Update local state by removing the deleted task
 
       console.log("*****deleted task id:", taskId);
       console.log("Columns data here:", columns);
@@ -107,7 +157,6 @@ export default function ColumnsProvider(props) {
     }
   };
 
-
   const onDragEnd = async (result) => {
     // it only updates the dragged card, it does not update the index of other cards that are also moved passively
 
@@ -119,14 +168,12 @@ export default function ColumnsProvider(props) {
     console.log("taskId:", taskId);
     // taskId is a string
 
-
     if (source.droppableId !== destination.droppableId) {
-
       try {
         await axios.post(`/api/tasks/${Number(taskId)}`, {
           new_column_status: destination.droppableId,
           // destination.droppableId is a string
-          new_task_index: destination.index
+          new_task_index: destination.index,
           // destination.index is INT
         });
 
@@ -153,12 +200,10 @@ export default function ColumnsProvider(props) {
       } catch (error) {
         console.error("Could not drag tasks", error);
       }
-
     } else {
-
       try {
         await axios.post(`/api/tasks/${Number(taskId)}/onecolumn`, {
-          new_task_index: destination.index
+          new_task_index: destination.index,
           // destination.index is INT
         });
 
@@ -187,6 +232,7 @@ export default function ColumnsProvider(props) {
     onDragEnd,
     addNewTask,
     handleDelete,
+    addGeneratedTasks,
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
 import ColumnListItem from "./ColumnListItem";
 import ChatDrawer from "./Chat/ChatDrawer";
@@ -33,13 +33,18 @@ const ColumnList = (props) => {
         key={columnId}
         id={columnId}
         url_param={params.id}
-      // name={column.name}
-      // tasks={column.tasks}
+        // name={column.name}
+        // tasks={column.tasks}
       />
     );
   });
 
-  const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
+  const paperStyle = {
+    padding: 20,
+    height: "70vh",
+    width: 280,
+    margin: "20px auto",
+  };
 
   return (
     <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
@@ -53,15 +58,13 @@ const ColumnList = (props) => {
           // change to theme colours
         }}
       >
-
         <div>
           <span>
             <h1>{project.name}</h1>
             <ChatDrawer url_param={params} />
           </span>
-          <ul className="columnlist">
-            {columnArr}
-          </ul>
+
+          <ul className="columnlist">{columnArr}</ul>
         </div>
       </Box>
     </DragDropContext>
