@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Box, Typography} from "@mui/material";
+import {Box, Typography, TextField, FormControl, FormGroup, InputLabel, Input} from "@mui/material";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { Link, useParams } from 'react-router-dom';
@@ -22,37 +22,73 @@ const TaskEditModel = (props) => {
 
   const projectName = useParams().name
   // const projectId = useParams().id
+
+  const initialTask = [
+    name,
+    description,
+    due_date,
+    assigned_user
+  ]
+
+  const [task, setTask] = useState(initialTask)
+  console.log("task here:", task)
   
   const handleSave = () => {
     // make axois post request here to update the tasks table
     handleClose();
   }
-
+ 
   return (
-    <Box sx={style}>  
-      <Typography id="modal-modal-title" variant="h6" component="h2" align="center" fontSize={36}>
-        Task Name: {name}
-      </Typography>
+  <Box sx={style}>
 
-      <Typography id="modal-modal-description" sx={{ mt: 2 }} fontSize={28}> 
-        Description: {description}
-      </Typography>
+    <Typography id="modal-modal-title" variant="h6" component="h2" align="center" fontSize={36}>
+        {name} 
+    </Typography>
 
-      <Typography id="modal-modal-description" sx={{ mt: 2 }} fontSize={28} mb={2}> 
-        Due Date: {due_date}
-      </Typography>
+    <FormGroup >
+      
+      <TextField 
+        id="outlined-controlled" 
+        value={task[0]} 
+        sx={{ mt: 2 }} 
+        fontSize={28} 
+        onChange={(event) => setTask(prevTask => [event.target.value, ...prevTask.slice(1)])}
+      />
 
-      <Typography id="modal-modal-description" sx={{ mt: 2 }} fontSize={28} mb={2}> 
-        Assigned User: {assigned_user}
-      </Typography>
+      <TextField 
+        id="outlined-controlled" 
+        value={task[1]} 
+        sx={{ mt: 2 }} 
+        fontSize={28} mb={2} 
+        onChange={(event) => setTask(prevTask => [prevTask[0], event.target.value, ...prevTask.slice(2)])}
+      />
+
+      <TextField 
+        id="outlined-controlled" 
+        value={task[2]} 
+        sx={{ mt: 2 }} 
+        fontSize={28} 
+        mb={2} 
+        onChange={(event) => setTask(prevTask => [...prevTask.slice(0, 2), event.target.value, prevTask[3]])}
+      />
+      
+      <TextField 
+        id="outlined-controlled" 
+        value={task[3]} 
+        sx={{ mt: 2 }} 
+        fontSize={28} 
+        onChange={(event) => setTask(prevTask => [...prevTask.slice(0, 3), event.target.value])}
+      />
 
       <Stack direction="column" spacing={2} sx={{ '& button': { m: 1 } }}>
         
         {/* link back to the 'home' route whose component is TaskDetailModel */}
         {/* need to change to ${projectId} */}
-        <Link to={`/projectboard/${projectName}`}><Button variant="outlined" size="small" onClick={handleSave}>
+        <Link to={`/projectboard/${projectName}`}>
+          <Button variant="outlined" size="small" onClick={handleSave}>
             Save
-        </Button></Link>
+          </Button>
+        </Link>
         {/* <Button 
           variant="outlined" 
           size="small" 
@@ -62,6 +98,7 @@ const TaskEditModel = (props) => {
         </Button> */}
 
       </Stack>
+      </FormGroup>
   </Box>
   )
 }

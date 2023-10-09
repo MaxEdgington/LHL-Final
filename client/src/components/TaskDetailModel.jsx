@@ -33,15 +33,6 @@ const TaskDetailModel = (props) => {
     handleClose()
     navigate(`/projectboard/${projectName}`);
   }
-  
-  // const editTask = () => {
-  //   // first open a new model
-  //   // second make controlled input components
-  //   // third make post request to update tasks table
-  //   // setState
-  // }
-  
-  // const navigate = useNavigate();
 
   return (
     <Box sx={style}>  
