@@ -1,17 +1,19 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { FormControl, Box, Paper, Grid } from "@mui/material";
+import { FormControl, FormLabel, Box, Paper, Grid } from "@mui/material";
 import { DateField } from "@mui/x-date-pickers";
 import { projectContext } from "../../providers/ProjectProvider";
 import { columnsContext } from "../../providers/ColumnsProvider";
 import background from "../../../public/lens-img-darkmode.jpeg";
 import { ClipLoader } from "react-spinners";
 
-function NewProjectForm(props) {
-  const { setView } = props;
-  const { projectAddFetchSet } = useContext(projectContext);
-  const { addGeneratedTasks } = useContext(columnsContext); // import addGeneratedTasks from ColumnsProvider
+function NewProjectForm() {
+  // Removed 'props' since it's not needed
+  const { addProject, project } = useContext(projectContext);
+  const navigate = useNavigate();
+  const { addGeneratedTasks } = useContext(columnsContext);
 
   // states for the form
   const [projectName, setProjectName] = useState("");
@@ -22,27 +24,31 @@ function NewProjectForm(props) {
   const handleLensAIClick = async () => {
     setIsLoading(true);
     try {
-      await addGeneratedTasks(projectDescription); // Call addGeneratedTasks directly here
-      setView(1); // Redirect to main board after adding tasks
+      await addGeneratedTasks(projectDescription);
+      navigate(`/projectBoard/${project.id}`); // Redirect to main board after adding tasks
     } catch (error) {
       console.error("Error adding generated tasks:", error);
     }
     setIsLoading(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = {
       project_name: projectName,
       project_description: projectDescription,
       project_due_date: projectDueDate,
-      // logged-in user will need to go here from session
     };
 
-    console.log(formData);
-    projectAddFetchSet(formData);
-    setView(1);
+    try {
+      console.log("Before adding project");
+      const newProjectData = await addProject(formData);
+      console.log("Returned data after adding project:", newProjectData); // Debugging line
+      navigate(`/projectBoard/${newProjectData.id}`);
+    } catch (error) {
+      console.error("Error while creating the project and navigating:", error);
+    }
   };
 
   const paperStyle = {

@@ -1,12 +1,12 @@
-INSERT INTO users (username, email, password) 
+INSERT INTO users (username, email, password, avatar) 
   VALUES 
-    ('Caroline', 'caro@example.com', 'passwrd'),
-    ('Yuli', 'yuli@example.com', 'passwrd'),
-    ('Max', 'max@eaxmple.com', 'passwrd'),
-    ('Edwin', 'edwin@example.com', 'passwrd'),
-    ('Curtis', 'curtis@example.com', 'passwrd'),
-    ('Salman', 'salman@example.com', 'passwrd'),
-    ('Shani', 'shani@example.com', 'passwrd')
+    ('Caroline', 'caro@example.com', 'passwrd', 'https://github.com/MaxEdgington/LHL-Final/blob/main/server/avatars/avatar3.png?raw=true' ),
+    ('Yuli', 'yuli@example.com', 'passwrd', 'https://github.com/MaxEdgington/LHL-Final/blob/main/server/avatars/avatar2.png?raw=true'),
+    ('Max', 'max@example.com', 'passwrd','https://github.com/MaxEdgington/LHL-Final/blob/main/server/avatars/avatar1.png?raw=true'),
+    ('Edwin', 'edwin@example.com', 'passwrd', 'https://github.com/MaxEdgington/LHL-Final/blob/main/server/avatars/avatar4.png?raw=true'),
+    ('Curtis', 'curtis@example.com', 'passwrd','https://github.com/MaxEdgington/LHL-Final/blob/main/server/avatars/avatar5.png?raw=true'),
+    ('Salman', 'salman@example.com', 'passwrd', 'https://github.com/MaxEdgington/LHL-Final/blob/main/server/avatars/avatar6.png?raw=true'),
+    ('Shani', 'shani@example.com', 'passwrd', 'https://github.com/MaxEdgington/LHL-Final/blob/main/server/avatars/avatar7.png?raw=true')
 
 ;
 

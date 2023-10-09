@@ -7,19 +7,19 @@ import { columnsContext } from "../providers/ColumnsProvider";
 const ColumnListItem = (props) => {
   const [newTask, setNewTask] = useState("");
   const [isAddingTask, setIsAddingTask] = useState(false);
-  const { id } = props;
+  const { id, url_param } = props;
   const { columns, addNewTask } = useContext(columnsContext);
 
   const handleAddNewTask = (e) => {
     e.preventDefault();
-
+    console.log("in the add new task click", url_param);
     if (newTask.trim() === "") {
       // prevent adding empty tasks
       return;
     }
 
     // Call the addNewTask from context and pass the newTask
-    addNewTask(newTask);
+    addNewTask(newTask, url_param);
 
     // Reset the input and hide the form
     setNewTask("");
@@ -38,14 +38,14 @@ const ColumnListItem = (props) => {
         margin: "16px",
         width: "25%",
         bgcolor: "white",
-        "&:first-child": {
-          paddingLeft: "5px",
-          borderTopLeftRadius: 5,
-        },
-        "&:last-child": {
-          paddingRight: "5px",
-          borderTopRightRadius: 5,
-        },
+        // "&:first-child": {
+        //   paddingLeft: "5px",
+        //   borderTopLeftRadius: 5,
+        // },
+        // "&:last-child": {
+        //   paddingRight: "5px",
+        //   borderTopRightRadius: 5,
+        // },
       }}
     >
       {/* <Paper elevation={10} style={paperStyle}> */}

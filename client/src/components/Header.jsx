@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,19 +11,23 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
+import { userContext } from '../providers/UserProvider';
 
 const pages = ['New Project', 'What Links?'];
-const settings = ['My Projects', 'Logout'];
+// const settings = ['My Projects', 'Logout'];
 
-function Header(props) {
-  const { setView } = props;
-
+function Header() {
+  const { logOut, loggedinUser } = useContext(userContext);
   const theme = useTheme();
+  const navigate = useNavigate();
+
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [PaletteMode, setMode] = useState('light');
@@ -43,6 +47,13 @@ function Header(props) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const handleLogout = () => {
+    logOut();
+  };
+  const handleMyProjects = () => {
+    navigate(`/myProjects`);
+    handleCloseUserMenu();
+  };
 
   const toggleColorMode = () => {
     setMode((PaletteMode) =>
@@ -56,12 +67,16 @@ function Header(props) {
       {/* <AppBar position="static"> */}
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ background: 'secondary' }}>
-          <img src={"../../public/lens-line.jpg"} width="3.5%" sx={{ display: { xs: 'none', md: 'flex' }, mx: 2, px: 2 }} />
+          <img src={"../../public/lens-line.png"}
+            onClick={() => navigate('/login')}
+            width="3.5%"
+            sx={{ display: { xs: 'none', md: 'flex' }, mx: 2, px: 2 }} />
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            onClick={() => setView(1)}
+            // component="a"
+            // onClick={() => navigate('/projectBoard/')}
+            // should there be an onclick here???
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -134,7 +149,7 @@ function Header(props) {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={() => setView(2)}
+                onClick={() => navigate('/newProject')}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
@@ -145,7 +160,12 @@ function Header(props) {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="User settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="L" src="../../public/avatars/avatar5.png" />
+                {loggedinUser ? (
+                  <AccountCircleIcon stroke='white' />
+                ) : (
+                  // <Avatar alt="L" src={loggedinUser.avatar} />
+                  <></>
+                )}
               </IconButton>
             </Tooltip>
 
@@ -171,11 +191,21 @@ function Header(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              {/* {settings.map((setting) => ( */}
+              {loggedinUser ?
+                <div>
+                  <MenuItem key={'My Projects'} onClick={handleMyProjects}>
+                    <Typography textAlign="center">My Projects</Typography>
+                  </MenuItem>
+                  <MenuItem key={'Logout'} onClick={handleLogout}>
+                    <Typography textAlign="center">LogOut</Typography>
+                  </MenuItem>
+                </div>
+                :
+                <MenuItem key={'Sign In'} onClick={() => navigate('/login')}>
+                  <Typography textAlign="center">Sign In</Typography>
                 </MenuItem>
-              ))}
+              }
             </Menu>
           </Box>
         </Toolbar>
