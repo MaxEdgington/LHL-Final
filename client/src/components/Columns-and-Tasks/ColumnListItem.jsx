@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import TaskList from "./TaskList";
-import { Box, Paper } from "@mui/material";
+import { Box, Paper, TextField, Button } from "@mui/material";
 import "../../styles/ColumnListItem.scss";
 import { columnsContext } from "../../providers/ColumnsProvider";
 
@@ -50,24 +50,36 @@ const ColumnListItem = (props) => {
     >
       {/* <Paper elevation={10} style={paperStyle}> */}
       <div className="column">
+
         <h2>{columns[id].name}</h2>
+
         <TaskList id={id} tasks={columns[id].tasks} />
+
         {id == 1 && !isAddingTask && (
-          <button onClick={() => setIsAddingTask(true)}>Add New Task</button>
+          <Button color='primary' variant="contained" onClick={() => setIsAddingTask(true)}>Add New Task</Button>
         )}
         {id == 1 && isAddingTask && (
-          <form onSubmit={handleAddNewTask}>
-            <input
-              type="text"
-              placeholder="New Task"
-              value={newTask}
-              onChange={(e) => setNewTask(e.target.value)}
-            />
-            <button type="submit">Submit</button>
-            <button type="button" onClick={() => setIsAddingTask(false)}>
-              Cancel
-            </button>
-          </form>
+          <Box display={'flex'} justifyContent={'space-evenly'}>
+            <form onSubmit={handleAddNewTask}>
+
+              <TextField
+                type="text"
+                placeholder="New Task"
+                variant="outlined"
+                size="small"
+                fullWidth
+                value={newTask}
+                onChange={(e) => setNewTask(e.target.value)}
+              />
+              <Box display={'flex'} justifyContent={'space-evenly'}>
+                <Button type="submit" color='primary' variant="contained">Submit</Button>
+                <Button type="button" color='primary' variant="contained" onClick={() => setIsAddingTask(false)}>
+                  Cancel
+                </Button>
+              </Box>
+
+            </form>
+          </Box>
         )}
       </div>
     </Paper>

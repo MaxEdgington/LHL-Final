@@ -1,16 +1,8 @@
 import React, { useState, useContext } from "react";
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
+import { AppBar, Stack, Box, Toolbar, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
+
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
@@ -67,6 +59,7 @@ function Header() {
       {/* <AppBar position="static"> */}
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ background: 'secondary' }}>
+
           <img src={"../../public/white-lens.png"}
             onClick={() => navigate('/')}
             width="3.5%"
@@ -86,10 +79,10 @@ function Header() {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
-            }}
-          >
+            }}>
             Lens
           </Typography>
+
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton

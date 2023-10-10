@@ -69,42 +69,38 @@ const ProjectTable = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {whichProjects.map(
-              (row) => (
-                console.log(
-                  "the results of the function",
-                  findUserInfo(row.owner_id)
-                ),
-                (
-                  <TableRow
-                    key={row.name}
-                    sx={{
-                      "&:last-child td, &:last-child th": { border: 0 },
-                    }}
-                  >
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      sx={{ color: "darkred" }}
-                      onClick={() => navigate(`/projectboard/${row.id}`)}
-                    >
-                      <KeyboardDoubleArrowRightIcon />
-                      {/* <Link to={`/projectboard/${row.id}`}>{row.name}</Link> */}
-                      {/* onClick={() => handleProjectClick(row.id)} */}
-                    </TableCell>
 
-                    <TableCell align="right">{row.name}</TableCell>
-                    <TableCell align="right">{row.description}</TableCell>
-                    <TableCell align="right">{row.due_date}</TableCell>
-                    {/* how can we format this date better? */}
-                    <TableCell align="right">{row.owner_id}</TableCell>
-                    {/* <TableCell align="right">
-                      {findUserInfo(row.owner_id)}
-                      <img src={findUserInfo(row.owner_id)} alt='avatar' />
-                    </TableCell> */}
-                  </TableRow>
-                )
-              )
+            {whichProjects.map((row) => (
+
+              <TableRow
+                key={row.project_name}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                }}
+              >
+                <TableCell
+                  component="th"
+                  scope="row"
+                  sx={{ color: "darkred" }}
+                  onClick={() => navigate(`/projectboard/${row.project_id}`)}
+                >
+                  <KeyboardDoubleArrowRightIcon />
+                </TableCell>
+
+                <TableCell align="right">{row.project_name}</TableCell>
+                <TableCell align="right">{row.project_description}</TableCell>
+                <TableCell align="right">{row.project_due_date}</TableCell>
+                {/* how can we format this date better? */}
+                <TableCell align="right">{row.owner_username}</TableCell>
+
+                <TableCell align="left">
+                  <Avatar alt="LHL" src={row.owner_avatar}
+                    sx={{ width: 30, height: 30 }}
+                  />
+                </TableCell>
+
+              </TableRow>
+            )
             )}
           </TableBody>
         </Table>
