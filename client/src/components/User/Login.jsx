@@ -25,6 +25,7 @@ const Login = () => {
   };
 
   const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
+  const boxStyle = {};
   const btnstyle = { margin: '8px 0' };
   return (
     <Box

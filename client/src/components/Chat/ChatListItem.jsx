@@ -14,7 +14,10 @@ import { projectContext } from "../../providers/ProjectProvider";
 const ChatListItem = (props) => {
   const { msg, user_name, time, avatar } = props;
   const { project } = useContext(projectContext);
+
   console.log("what is item", msg, user_name, time);
+
+
   return (
     <Box sx={{ margin: 2.5 }}>
       <Paper sx={{ margin: 2, padding: 1 }}>

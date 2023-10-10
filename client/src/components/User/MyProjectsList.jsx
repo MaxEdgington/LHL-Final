@@ -21,8 +21,9 @@ import {
 } from "@mui/material";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
-// import background from '../../../public/do i want a background picture?';
-import MyProjectListItem from "./MyProjectListItem";
+import background from '../../../public/lighthouse-lens.jpeg';
+// import MyProjectListItem from "./MyProjectListItem";
+import ProjectTable from "../ProjectsTable";
 import { useTheme } from "@mui/material/styles";
 
 import { userContext } from "../../providers/UserProvider";
@@ -38,87 +39,37 @@ const MyProjectsList = () => {
 
   console.log("is this the right params", params);
 
-  useEffect(() => {
-    selectUser(params.id);
-    fetchMyProjects(params.id);
-  }, [params]);
-  // }, [loggedinUser]);
 
   console.log("don't got them", myProjects);
   console.log("do i have the user?", loggedinUser);
   myProjects.map((row) => console.log("this is a row", row));
 
-  const handleProjectClick = async (name) => {
-    await selectProject(name);
-    navigate(`/projectboard/${id}`);
+  const paperStyle = { padding: 2, height: '70vh', width: '75%', margin: "20px auto", backgroundColor: '#FAFAFA' };
+  const boxStyle = {
+    backgroundImage: `url(${background})`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center center",
+    backgroundSize: "cover",
+    backgroundAttachment: "fixed",
+    height: "100%",
   };
 
   return (
     <>
-      <Grid container sx={{ justifyContent: "center" }}>
-        <Box>
-          <h1>
-            <img src={loggedinUser.avatar} alt="syntax" height="50px" />
-            {loggedinUser.username}'s Projects
-          </h1>
-          {/* this need to be a cookie, not state */}
-        </Box>
+      <Grid container style={boxStyle}>
+        <Paper elevation={10} style={paperStyle}>
+          <Box>
 
-        <Box sx={{ m: 10, justifyContent: "center" }}>
-          <TableContainer component={Paper} sx={{ width: `95%` }}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead sx={{ backgroundColor: "#a3a2a9" }}>
-                <TableRow>
-                  <TableCell></TableCell>
-                  <TableCell>Project Name</TableCell>
-                  <TableCell>Description</TableCell>
-                  <TableCell>Due&nbsp;Date</TableCell>
-                  <TableCell align="right">Owner</TableCell>
-                  <TableCell align="right"></TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {myProjects.map(
-                  (row) => (
-                    console.log(
-                      "the results of the function",
-                      findUserInfo(row.owner_id)
-                    ),
-                    (
-                      <TableRow
-                        key={row.name}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                      >
-                        <TableCell
-                          component="th"
-                          scope="row"
-                          sx={{ color: "darkred" }}
-                          onClick={() => navigate(`/projectboard/${row.id}`)}
-                        >
-                          <KeyboardDoubleArrowRightIcon />
-                          {/* <Link to={`/projectboard/${row.id}`}>{row.name}</Link> */}
-                          {/* onClick={() => handleProjectClick(row.id)} */}
-                        </TableCell>
+            <h1>
+              <img src={loggedinUser.avatar} alt="syntax" height="50px" />
+              {loggedinUser.username}'s Projects
+            </h1>
+            {/* this need to be a cookie, not state */}
+          </Box>
 
-                        <TableCell align="right">{row.name}</TableCell>
-                        <TableCell align="right">{row.description}</TableCell>
-                        <TableCell align="right">{row.due_date}</TableCell>
-                        {/* how can we format this date better? */}
-                        <TableCell align="right">{row.owner_id}</TableCell>
-                        {/* <TableCell align="right">
-                      {findUserInfo(row.owner_id)}
-                      <img src={findUserInfo(row.owner_id)} alt='avatar' />
-                    </TableCell> */}
-                      </TableRow>
-                    )
-                  )
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Box>
+          <ProjectTable />
+        </Paper>
+
       </Grid>
     </>
   );

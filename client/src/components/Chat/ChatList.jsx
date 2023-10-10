@@ -21,6 +21,7 @@ const ChatList = () => {
     fetchMessagesforProject(project.id);
     // console.log("got them ", myProjects);
   }, [project]);
+  // Object.keys(messages).length
 
   const messagesArr = messages.map((item) => {
     //need to put these in order by timestamp
@@ -39,11 +40,9 @@ const ChatList = () => {
 
   return (
     <>
-      inside chat list
       <Box sx={{ margin: 2.5 }}>
         {/* <Paper
         sx={{ margin: 1 }}> */}
-        {/* <ChatBubble messages={messages} /> */}
         <ul>{messagesArr}</ul>
         {/* </Paper> */}
       </Box>

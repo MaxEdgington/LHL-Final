@@ -8,7 +8,7 @@ export default function MessageProvider(props) {
 
   const fetchMessagesforProject = async (project_id) => {
     try {
-      console.log('fetchMessagesforProject is running');
+      console.log('fetchMessagesforProject is running', project_id);
       const response = await axios.get(`/api/messages/${project_id}`);
       console.log("message provider", response.data);
       setMessages(response.data);
@@ -25,7 +25,9 @@ export default function MessageProvider(props) {
     try {
       const response = await axios.post(`/api/messages/add`, formData);
       // setMessages(response.data);
-      //does this need to set anything or spread prev
+      //HERE reurn ? or setState? or something spread prev?
+      return response.data;
+
     } catch (error) {
       console.error("Could not add message", error);
     }

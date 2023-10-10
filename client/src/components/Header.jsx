@@ -63,7 +63,7 @@ function Header() {
 
 
   return (
-    <AppBar position="sticky">
+    <AppBar position='fixed' top='0' zIndex='100'>
       {/* <AppBar position="static"> */}
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ background: 'secondary' }}>
