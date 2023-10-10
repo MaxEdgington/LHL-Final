@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/TaskListItem.scss";
+// import "../styles/TaskListItem.scss";
 
 import { Box, Card, CardContent, CardActions, Typography, Avatar, CardActionArea, useTheme } from "@mui/material";
 
@@ -9,7 +9,7 @@ import TaskDetailModel from "./TaskDetailModel";
 import TaskEditModel from "./TaskEditModel";
 import axios from "axios";
 
-import {Route, Routes, Link} from 'react-router-dom';
+import { Route, Routes, Link } from 'react-router-dom';
 
 const TaskListItem = (props) => {
   const { id, name, index } = props;
@@ -17,7 +17,7 @@ const TaskListItem = (props) => {
   const theme = useTheme();
 
   const [ModalOpen, setModalOpen] = useState(false);
-  const [Assigned_user_name, setAssigned_user_name] = useState("")
+  const [Assigned_user_name, setAssigned_user_name] = useState("");
 
   const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -32,19 +32,19 @@ const TaskListItem = (props) => {
     ...draggableStyle
   });
 
-  const handleOpen = async() => {
-    try{
+  const handleOpen = async () => {
+    try {
       const userResult = await axios.get(`/api/tasks/${id}/assigned_user`);
 
-      console.log("Get assigned user name:", userResult)
-      
-      const user_name = userResult.data
-      setAssigned_user_name(user_name)
+      console.log("Get assigned user name:", userResult);
+
+      const user_name = userResult.data;
+      setAssigned_user_name(user_name);
       setModalOpen(true);
 
     } catch (error) {
       console.error("Could not show TaskDetailModel", error);
-      console.log("Get assigned_user_id:", assigned_user)
+      console.log("Get assigned_user_id:", assigned_user);
     }
   };
 
@@ -58,43 +58,43 @@ const TaskListItem = (props) => {
 
         <Box sx={{ marginBottom: 1 }}>
           <Card>
-            <CardActionArea> 
+            <CardActionArea>
 
               <Modal open={ModalOpen} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
                 <div>
-                {/* define the react-router routes here */}
-                <Routes>
-                  
-                {/* path="/projectboard/:name/model" */}
-                  <Route path="modal" element = 
-                    { <div>
-                      <TaskDetailModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={Assigned_user_name} handleClose={handleClose} />
-                      </div>
-                     } /> 
+                  {/* define the react-router routes here */}
+                  <Routes>
 
-                 {/* <Routes>   */}
-                  {/* define the /edit route as TaskEditModel */}
-                  <Route path="modal/edit" element = 
-                    { <div>
-                      <TaskEditModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={Assigned_user_name} handleClose={handleClose} />
+                    {/* path="/projectboard/:name/model" */}
+                    <Route path="modal" element=
+                      {<div>
+                        <TaskDetailModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={Assigned_user_name} handleClose={handleClose} />
                       </div>
-                       } />
-                  
-                </Routes>
+                      } />
+
+                    {/* <Routes>   */}
+                    {/* define the /edit route as TaskEditModel */}
+                    <Route path="modal/edit" element=
+                      {<div>
+                        <TaskEditModel name={name} id={id} description={description} project_id={project_id} due_date={due_date} assigned_user={Assigned_user_name} handleClose={handleClose} />
+                      </div>
+                      } />
+
+                  </Routes>
                 </div>
               </Modal>
-              
+
               <Link to="modal">
-              <CardContent onClick={handleOpen}>
-                <Typography variant="h5" component="div" >
-                  <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
-                    style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}>
+                <CardContent onClick={handleOpen}>
+                  <Typography variant="h5" component="div" >
+                    <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
+                      style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}>
 
-                    {name}
+                      {name}
 
-                  </div>
-                </Typography>
-              </CardContent>
+                    </div>
+                  </Typography>
+                </CardContent>
               </Link>
 
             </CardActionArea>

@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { userContext } from '../providers/UserProvider';
 
-const pages = ['New Project', 'What Links?'];
+const pages = ['New Project'];
 // const settings = ['My Projects', 'Logout'];
 
 function Header() {
@@ -51,7 +51,7 @@ function Header() {
     logOut();
   };
   const handleMyProjects = () => {
-    navigate(`/myProjects`);
+    navigate(`/login`);
     handleCloseUserMenu();
   };
 
@@ -67,12 +67,13 @@ function Header() {
       {/* <AppBar position="static"> */}
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ background: 'secondary' }}>
-          <img src={"../../public/lens-line.png"}
-            onClick={() => navigate('/login')}
+          <img src={"../../public/white-lens.png"}
+            onClick={() => navigate('/')}
             width="3.5%"
             sx={{ display: { xs: 'none', md: 'flex' }, mx: 2, px: 2 }} />
+
           <Typography
-            variant="h6"
+            variant="h4"
             noWrap
             // component="a"
             // onClick={() => navigate('/projectBoard/')}
@@ -160,20 +161,16 @@ function Header() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="User settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                {loggedinUser ? (
-                  <AccountCircleIcon stroke='white' />
-                ) : (
-                  // <Avatar alt="L" src={loggedinUser.avatar} />
-                  <></>
-                )}
+                <AccountCircleIcon stroke='white' />
               </IconButton>
             </Tooltip>
 
-            <Tooltip title="Dark Mode">
+            {/* <Tooltip title="Dark Mode">
               <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
                 {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
               </IconButton>
-            </Tooltip>
+            </Tooltip> */}
+
 
             <Menu
               sx={{ mt: '45px' }}
@@ -208,6 +205,7 @@ function Header() {
               }
             </Menu>
           </Box>
+
         </Toolbar>
       </Container>
     </AppBar >

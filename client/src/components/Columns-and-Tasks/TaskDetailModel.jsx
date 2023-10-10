@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { columnsContext } from "../providers/ColumnsProvider";
+import { columnsContext } from "../../providers/ColumnsProvider";
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const style = {
@@ -33,14 +33,14 @@ const TaskDetailModel = (props) => {
   const { handleDelete, columns } = useContext(columnsContext);
 
   const navigate = useNavigate();
-  const projectId = useParams().id
+  const projectId = useParams().id;
 
   const deleteTask = () => {
     handleDelete(id);
     // console.log("++++New Columns data here:", columns)
-    handleClose()
+    handleClose();
     navigate(`/projectboard/${projectId}`);
-  }
+  };
 
   return (
     <Box sx={style}>

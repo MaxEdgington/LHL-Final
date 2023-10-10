@@ -40,7 +40,7 @@ const ChatList = () => {
 
   return (
     <>
-      <Box sx={{ margin: 2.5 }}>
+      <Box sx={{ margin: 2.5, minHeight: '70%', maxHeight: '70%', minWidth: 300, maxWidth: 400, overflow: 'auto' }}>
         {/* <Paper
         sx={{ margin: 1 }}> */}
         <ul>{messagesArr}</ul>

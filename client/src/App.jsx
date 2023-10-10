@@ -4,24 +4,23 @@ import axios from "axios";
 import { Box } from "@mui/material";
 
 import Header from "./components/Header";
-import ColumnList from "./components/ColumnList";
+import ColumnList from "./components/Columns-and-Tasks/ColumnList";
 import StartNewProject from "./components/StartProject/StartNewProject";
-// import NewTasksForm from "./components/NewTasksForm";
 import Login from "./components/User/Login";
 import MyProjectsList from "./components/User/MyProjectsList";
 import ErrorPage from "./components/ErrorPage";
-import background from '../public/lots-of-lenses.jpg';
+import AllProjectsList from "./components/AllProjectsList";
 
 import UserProvider from "./providers/UserProvider";
 import ColumnsProvider from "./providers/ColumnsProvider";
 import ProjectProvider from "./providers/ProjectProvider";
 import MessageProvider from "./providers/MessageProvider";
 
+import background from '../public/lots-of-lenses.jpg';
 // import { columnsContext } from "./providers/ColumnsProvider";
 // import CustomThemeProvider from './providers/ThemeProvider';
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 import "./App.css";
-import TaskDetailModel from "./components/TaskDetailModel";
 
 function App() {
   const [data, setData] = useState(null);
@@ -76,7 +75,7 @@ function App() {
             <ColumnsProvider>
 
               <Routes>
-                <Route path="/" element={<Login />} />
+                <Route path="/" element={<AllProjectsList />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/myProjects/:id" element={<MyProjectsList />} />
                 {/* <Route path="/projectboard" element={<ColumnList />} /> */}
@@ -85,8 +84,6 @@ function App() {
                 <Route path='/users/:id' />
                 <Route path="*" element={<ErrorPage />} />
 
-                {/* YULI - something like this maybe??? */}
-                {/* <Route path='/task/:id' element={???} /> */}
               </Routes>
 
             </ColumnsProvider>

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import TaskList from "./TaskList";
 import { Box, Paper } from "@mui/material";
-import "../styles/ColumnListItem.scss";
-import { columnsContext } from "../providers/ColumnsProvider";
+import "../../styles/ColumnListItem.scss";
+import { columnsContext } from "../../providers/ColumnsProvider";
 
 const ColumnListItem = (props) => {
   const [newTask, setNewTask] = useState("");

@@ -30,7 +30,8 @@ import { projectContext } from "../providers/ProjectProvider";
 
 
 
-const ProjectTable = () => {
+const ProjectTable = (props) => {
+  const { whichProjects } = props;
   const { project, myProjects, addProject, selectProject, fetchMyProjects } =
     useContext(projectContext);
   const { loggedinUser, selectUser, findUserInfo } = useContext(userContext);
@@ -40,12 +41,12 @@ const ProjectTable = () => {
   const theme = useTheme();
 
 
-  useEffect(() => {
-    selectUser(params.id);
-    fetchMyProjects(params.id);
-  }, [params]);
-
-  myProjects.map((row) => console.log("this is a row", row));
+  // useEffect(() => {
+  //   selectUser(params.id);
+  //   fetchMyProjects(params.id);
+  // }, [params]);
+  console.log("WHICH?", whichProjects);
+  whichProjects.map((row) => console.log("this is a row", row));
 
   const handleProjectClick = async (name) => {
     await selectProject(name);
@@ -68,7 +69,7 @@ const ProjectTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {myProjects.map(
+            {whichProjects.map(
               (row) => (
                 console.log(
                   "the results of the function",

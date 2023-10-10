@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { FormControl, FormLabel, Box, Paper, Grid } from "@mui/material";
+import { FormControl, Stack, Box, Paper, Grid } from "@mui/material";
 import { DateField } from "@mui/x-date-pickers";
 import { projectContext } from "../../providers/ProjectProvider";
 import { columnsContext } from "../../providers/ColumnsProvider";
@@ -52,6 +52,7 @@ function NewProjectForm() {
       project_due_date: projectDueDate,
 
       // owner_id: loggedinUser.id //owner currently hard coded
+
     };
 
     try {
@@ -102,40 +103,51 @@ function NewProjectForm() {
 
             <form noValidate autoComplete="off" onSubmit={handleSubmit}>
               <FormControl>
+
                 <TextField
                   label="Project Name"
                   name="project_name"
                   value={projectName}
                   onChange={(e) => setProjectName(e.target.value)}
                   variant="outlined"
+                  margin="normal"
                 ></TextField>
+
                 <TextField
                   label="Project Description"
                   name="project_description"
                   value={projectDescription}
                   onChange={(e) => setProjectDescription(e.target.value)}
                   variant="outlined"
+                  margin="normal"
+                  multiline
+                  maxRows={4}
                 ></TextField>
+
                 <DateField
                   label="Project Due Date"
                   name="project_due_date"
                   value={projectDueDate}
                   variant="outlined"
+                  margin="normal"
                   onChange={(date) => setProjectDueDate(date)}
                 />
-                <h3>
-                  Would you like to use our Lens AI to help you get started?
-                </h3>
-                <Button
-                  variant="contained"
-                  onClick={handleLensAIClick}
-                  disabled={isLoading}
-                >
-                  Yes, use LensAI
-                </Button>
-                <Button variant="contained" onClick={handleSubmit}>
-                  No, I'll enter the tasks myself
-                </Button>
+
+                <h3>Would you like to use <br />Lens AI<br /> to help you get started?</h3>
+                <Stack spacing={2} direction="column">
+                  <Button
+                    variant="contained"
+                    onClick={handleLensAIClick}
+                    disabled={isLoading}
+                    margin="normal"
+                  >
+                    Yes, use LensAI
+                  </Button>
+
+                  <Button variant="contained" margin="2" onClick={handleSubmit}>
+                    No, I'll enter the tasks myself
+                  </Button>
+                </Stack>
               </FormControl>
             </form>
           </Paper>

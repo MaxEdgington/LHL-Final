@@ -31,6 +31,7 @@ function NewMsgForm(props) {
     console.log("am i getting form data", formData);
     await addMessage(formData);
     fetchMessagesforProject(parseInt(project_id.id));
+    setMessage("");
   };
 
 
@@ -41,8 +42,8 @@ function NewMsgForm(props) {
 
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <FormControl>
-              <Grid container flexDirection={"row"}>
-
+              <Box container sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                {/* why isnt this not spaced??? */}
 
                 <TextField
                   id="outlined-basic-email"
@@ -53,7 +54,7 @@ function NewMsgForm(props) {
                   fullWidth />
 
                 <Fab type="Submit" size="small" color="primary" aria-label="add"> <SendIcon /> </Fab>
-              </Grid>
+              </Box>
 
             </FormControl>
           </form >

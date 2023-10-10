@@ -16,6 +16,19 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+//this gets ALL projects
+router.get('/', async (req, res) => {
+  try {
+    console.log("PARAMS", req.params);
+    const allTheProjects = await projectQueries.getAllProjects(req.params.id);
+    console.log("checkign in the router", allTheProjects);
+    res.status(200).json(allTheProjects); ////
+  } catch (error) {
+    console.error('Error during fetching projects-server side:', error);
+    res.status(500).send('Server Error');
+  }
+});
+
 
 //this adds a project
 router.post('/add', async (req, res) => {
