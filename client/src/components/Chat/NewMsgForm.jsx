@@ -10,7 +10,7 @@ function NewMsgForm(props) {
   const { project_id } = props;
   const { addProject, project } = useContext(projectContext);
   const { loggedinUser } = useContext(userContext);
-  const { addMessage } = useContext(messageContext);
+  const { addMessage, fetchMessagesforProject } = useContext(messageContext);
 
   //these states are just to handle the data for the form
   const [message, setMessage] = useState('');
@@ -30,6 +30,7 @@ function NewMsgForm(props) {
 
     console.log("am i getting form data", formData);
     await addMessage(formData);
+    fetchMessagesforProject(parseInt(project_id.id));
   };
 
 

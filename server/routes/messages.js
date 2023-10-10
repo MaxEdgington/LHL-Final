@@ -22,7 +22,7 @@ router.get('/:id', async (req, res) => {
 router.post('/add', async (req, res) => {
   console.log("adding message in route", req.body);
   try {
-    const newMsg = await messagesQueries.addMessage(req.body.message, timestamp, req.body.user_id, req.body.project_id);
+    const newMsg = await messagesQueries.addMessage(req.body.message, "2023-10-09T23:52:02.877Z", req.body.user_id, req.body.project_id);
     console.log("newProject.rows", newMsg[0]);
     res.status(200).json(newMsg[0]);
   } catch (error) {

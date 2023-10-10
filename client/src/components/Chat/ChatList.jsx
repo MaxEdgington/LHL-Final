@@ -40,7 +40,6 @@ const ChatList = () => {
 
   return (
     <>
-      inside chat list
       <Box sx={{ margin: 2.5 }}>
         {/* <Paper
         sx={{ margin: 1 }}> */}

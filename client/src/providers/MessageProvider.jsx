@@ -8,7 +8,7 @@ export default function MessageProvider(props) {
 
   const fetchMessagesforProject = async (project_id) => {
     try {
-      console.log('fetchMessagesforProject is running');
+      console.log('fetchMessagesforProject is running', project_id);
       const response = await axios.get(`/api/messages/${project_id}`);
       console.log("message provider", response.data);
       setMessages(response.data);
