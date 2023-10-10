@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 
 import ColumnListItem from "./ColumnListItem";
 import ChatDrawer from "../Chat/ChatDrawer";
-import { Box, Typography, Paper } from "@mui/material";
+import { Box, Typography, Paper, Fab, Tooltip } from "@mui/material";
+import EmailIcon from '@mui/icons-material/Email';
+
 import "../../styles/ColumnList.scss";
 import { DragDropContext } from "react-beautiful-dnd";
 import { columnsContext } from "../../providers/ColumnsProvider";
@@ -16,15 +18,17 @@ const ColumnList = (props) => {
   // console.log("am i getting the project?", project);
   const params = useParams();
 
-  // console.log("useparams?", params);
-  // Start of new code
+  const handleEmailClick = () => {
+    const mailtoLink = `mailto:${project.owner_id}`;
+    window.location.href = mailtoLink;
+  };
 
   useEffect(() => {
     selectProject(params.id);
     fetchTasks(params.id);
   }, [params]);
 
-  // End of new code
+
 
   console.log(columns);
   const columnArr = Object.entries(columns).map(([columnId, column]) => {
@@ -58,19 +62,26 @@ const ColumnList = (props) => {
           // change to theme colours
         }}
       >
-        <div>
-          <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '3em' }}>
-            <div></div>
-            <div>
-              <h1>{project.name}</h1>
-              <h3>{project.description}</h3>
-            </div>
-            <ChatDrawer url_param={params} />
 
-          </Box>
+        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '3em' }}>
 
-          <ul className="columnlist">{columnArr}</ul>
-        </div>
+          <Tooltip title="Email Lead">
+            <Fab color="primary" aria-label="email" onClick={handleEmailClick}>
+              <EmailIcon />
+            </Fab>
+          </Tooltip>
+
+          <div>
+            <h1>{project.name}</h1>
+            <h3>{project.description}</h3>
+          </div>
+
+          <ChatDrawer url_param={params} />
+
+        </Box>
+
+        <ul className="columnlist">{columnArr}</ul>
+
       </Box>
     </DragDropContext>
   );
