@@ -6,7 +6,7 @@ import { Box } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 
 const getListStyle = (isDraggingOver) => ({
-  background: isDraggingOver ? "#fee2e2" : "white",
+  background: isDraggingOver ? "#fbf7f5" : "white",
   width: '100%'
 });
 
