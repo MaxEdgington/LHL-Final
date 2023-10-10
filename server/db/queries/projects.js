@@ -1,5 +1,16 @@
 const db = require('../../configs/db.config');
 
+const getAllProjects = () => {
+  return db
+    .query(`SELECT * FROM projects`)
+    .then(data => {
+      console.log("checking in the query", data.rows);
+      return data.rows;
+    }).catch(err => {
+      console.error("Error executing query: ", err);
+      throw err;
+    });
+};
 
 const getProjectbyName = (name) => {
   return db
@@ -72,4 +83,4 @@ const getAllProjectsOfUser = (id) => {
     });
 };
 
-module.exports = { getProjectbyName, getProjectbyId, addProject, getProjectsByOwner, getAllProjectsOfUser };
+module.exports = { getProjectbyName, getProjectbyId, addProject, getProjectsByOwner, getAllProjectsOfUser, getAllProjects };

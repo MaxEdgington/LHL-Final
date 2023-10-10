@@ -52,6 +52,7 @@ function NewProjectForm() {
       project_due_date: projectDueDate,
 
       // owner_id: loggedinUser.id //owner currently hard coded
+
     };
 
     try {

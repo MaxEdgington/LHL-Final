@@ -2,12 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import ColumnListItem from "./ColumnListItem";
-import ChatDrawer from "./Chat/ChatDrawer";
+import ChatDrawer from "../Chat/ChatDrawer";
 import { Box, Typography, Paper } from "@mui/material";
-import "../styles/ColumnList.scss";
+// import "../styles/ColumnList.scss";
 import { DragDropContext } from "react-beautiful-dnd";
-import { columnsContext } from "../providers/ColumnsProvider";
-import { projectContext } from "../providers/ProjectProvider";
+import { columnsContext } from "../../providers/ColumnsProvider";
+import { projectContext } from "../../providers/ProjectProvider";
 // import background from '../../public/lens-img-darkmode.jpeg';
 
 const ColumnList = (props) => {

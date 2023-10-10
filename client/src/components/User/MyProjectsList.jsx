@@ -37,9 +37,13 @@ const MyProjectsList = () => {
   const navigate = useNavigate();
   const theme = useTheme();
 
+
+  useEffect(() => {
+    selectUser(params.id);
+    fetchMyProjects(params.id);
+  }, [params]);
+
   console.log("is this the right params", params);
-
-
   console.log("don't got them", myProjects);
   console.log("do i have the user?", loggedinUser);
   myProjects.map((row) => console.log("this is a row", row));
@@ -67,7 +71,7 @@ const MyProjectsList = () => {
             {/* this need to be a cookie, not state */}
           </Box>
 
-          <ProjectTable />
+          <ProjectTable whichProjects={myProjects} />
         </Paper>
 
       </Grid>

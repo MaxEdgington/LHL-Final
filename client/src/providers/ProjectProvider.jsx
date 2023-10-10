@@ -9,6 +9,7 @@ export default function ProjectProvider(props) {
   const [project, setProject] = useState({});
   //project is an object with all the keys from db,
   const [myProjects, setMyProjects] = useState([]);
+  const [allProjects, setAllProjects] = useState([]);
   const navigate = useNavigate();
 
   const addProject = async (formData) => {
@@ -54,6 +55,16 @@ export default function ProjectProvider(props) {
     }
   };
 
+  const fetchAllProjects = async () => {
+    try {
+      console.log("fetching all projects is running");
+      const response = await axios.get(`/api/projects`);
+      setAllProjects(response.data);
+    } catch (error) {
+      console.error("Could not find all projects", error.message);
+    }
+  };
+
   const projectData = {
     project,
     setProject,
@@ -61,6 +72,9 @@ export default function ProjectProvider(props) {
     addProject,
     selectProject,
     fetchMyProjects,
+    allProjects,
+    fetchAllProjects
+
   };
 
   return (

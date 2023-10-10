@@ -67,7 +67,7 @@ function Header() {
       {/* <AppBar position="static"> */}
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ background: 'secondary' }}>
-          <img src={"../../public/lens-line.png"}
+          <img src={"../../public/white-lens.png"}
             onClick={() => navigate('/login')}
             width="3.5%"
             sx={{ display: { xs: 'none', md: 'flex' }, mx: 2, px: 2 }} />
