@@ -44,7 +44,6 @@ const MyProjectsList = () => {
   }, [params]);
 
   console.log("is this the right params", params);
-  console.log("don't got them", myProjects);
   console.log("do i have the user?", loggedinUser);
   myProjects.map((row) => console.log("this is a row", row));
 
