@@ -20,7 +20,7 @@ router.get('/:id', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     console.log("PARAMS", req.params);
-    const allTheProjects = await projectQueries.getAllProjects(req.params.id);
+    const allTheProjects = await projectQueries.getAllProjectsWithOwnerDetails(req.params.id);
     console.log("checkign in the router", allTheProjects);
     res.status(200).json(allTheProjects); ////
   } catch (error) {
