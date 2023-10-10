@@ -146,33 +146,6 @@ router.get("/:id/assigned_user", async (req, res) => {
     const due_date = Editedtask[2]
     const assigned_userName = Editedtask[3]
 
-    // db.query(`SELECT id FROM users WHERE username LIKE '${assigned_userName}%'`)
-    // .then(res => {
-    //     console.log("what is res:", res)
-    //     // bug is within the if!!1
-    //     if (res.rows.length === 0) {
-    //         console.log("The user doesn't exist!");
-    //       db.query(`UPDATE tasks SET name=$1, description=$2, due_date=$3, WHERE id=$4`, [name, description, due_date, task_id])
-        
-    //       .then(() => {
-    //       console.log("Task info updated without assigned user", Editedtask);
-    //       // console.log("what is res:", res)
-    //       })
-    //       return;
-    //     }
-        
-    //     const userId = res.rows[0].id
-    //     // console.log("is this userId?", userId)
-        
-    //     db.query(`UPDATE tasks SET name=$1, description=$2, due_date=$3, assigned_user=$4 WHERE id=$5`, [name, description, due_date, userId, task_id])
-        
-    //     .then(() => {
-    //     console.log("Task info updated", Editedtask);
-        
-    //     // console.log("what is res:", res)
-    //     return;
-    //     }) 
-    // })
     db.query(`UPDATE tasks SET name=$1, description=$2, due_date=$3 WHERE id=$4`, [name, description, due_date, task_id])
         .then(() => {
           console.log("Task info updated without assigned user!", Editedtask);
