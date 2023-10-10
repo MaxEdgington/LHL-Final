@@ -138,7 +138,7 @@ router.get("/:id/assigned_user", async (req, res) => {
   }
 });
 
- router.post("/:id/edit", async(req, res) => {
+ router.post("/:id/edit", (req, res) => {
     const task_id = req.params.id
     const Editedtask = req.body.Editedtask
     const name = Editedtask[0]
@@ -147,14 +147,28 @@ router.get("/:id/assigned_user", async (req, res) => {
     const assigned_userName = Editedtask[3]
 
     console.log("Task_id", task_id)
-    try{
-      await db.query(`UPDATE tasks SET name=$1, description=$2, due_date=$3 WHERE id=$4`, [name, description, due_date, task_id])
-      res.status(200).send();
-      console.log("Task info updated", Editedtask);
-    } catch (error) {
+
+    db.query(`SELECT id FROM users WHERE username LIKE '${assigned_userName}%'`)
+    .then(res => {
+        const userId = res.rows[0].id
+        console.log("is this userId?", userId)
+        if (!userId) {
+            return "The user doesn't exist"
+        }
+        db.query(`UPDATE tasks SET name=$1, description=$2, due_date=$3, assigned_user=$4 WHERE id=$5`, [name, description, due_date, userId, task_id])
+        
+        .then(res => {
+        console.log("Task info updated", Editedtask);
+        console.log("what is res:", res)
+        return;
+        })
+        
+    })
+    .catch (error => {
       console.error("Error during saving edited task info:", error);
+      console.log("is this userId?", userId)
       res.status(500).send("Server Error");
-    }
+    })
  })
 
 
