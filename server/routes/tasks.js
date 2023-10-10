@@ -177,10 +177,11 @@ router.get("/:id/assigned_user", async (req, res) => {
         .then(() => {
           console.log("Task info updated without assigned user!", Editedtask);
           // console.log("what is res:", res)
-
+         
+        //   need to fix here is make sure res is defined!
           db.query(`SELECT id FROM users WHERE username LIKE '${assigned_userName}%'`)
           .then(res => {
-            if (res.rows[0].id) {
+            if (res.rows[0]) {
                 const userId = res.rows[0].id
                 db.query(`UPDATE tasks SET assigned_user=$1 WHERE id=$2`, [userId, task_id])
                 .then(()=> {
