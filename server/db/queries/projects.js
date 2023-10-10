@@ -83,4 +83,41 @@ const getAllProjectsOfUser = (id) => {
     });
 };
 
-module.exports = { getProjectbyName, getProjectbyId, addProject, getProjectsByOwner, getAllProjectsOfUser, getAllProjects };
+const getAllProjectsOfUserWithOwnerDetails = (id) => {
+  return db.query(
+    `WITH project_owner_info AS (
+    SELECT
+        p.id AS project_id,
+        p.name AS project_name,
+        p.description AS project_description,
+        p.due_date AS project_due_date,
+        u.id AS owner_id,
+        u.username AS owner_username,
+        u.email AS owner_email,
+        u.avatar AS owner_avatar
+    FROM
+        projects AS p
+    JOIN
+        users AS u ON p.owner_id = u.id
+    )
+    
+    SELECT o.*
+    FROM project_owner_info AS o
+    JOIN user_project_bridge AS upb ON o.project_id = upb.project_id
+    WHERE upb.user_id = $1
+    UNION
+    SELECT *
+    FROM project_owner_info AS o
+    WHERE o.owner_id = $1;`,
+    [id])
+    .then(data => {
+      console.log("checking second querydata", data.rows);
+      return data.rows;
+    }).catch(err => {
+      console.error("Error executing query: ", err);
+      throw err;
+    });
+};
+
+
+module.exports = { getProjectbyName, getProjectbyId, addProject, getProjectsByOwner, getAllProjectsOfUser, getAllProjects, getAllProjectsOfUserWithOwnerDetails };

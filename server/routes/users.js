@@ -35,7 +35,7 @@ router.post('/set-session', async (req, res) => {
 router.get('/myprojects/:id', async (req, res) => {
   try {
     console.log("my projects PARAMS", req.params);
-    const myProjects = await projectQueries.getAllProjectsOfUser(Number(req.params.id));
+    const myProjects = await projectQueries.getAllProjectsOfUserWithOwnerDetails(Number(req.params.id));
     console.log("checkign in the router", myProjects);
     res.status(200).json(myProjects);
   } catch (error) {
