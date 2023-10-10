@@ -29,7 +29,10 @@ const ChatDrawer = (props) => {
     < >
       {/* change this to icon? */}
       <Tooltip title="Chat">
-        <Button onClick={toggleDrawer(true)}>Open Chat</Button>
+        <Fab color="primary" aria-label="add" onClick={toggleDrawer(true)}>
+          <CommentIcon />
+        </Fab>
+        {/* <Button onClick={toggleDrawer(true)}>Open Chat</Button> */}
       </Tooltip>
 
       <Drawer

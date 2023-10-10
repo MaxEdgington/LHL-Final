@@ -59,12 +59,15 @@ const ColumnList = (props) => {
         }}
       >
         <div>
-          <span>
-            <h1>{project.name}</h1>
-
+          <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '3em' }}>
+            <div></div>
+            <div>
+              <h1>{project.name}</h1>
+              <h3>{project.description}</h3>
+            </div>
             <ChatDrawer url_param={params} />
 
-          </span>
+          </Box>
 
           <ul className="columnlist">{columnArr}</ul>
         </div>
