@@ -4,6 +4,7 @@ const router = express.Router();
 const db = require("../configs/db.config");
 const tasksQueries = require("../db/queries/tasks");
 
+//get all tasks
 router.get("/", async (req, res) => {
   console.log("Tasks route hit");
   try {
@@ -15,6 +16,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+//get tasks of a project??
 router.get("", async (req, res) => {
   //new route? or just slash to replace above?
   try {
@@ -26,11 +28,12 @@ router.get("", async (req, res) => {
   }
 });
 
+//add a task
 router.post("/add", async (req, res) => {
   console.log("POST /add route hit. Body:", req.body);
 
   try {
-    const title = req.body.title; //used to be an object?
+    const title = req.body.title;
     const project = req.body.project_id;
     const description = req.body.description;
     const newTask = await tasksQueries.addNewTask(title, description, project);
@@ -40,6 +43,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
+//add tasks from AI all at once
 router.post("/add-batch", async (req, res) => {
   console.log("POST /add-batch route hit. Body:", req.body);
 
@@ -75,6 +79,7 @@ router.post("/add-batch", async (req, res) => {
   }
 });
 
+//delete task
 router.post("/:id/delete", async (req, res) => {
   try {
     const taskId = req.params.id;
@@ -86,6 +91,7 @@ router.post("/:id/delete", async (req, res) => {
   }
 });
 
+//edit a task
 router.post("/:id", async (req, res) => {
   const { new_column_status, new_task_index } = req.body;
   const task_id = req.params.id;
@@ -106,6 +112,7 @@ router.post("/:id", async (req, res) => {
   }
 });
 
+//to be able to move tasks
 router.post("/:id/onecolumn", async (req, res) => {
   const { new_task_index } = req.body;
   const task_id = req.params.id;
@@ -123,6 +130,7 @@ router.post("/:id/onecolumn", async (req, res) => {
   }
 });
 
+//get the user of a task
 router.get("/:id/assigned_user", async (req, res) => {
   const task_id = req.params.id;
 
@@ -138,39 +146,39 @@ router.get("/:id/assigned_user", async (req, res) => {
   }
 });
 
- router.post("/:id/edit", (req, res) => {
-    const task_id = req.params.id
-    const Editedtask = req.body.Editedtask
-    const name = Editedtask[0]
-    const description = Editedtask[1]
-    const due_date = Editedtask[2]
-    const assigned_userName = Editedtask[3]
+router.post("/:id/edit", (req, res) => {
+  const task_id = req.params.id;
+  const Editedtask = req.body.Editedtask;
+  const name = Editedtask[0];
+  const description = Editedtask[1];
+  const due_date = Editedtask[2];
+  const assigned_userName = Editedtask[3];
 
-    db.query(`UPDATE tasks SET name=$1, description=$2, due_date=$3 WHERE id=$4`, [name, description, due_date, task_id])
-        .then(() => {
-          console.log("Task info updated without assigned user!", Editedtask);
-          // console.log("what is res:", res)
-         
-        //   need to fix here is make sure res is defined!
-          db.query(`SELECT id FROM users WHERE username LIKE '${assigned_userName}%'`)
-          .then(res => {
-            if (res.rows[0]) {
-                const userId = res.rows[0].id
-                db.query(`UPDATE tasks SET assigned_user=$1 WHERE id=$2`, [userId, task_id])
-                .then(()=> {
-                    console.log("Task info updated with assigned user!", Editedtask);
-                    return;
-                })
-            }
-            return;
-          })
-          }) 
-    .catch (error => {
-      console.error("Error during saving edited task info:", error);
-    //   console.log("is this userId?", userId)
-      res.status(500).send("Server Error");
+  db.query(`UPDATE tasks SET name=$1, description=$2, due_date=$3 WHERE id=$4`, [name, description, due_date, task_id])
+    .then(() => {
+      console.log("Task info updated without assigned user!", Editedtask);
+      // console.log("what is res:", res)
+
+      //   need to fix here is make sure res is defined!
+      db.query(`SELECT id FROM users WHERE username LIKE '${assigned_userName}%'`)
+        .then(res => {
+          if (res.rows[0]) {
+            const userId = res.rows[0].id;
+            db.query(`UPDATE tasks SET assigned_user=$1 WHERE id=$2`, [userId, task_id])
+              .then(() => {
+                console.log("Task info updated with assigned user!", Editedtask);
+                return;
+              });
+          }
+          return;
+        });
     })
- })
+    .catch(error => {
+      console.error("Error during saving edited task info:", error);
+      //   console.log("is this userId?", userId)
+      res.status(500).send("Server Error");
+    });
+});
 
 
 module.exports = router;
