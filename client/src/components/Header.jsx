@@ -1,90 +1,73 @@
-import React, { useState, useContext } from "react";
-import { AppBar, Stack, Box, Toolbar, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
+import { useState, useContext } from "react"
+import { AppBar, Box, Toolbar, Typography, Menu, Container, Button, Tooltip, MenuItem } from "@mui/material"
 
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
+import IconButton from "@mui/material/IconButton"
+import MenuIcon from "@mui/icons-material/Menu"
+import AccountCircleIcon from "@mui/icons-material/AccountCircle"
 
-import { useTheme } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom"
 
-import { userContext } from '../providers/UserProvider';
+import { userContext } from "../providers/UserProvider"
 
-const pages = ['New Project'];
+const pages = ["New Project"]
 // const settings = ['My Projects', 'Logout'];
 
 function Header() {
-  const { logOut, loggedinUser } = useContext(userContext);
-  const theme = useTheme();
-  const navigate = useNavigate();
+  const { logOut, loggedinUser } = useContext(userContext)
+  const navigate = useNavigate()
 
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
-  const [PaletteMode, setMode] = useState('light');
-
+  const [anchorElNav, setAnchorElNav] = useState(null)
+  const [anchorElUser, setAnchorElUser] = useState(null)
 
   const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+    setAnchorElNav(event.currentTarget)
+  }
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+    setAnchorElUser(event.currentTarget)
+  }
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+    setAnchorElNav(null)
+  }
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+    setAnchorElUser(null)
+  }
   const handleLogout = () => {
-    logOut();
-  };
+    logOut()
+  }
   const handleMyProjects = () => {
-    navigate(`/login`);
-    handleCloseUserMenu();
-  };
-
-  const toggleColorMode = () => {
-    setMode((PaletteMode) =>
-      PaletteMode === 'light' ? 'dark' : 'light',
-    );
-  };
-
+    navigate(`/login`)
+    handleCloseUserMenu()
+  }
 
   return (
-    <AppBar position='fixed' top='0' zIndex='100'>
+    <AppBar position="fixed" top="0" style={{ zIndex: 100 }}>
       {/* <AppBar position="static"> */}
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ background: 'secondary' }}>
-
-          <img src={"../../public/white-lens.png"}
-            onClick={() => navigate('/')}
-            width="3.5%"
-            sx={{ display: { xs: 'none', md: 'flex' }, mx: 2, px: 2 }} />
+        <Toolbar disableGutters sx={{ background: "secondary" }}>
+          <img src={"/white-lens.png"} onClick={() => navigate("/")} width="40px" style={{ marginRight: "8px" }} />
 
           <Typography
             variant="h4"
             noWrap
-            // component="a"
-            // onClick={() => navigate('/projectBoard/')}
-            // should there be an onclick here???
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}>
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 100,
+              letterSpacing: ".3px",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+            style={{
+              fontSize: "1.2rem",
+            }}
+          >
             Lens
           </Typography>
 
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -99,28 +82,29 @@ function Header() {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: "block", md: "none" },
               }}
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" href='StartNewProject'>{page}</Typography>
+                  <Typography textAlign="center" href="StartNewProject">
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          {/* <img src={"../../public/vite.svg"} sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
             variant="h5"
             noWrap
@@ -128,23 +112,24 @@ function Header() {
             href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             Lens
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={() => navigate('/newProject')}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                style={{ fontWeight: 500, letterSpacing: "2px" }}
+                onClick={() => navigate("/newProject")}
+                sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}
               </Button>
@@ -154,54 +139,45 @@ function Header() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="User settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <AccountCircleIcon stroke='white' />
+                <AccountCircleIcon color="action" sx={{ color: "white", width: "40px", height: "40px" }} />
               </IconButton>
             </Tooltip>
-
-            {/* <Tooltip title="Dark Mode">
-              <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
-                {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-              </IconButton>
-            </Tooltip> */}
-
-
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
               {/* {settings.map((setting) => ( */}
-              {loggedinUser ?
+              {loggedinUser ? (
                 <div>
-                  <MenuItem key={'My Projects'} onClick={handleMyProjects}>
+                  <MenuItem key={"My Projects"} onClick={handleMyProjects}>
                     <Typography textAlign="center">My Projects</Typography>
                   </MenuItem>
-                  <MenuItem key={'Logout'} onClick={handleLogout}>
+                  <MenuItem key={"Logout"} onClick={handleLogout}>
                     <Typography textAlign="center">LogOut</Typography>
                   </MenuItem>
                 </div>
-                :
-                <MenuItem key={'Sign In'} onClick={() => navigate('/login')}>
+              ) : (
+                <MenuItem key={"Sign In"} onClick={() => navigate("/login")}>
                   <Typography textAlign="center">Sign In</Typography>
                 </MenuItem>
-              }
+              )}
             </Menu>
           </Box>
-
         </Toolbar>
       </Container>
-    </AppBar >
-  );
+    </AppBar>
+  )
 }
-export default Header;
+export default Header
