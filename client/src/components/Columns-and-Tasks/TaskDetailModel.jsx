@@ -68,7 +68,7 @@ const TaskDetailModel = (props) => {
         fontSize={28}
         mb={2}
       >
-        Due Date: {formattedDate}
+        Due Date: {due_date ? formattedDate : ""}
       </Typography>
       <Typography
         id="modal-modal-description"
