@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { columnsContext } from "../../providers/ColumnsProvider";
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -42,6 +42,12 @@ const TaskDetailModel = (props) => {
     navigate(`/projectboard/${projectId}`);
   };
 
+  const formattedDate = new Date(due_date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <Box sx={style}>
       <Typography
@@ -62,7 +68,7 @@ const TaskDetailModel = (props) => {
         fontSize={28}
         mb={2}
       >
-        Due Date: {due_date}
+        Due Date: {formattedDate}
       </Typography>
       <Typography
         id="modal-modal-description"
@@ -83,13 +89,13 @@ const TaskDetailModel = (props) => {
         {/* <Link to="edit"><Button variant="outlined" size="small" >
           Edit
         </Button></Link> */}
-        <Button 
-          variant="outlined" 
-          size="small" 
-          onClick={()=>navigate("edit")}>
+        <Button
+          variant="outlined"
+          size="small"
+          onClick={() => navigate("edit")}
+        >
           Edit
         </Button>
-
       </Stack>
     </Box>
   );
