@@ -9,7 +9,7 @@ import TaskDetailModel from "./TaskDetailModel";
 import TaskEditModel from "./TaskEditModel";
 import axios from "axios";
 
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes, Link, useNavigate } from 'react-router-dom';
 
 const TaskListItem = (props) => {
   const { id, name, index } = props;
@@ -31,6 +31,8 @@ const TaskListItem = (props) => {
     // styles we need to apply on draggables
     ...draggableStyle
   });
+  
+  const navigate = useNavigate()
 
   const handleOpen = async () => {
     try {
@@ -46,6 +48,8 @@ const TaskListItem = (props) => {
       console.error("Could not show TaskDetailModel", error);
       console.log("Get assigned_user_id:", assigned_user);
     }
+    // in Modal, show the <TaskDetailModel /> component
+    navigate("modal");
   };
 
   const handleClose = () => {
@@ -84,7 +88,7 @@ const TaskListItem = (props) => {
                 </div>
               </Modal>
 
-              <Link to="modal">
+              {/* <Link to="modal"> */}
                 <CardContent onClick={handleOpen}>
                   <Typography variant="h5" component="div" >
                     <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
@@ -95,7 +99,7 @@ const TaskListItem = (props) => {
                     </div>
                   </Typography>
                 </CardContent>
-              </Link>
+              {/* </Link> */}
 
             </CardActionArea>
           </Card>
