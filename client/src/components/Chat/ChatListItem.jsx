@@ -20,7 +20,7 @@ const ChatListItem = (props) => {
 
   return (
     <Box sx={{ margin: 2.5 }}>
-      <Paper sx={{ display: 'flex', flexDirection: 'row', width: 'auto', margin: .5, padding: 1 }}>
+      <Paper sx={{ display: 'flex', flexDirection: 'row', alignItems: "left", width: 'auto', margin: .5, padding: 1 }}>
 
         <Avatar alt={user_name} src={avatar} />
         {user_name}: {msg}

@@ -11,11 +11,11 @@ INSERT INTO chat_messages (message, timestamp, user_id, project_id)
 --for yes,no,toaster
   INSERT INTO chat_messages (message, timestamp, user_id, project_id) 
   VALUES 
-  ('I found a great breakfast recipe API we can integrate!', '2023-11-05 09:30:00', 1, 6),
+  ('I found a great breakfast recipe API we can integrate!', '2023-11-05 09:30:00', 3, 6),
     ('That sounds awesome! Can you share the details?', '2023-11-05 10:00:00', 2, 6),
     ('I am working on the UI. Any specific design preferences?', '2023-11-06 14:15:00', 3, 6),
-    ('I think a clean and minimalistic design with breakfast-themed colors.', '2023-11-06 14:45:00', 1, 6),
-    ('I am coding the feature to randomize breakfast choices. Any suggestions on how it should work?', '2023-11-07 11:30:00', 2, 6),
-    ('We should let users input their available ingredients and dietary preferences for personalized recommendations.', '2023-11-07 12:00:00', 3, 6),
-    ('Great idea! I will start working on the ingredient input form.', '2023-11-07 14:00:00', 2, 6),
-    ('I just pushed an update to the apps GitHub repository. Check it out and let me know your thoughts!', '2023-11-08 16:45:00', 1, 6);
+    ('I think a clean and minimalistic design with breakfast-themed colors.', '2023-11-06 14:45:00', 2, 6),
+    ('I am coding the feature to randomize breakfast choices. Any suggestions on how it should work?', '2023-11-07 11:30:00', 7, 6),
+    ('We should let users input their available ingredients and dietary preferences for personalized recommendations.', '2023-11-07 12:00:00', 5, 6),
+    ('Great idea! I will start working on the ingredient input form.', '2023-11-07 14:00:00', 3, 6),
+    ('I just pushed an update to the apps GitHub repository. Check it out and let me know your thoughts!', '2023-11-08 16:45:00', 2, 6);

@@ -59,7 +59,7 @@ const ProjectTable = (props) => {
         height: "90%",
       }}
     >
-      <TableContainer component={Paper} maxHeight="100%">
+      <TableContainer component={Paper} maxheight="100%">
         <Table
           stickyHeader
           aria-label="simple table"
@@ -101,7 +101,7 @@ const ProjectTable = (props) => {
                   color: "#fff",
                   backgroundColor: "#660000",
                 }}
-                align="right"
+                align="left"
               >
                 Due&nbsp;Date
               </TableCell>
@@ -111,7 +111,7 @@ const ProjectTable = (props) => {
                   color: "#fff",
                   backgroundColor: "#660000",
                 }}
-                align="center"
+                align="left"
               >
                 Owner
               </TableCell>
@@ -143,12 +143,12 @@ const ProjectTable = (props) => {
                   })}
                 </TableCell>
                 {/* how can we format this date better? */}
-                <TableCell align="center">
+                <TableCell align="right">
                   <div
                     style={{
                       display: "flex",
                       flexDirection: "row",
-                      justifyContent: "center",
+                      justifyContent: "left",
                       alignContent: "center",
                       alignItems: "center",
                     }}
