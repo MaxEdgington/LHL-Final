@@ -2,6 +2,26 @@
   display: flex;
   width: 100%;
   margin: 0 auto;
-  padding: 0 24px;
-  height: 80%;
+  padding: 0;
 }
+.project-header {
+  color: #fff;
+  // background-color: #660000;
+  padding: 0 16px;
+}
+
+.project-header h1 {
+  font-size: 3em;
+  font-weight: 350;
+  font-family: monospace;
+  letter-spacing: 2px;
+  // background-color: black;
+}
+
+.project-header h3 {
+  font-size: 1.5em;
+  // background-color: black;
+  font-weight: 350;
+  letter-spacing: .3px;
+}
+

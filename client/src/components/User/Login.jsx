@@ -99,8 +99,8 @@ const Login = () => {
             <TextField
               label="Password"
               size="small"
-              onChange={(e) => setFormPassword(e.target.value)}
               style={{ marginBottom: "10px" }}
+              onChange={(e) => setFormPassword(e.target.value)}
               name="password"
               placeholder="Enter password"
               type="password"
@@ -119,7 +119,10 @@ const Login = () => {
               Sign in
             </Button>
 
-            <Typography style={{ marginTop: "24px", fontSize: ".9rem" }}>
+            <Typography style={{
+              marginTop: "24px",
+              fontSize: ".9rem"
+            }}>
               Don&apos;t have an account?
               <Link style={{ marginLeft: "4px", fontWeight: 700 }} href="#">
                 Sign Up

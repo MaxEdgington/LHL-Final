@@ -8,7 +8,7 @@ import ProjectTable from "../ProjectsTable";
 import { userContext } from "../../providers/UserProvider";
 import { projectContext } from "../../providers/ProjectProvider";
 
-import background from "../../../public/lighthouse-lens.jpeg";
+import background from "../../../public/lens-img-darkmode.jpeg";
 
 const MyProjectsList = () => {
   const { loggedinUser, selectUser, findUserInfo } = useContext(userContext);
