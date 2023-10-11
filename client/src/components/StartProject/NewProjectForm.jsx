@@ -1,30 +1,31 @@
-import React, { useContext, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import TextField from "@mui/material/TextField"
-import Button from "@mui/material/Button"
-import { FormControl, Stack, Box, Paper, Grid } from "@mui/material"
-import { DateField } from "@mui/x-date-pickers"
-import { projectContext } from "../../providers/ProjectProvider"
-import { columnsContext } from "../../providers/ColumnsProvider"
-import background from "../../../public/lens-img-darkmode.jpeg"
-import { ClipLoader } from "react-spinners"
-import { userContext } from "../../providers/UserProvider"
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { FormControl, Stack, Box, Paper, Grid, Hidden } from "@mui/material";
+import { DateField } from "@mui/x-date-pickers";
+import { projectContext } from "../../providers/ProjectProvider";
+import { columnsContext } from "../../providers/ColumnsProvider";
+import background from "../../../public/lens-img-darkmode.jpeg";
+import { ClipLoader } from "react-spinners";
+import { userContext } from "../../providers/UserProvider";
+const spinningLens = "/spinning-lens.gif";
 
 function NewProjectForm() {
   // Removed 'props' since it's not needed
-  const { addProject, project } = useContext(projectContext)
-  const { loggedinUser } = useContext(userContext)
-  const navigate = useNavigate()
-  const { addGeneratedTasks } = useContext(columnsContext)
+  const { addProject, project } = useContext(projectContext);
+  const { loggedinUser } = useContext(userContext);
+  const navigate = useNavigate();
+  const { addGeneratedTasks } = useContext(columnsContext);
 
   // states for the form
-  const [projectName, setProjectName] = useState("")
-  const [projectDescription, setProjectDescription] = useState("")
-  const [projectDueDate, setProjectDueDate] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const [projectName, setProjectName] = useState("");
+  const [projectDescription, setProjectDescription] = useState("");
+  const [projectDueDate, setProjectDueDate] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLensAIClick = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       const formData = {
         project_name: projectName,
@@ -32,19 +33,19 @@ function NewProjectForm() {
         project_due_date: projectDueDate,
 
         // owner_id: loggedinUser.id //owner currently hard coded
-      }
-      const newProjectData = await addProject(formData)
-      console.log("Line 30 of NewProjectForm", newProjectData)
-      await addGeneratedTasks(projectDescription, newProjectData.id)
-      navigate(`/projectBoard/${newProjectData.id}`) // Redirect to main board after adding tasks
+      };
+      const newProjectData = await addProject(formData);
+      console.log("Line 30 of NewProjectForm", newProjectData);
+      await addGeneratedTasks(projectDescription, newProjectData.id);
+      navigate(`/projectBoard/${newProjectData.id}`); // Redirect to main board after adding tasks
     } catch (error) {
-      console.error("Error adding generated tasks:", error)
+      console.error("Error adding generated tasks:", error);
     }
-    setIsLoading(false)
-  }
+    setIsLoading(false);
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     /// need a way to handle error if no one is logged in
     const formData = {
       project_name: projectName,
@@ -52,24 +53,24 @@ function NewProjectForm() {
       project_due_date: projectDueDate,
 
       // owner_id: loggedinUser.id //owner currently hard coded
-    }
+    };
 
     try {
-      console.log("Before adding project")
-      const newProjectData = await addProject(formData)
-      console.log("Returned data after adding project:", newProjectData) // Debugging line
-      navigate(`/projectBoard/${newProjectData.id}`)
+      console.log("Before adding project");
+      const newProjectData = await addProject(formData);
+      console.log("Returned data after adding project:", newProjectData); // Debugging line
+      navigate(`/projectBoard/${newProjectData.id}`);
     } catch (error) {
-      console.error("Error while creating the project and navigating:", error)
+      console.error("Error while creating the project and navigating:", error);
     }
-  }
+  };
 
   const paperStyle = {
     padding: 20,
     height: "70vh",
     width: 280,
     margin: "20px auto",
-  }
+  };
 
   return (
     <Box
@@ -80,6 +81,7 @@ function NewProjectForm() {
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
         height: "100%",
+        overflow: "hidden",
       }}
     >
       {/* <!-- set image to vertical, horizontal center, position: absolute, css animation rotate --> */}
@@ -89,13 +91,22 @@ function NewProjectForm() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "100vh",
+            height: "90vh",
+            width: "100vw",
+            backgroundColor: "#000000A0",
+
             // TODO: come visit me @max
             // width: "100vw",
             // filter: "opacity(50%)",
           }}
         >
-          <ClipLoader color="#123abc" size={150} />
+          <img
+            src={spinningLens}
+            style={{ filter: "invert(1)" }}
+            alt="Loading..."
+            width="150"
+            height="150"
+          />
         </div>
       ) : (
         <Grid>
@@ -141,7 +152,12 @@ function NewProjectForm() {
                   <br /> to help you get started?
                 </h3>
                 <Stack spacing={2} direction="column">
-                  <Button variant="contained" onClick={handleLensAIClick} disabled={isLoading} margin="normal">
+                  <Button
+                    variant="contained"
+                    onClick={handleLensAIClick}
+                    disabled={isLoading}
+                    margin="normal"
+                  >
                     Yes, use LensAI
                   </Button>
 
@@ -155,9 +171,9 @@ function NewProjectForm() {
         </Grid>
       )}
     </Box>
-  )
+  );
 }
 
-export default NewProjectForm
+export default NewProjectForm;
 
 //  ternary condition based on isLoading. If isLoading is true, we display the loading spinner. Otherwise, we render the main content of the component.
