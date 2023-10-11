@@ -80,9 +80,16 @@ const TaskDetailModel = (props) => {
         >
           Delete
         </Button>
-        <Link to="edit"><Button variant="outlined" size="small" >
+        {/* <Link to="edit"><Button variant="outlined" size="small" >
           Edit
-        </Button></Link>
+        </Button></Link> */}
+        <Button 
+          variant="outlined" 
+          size="small" 
+          onClick={()=>navigate("edit")}>
+          Edit
+        </Button>
+
       </Stack>
     </Box>
   );
