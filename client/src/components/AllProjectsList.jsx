@@ -6,7 +6,7 @@ import ProjectTable from "./ProjectsTable"
 
 import { userContext } from "../providers/UserProvider"
 import { projectContext } from "../providers/ProjectProvider"
-import background from "../../public/cameras-p.jpeg"
+import background from "../../public/lens-img-darkmode.jpeg";
 
 import { Box, Grid, Paper } from "@mui/material"
 
