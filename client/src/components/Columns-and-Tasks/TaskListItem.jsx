@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import "../styles/TaskListItem.scss";
+import "../../styles/TaskListItem.scss";
 
 import { Box, Card, CardContent, CardActions, Typography, Avatar, CardActionArea, useTheme } from "@mui/material";
 
@@ -60,8 +60,8 @@ const TaskListItem = (props) => {
     <Draggable key={id} draggableId={String(id)} index={index}>
       {(provided, snapshot) => (
 
-        <Box sx={{ marginBottom: 1 }}>
-          <Card>
+        <Box sx={{ marginBottom: 2, backgroundColor: "rgb(241, 242, 244)" }}>
+          <Card sx={{ borderRadius: "10px", padding:"4px" }}>
             <CardActionArea>
 
               <Modal open={ModalOpen} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
@@ -92,7 +92,7 @@ const TaskListItem = (props) => {
                 <CardContent onClick={handleOpen}>
                   <Typography variant="h5" component="div" >
                     <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
-                      style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}>
+                      style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)} className="task-card">
 
                       {name}
 
