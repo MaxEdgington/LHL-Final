@@ -1,0 +1,162 @@
+/* helper classes */
+
+.text-small {
+    font-size: 0.55rem;
+}
+
+// percentages for setting widths and heights
+$percents: (
+    100: 100%,
+    95: 95%,
+    90: 90%,
+    85: 85%,
+    80: 80%,
+    75: 75%,
+    70: 70%,
+    66: 66%,
+    65: 65%,
+    60: 60%,
+    55: 55%,
+    50: 50%,
+    45: 45%,
+    40: 40%,
+    35: 35%,
+    33: 33%,
+    30: 30%,
+    25: 25%,
+    20: 20%,
+    15: 15%,
+    10: 10%,
+    5: 5%,
+    0: 0%,
+);
+
+// pixels in the 100s, for setting widths and heights
+$pixel-dims-100s: (
+    1: 100px,
+    2: 200px,
+    3: 300px,
+    4: 400px,
+    5: 500px,
+    6: 600px,
+);
+
+// pixels in the 4s, for setting gaps, and text sizes, matches the scale of Vuetify padding/margin
+$pixel-dims-4s: (
+    1: 4px,
+    2: 8px,
+    3: 12px,
+    4: 16px,
+    5: 20px,
+    6: 24px,
+    7: 28px,
+    8: 32px,
+    9: 36px,
+    10: 40px,
+    11: 44px,
+    12: 48px,
+    13: 52px,
+);
+
+// create width, max-width, minn-width, and forced width classes
+@each $percentKey,
+$percentValue in $percents {
+
+    // widths
+    .w-#{$percentKey} {
+        width: $percentValue;
+    }
+
+    .maxw-#{$percentKey} {
+        max-width: $percentValue;
+    }
+
+    .minw-#{$percentKey} {
+        min-width: $percentValue;
+    }
+
+    // forced width
+    .fw-#{$percentKey} {
+        width: $percentValue !important;
+        min-width: $percentValue !important;
+        max-width: $percentValue !important;
+    }
+
+    // heights
+    .h-#{$percentKey} {
+        height: $percentValue;
+    }
+
+    .maxh-#{$percentKey} {
+        max-height: $percentValue;
+    }
+
+    .minh-#{$percentKey} {
+        min-height: $percentValue;
+    }
+
+    // forced height
+    .fh-#{$percentKey} {
+        height: $percentValue !important;
+        min-height: $percentValue !important;
+        max-height: $percentValue !important;
+    }
+}
+
+// create pixel width and height classes for 100 px increments
+@each $pixel,
+$px in $pixel-dims-100s {
+    .pxw-#{$pixel} {
+        width: $px;
+    }
+
+    .pxh-#{$pixel} {
+        height: $px;
+    }
+}
+
+// create pixel gap and text size classes for 4 px increments
+@each $pixel,
+$px in $pixel-dims-4s {
+    .fg-#{$pixel} {
+        gap: $px;
+    }
+
+    // create pixel gap and text size classes for 4 px increments
+    @each $pixel,
+    $px in $pixel-dims-4s {
+        .fg-#{$pixel} {
+            gap: $px;
+        }
+
+        .ts-#{$pixel} {
+            font-size: $px !important;
+        }
+    }
+
+    // general style
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .text-h2-amber {
+        color: var(--v-accent-base) !important;
+    }
+
+    .link {
+        background-color: #fbeeb8;
+    }
+
+    .frcc {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .fccc {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+}

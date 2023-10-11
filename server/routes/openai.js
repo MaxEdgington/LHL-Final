@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
       { role: "system", content: "You are a helpful assistant." },
       {
         role: "user",
-        content: `Generate a list of 25 tasks related to web development in JavaScript or TypeScript with an SQL database. Each task should be in the format: "task title: task description". Based on the following project description, provide the tasks: ${description}`,
+        content: `Generate a list of 15 tasks (not numbered) related to web development in JavaScript or TypeScript with an SQL database. Each task should be in the format: "task title: task description". Based on the following project description, provide the tasks: ${description}`,
       },
     ];
 

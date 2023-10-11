@@ -28,8 +28,6 @@ import { useTheme } from "@mui/material/styles";
 import { userContext } from "../providers/UserProvider";
 import { projectContext } from "../providers/ProjectProvider";
 
-
-
 const ProjectTable = (props) => {
   const { whichProjects } = props;
   const { project, myProjects, addProject, selectProject, fetchMyProjects } =
@@ -40,12 +38,11 @@ const ProjectTable = (props) => {
   const navigate = useNavigate();
   const theme = useTheme();
 
-
   // useEffect(() => {
   //   selectUser(params.id);
   //   fetchMyProjects(params.id);
   // }, [params]);
-  console.log("WHICH?", whichProjects);
+
   whichProjects.map((row) => console.log("this is a row", row));
 
   const handleProjectClick = async (name) => {
@@ -54,30 +51,75 @@ const ProjectTable = (props) => {
   };
 
   return (
-
-    <Box sx={{ m: 10, justifyContent: "center" }}>
-      <TableContainer component={Paper} >
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead sx={{ backgroundColor: "#a3a2a9" }}>
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell>Project Name</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell>Due&nbsp;Date</TableCell>
-              <TableCell align="right">Owner</TableCell>
-              <TableCell align="right"></TableCell>
+    <Box
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        height: "90%",
+      }}
+    >
+      <TableContainer component={Paper} maxHeight="100%">
+        <Table
+          stickyHeader
+          aria-label="simple table"
+          style={{ height: "100%" }}
+          size="small"
+        >
+          <TableHead>
+            <TableRow style={{ backgroundColor: "#660000" }}>
+              <TableCell
+                style={{
+                  fontWeight: 600,
+                  color: "#fff",
+                  backgroundColor: "#660000",
+                }}
+              ></TableCell>
+              <TableCell
+                style={{
+                  fontWeight: 600,
+                  color: "#fff",
+                  backgroundColor: "#660000",
+                }}
+                align="left"
+              >
+                Project Name
+              </TableCell>
+              <TableCell
+                style={{
+                  fontWeight: 600,
+                  color: "#fff",
+                  backgroundColor: "#660000",
+                }}
+                align="left"
+              >
+                Description
+              </TableCell>
+              <TableCell
+                style={{
+                  fontWeight: 600,
+                  color: "#fff",
+                  backgroundColor: "#660000",
+                }}
+                align="right"
+              >
+                Due&nbsp;Date
+              </TableCell>
+              <TableCell
+                style={{
+                  fontWeight: 600,
+                  color: "#fff",
+                  backgroundColor: "#660000",
+                }}
+                align="center"
+              >
+                Owner
+              </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-
+          <TableBody style={{ overflow: "scroll", height: "100%" }}>
             {whichProjects.map((row) => (
-
-              <TableRow
-                key={row.project_name}
-                sx={{
-                  "&:last-child td, &:last-child th": { border: 0 },
-                }}
-              >
+              <TableRow key={row.project_name}>
                 <TableCell
                   component="th"
                   scope="row"
@@ -87,21 +129,42 @@ const ProjectTable = (props) => {
                   <KeyboardDoubleArrowRightIcon />
                 </TableCell>
 
-                <TableCell align="right">{row.project_name}</TableCell>
-                <TableCell align="right">{row.project_description}</TableCell>
-                <TableCell align="right">{row.project_due_date}</TableCell>
-                {/* how can we format this date better? */}
-                <TableCell align="right">{row.owner_username}</TableCell>
-
-                <TableCell align="left">
-                  <Avatar alt="LHL" src={row.owner_avatar}
-                    sx={{ width: 30, height: 30 }}
-                  />
+                <TableCell align="left" style={{ fontWeight: 600 }}>
+                  {row.project_name}
                 </TableCell>
-
+                <TableCell align="left" style={{ fontStyle: "italic" }}>
+                  {row.project_description}
+                </TableCell>
+                <TableCell align="right">
+                  {new Date(row.project_due_date).toLocaleString({
+                    dateStyle: "short",
+                    timeStyle: "medium",
+                    weekDay: "short",
+                  })}
+                </TableCell>
+                {/* how can we format this date better? */}
+                <TableCell align="center">
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Avatar
+                      alt="LHL"
+                      src={row.owner_avatar}
+                      sx={{ width: 30, height: 30, marginRight: "8px" }}
+                    />
+                    <span style={{ marginRight: "4px" }}>
+                      {row.owner_username}
+                    </span>
+                  </div>
+                </TableCell>
               </TableRow>
-            )
-            )}
+            ))}
           </TableBody>
         </Table>
       </TableContainer>

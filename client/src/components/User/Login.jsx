@@ -1,32 +1,55 @@
-import React, { useContext, useState } from 'react';
-import { Box, Grid, Paper, Avatar, Button, Typography, Link, FormControlLabel, TextField } from '@mui/material';
+import { useContext, useState } from "react"
+import { Box, Grid, Paper, Avatar, Button, Typography, Link, TextField } from "@mui/material"
 // import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Checkbox from '@mui/material/Checkbox';
-import background from '../../../public/lots-of-lenses.jpg';
-import { userContext } from '../../providers/UserProvider';
-import { useNavigate } from 'react-router-dom';
+import background from "../../../public/lots-of-lenses.jpg"
+import { userContext } from "../../providers/UserProvider"
 
 const Login = () => {
-
-  const { loggedinUser, setCookie } = useContext(userContext);
-  const [formEmail, setFormEmail] = useState();
-  const navigate = useNavigate();
+  const { setCookie } = useContext(userContext)
+  const [formEmail, setFormEmail] = useState()
+  const [formPassword, setFormPassword] = useState()
 
   const handleSignIn = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     const formData = {
-      email: formEmail
-    };
-    console.log("move handle funct", formData);
-    await setCookie(formData);
-    // navigate('/myProjects');
-    e.target.reset();
-  };
+      email: formEmail,
+    }
+    console.log("move handle funct", formData)
+    await setCookie(formData)
+    e.target.reset()
+  }
 
-  const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" };
-  const boxStyle = {};
-  const btnstyle = { margin: '8px 0' };
+  /*
+    style={{
+        backgroundImage: `url(${background})`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center center",
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed",
+        backdropFilter: "blur(2px)",
+        display: "flex",
+        flexShrink: 1,
+        alignSelf: "center",
+      }}
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+  */
+
+  const paperStyle = {
+    padding: 20,
+    width: 280,
+    margin: "20px auto",
+    paddingTop: "40px",
+    paddingBottom: "40px",
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center",
+  }
+  const btnstyle = { margin: "8px 0" }
   return (
     <Box
       style={{
@@ -35,49 +58,69 @@ const Login = () => {
         backgroundPosition: "center center",
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
-        height: "100%"
-      }}>
+        backdropFilter: "blur(2px)",
+        alignSelf: "center",
+        height: "100%",
+        flexGrow: 1,
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       <Grid>
         <Paper elevation={10} style={paperStyle}>
-          <Grid align='center'>
-            <Avatar src="../../../public/lens-line.png"></Avatar>
-            <h2>Sign In</h2>
-            <h4>{loggedinUser.email}</h4>
-            {/* this h4 wont show because as soon as you're logged in it will redirect */}
+          <Grid align="center" style={{ marginBottom: "50px" }}>
+            <Avatar src="lens-line.png" style={{ marginBottom: "24px" }}></Avatar>
+            <span style={{ fontWeight: 400, fontSize: "1.2rem" }}>Sign In</span>
           </Grid>
 
           <form onSubmit={handleSignIn}>
             <TextField
-              label='Email'
-              name='email'
-              placeholder='Enter email'
+              label="Email"
+              size="small"
+              name="email"
+              placeholder="Enter email"
               onChange={(e) => setFormEmail(e.target.value)}
               variant="outlined"
               fullWidth
-              required />
-            <TextField label='Password' name='password' placeholder='Enter password' type='password' variant="outlined" fullWidth />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="checkedB"
-                  color="primary"
-                />
-              }
-              label="Remember me"
+              style={{ marginBottom: "10px" }}
+              required
             />
-            <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
+            <TextField
+              label="Password"
+              size="small"
+              onChange={(e) => setFormPassword(e.target.value)}
+              style={{ marginBottom: "10px" }}
+              name="password"
+              placeholder="Enter password"
+              type="password"
+              variant="outlined"
+              fullWidth
+              required
+            />
+            <Button
+              type="submit"
+              color="primary"
+              variant="contained"
+              style={btnstyle}
+              fullWidth
+              disabled={!formEmail || !formPassword}
+            >
+              Sign in
+            </Button>
 
-            <Typography > Do you have an account ?
-              <Link href="#" >
+            <Typography style={{ marginTop: "24px", fontSize: ".9rem" }}>
+              Don&apos;t have an account?
+              <Link style={{ marginLeft: "4px", fontWeight: 700 }} href="#">
                 Sign Up
               </Link>
             </Typography>
           </form>
-
         </Paper>
       </Grid>
     </Box>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

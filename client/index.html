@@ -14,3 +14,33 @@
 </body>
 
 </html>
+
+<style>
+  body #root {
+    height: 80vh;
+    padding: 0;
+    font-family: sans-serif;
+  }
+
+  /* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #660000 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #660000;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+  }
+  </style>
