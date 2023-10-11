@@ -21,7 +21,7 @@ import {
 } from "@mui/material"
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight"
 
-import background from "../../../public/lighthouse-lens.jpeg"
+import background from "../../../public/lens-img-darkmode.jpeg"
 // import MyProjectListItem from "./MyProjectListItem";
 import ProjectTable from "../ProjectsTable"
 import { useTheme } from "@mui/material/styles"

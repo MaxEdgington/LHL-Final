@@ -10,7 +10,9 @@ import "../../styles/ColumnList.scss";
 import { DragDropContext } from "react-beautiful-dnd";
 import { columnsContext } from "../../providers/ColumnsProvider";
 import { projectContext } from "../../providers/ProjectProvider";
-// import background from '../../public/lens-img-darkmode.jpeg';
+// import background from '../../../public/iris_Lens_background.jpg';
+import background from '../../../public/lens-img-darkmode.jpeg';
+
 
 const ColumnList = (props) => {
   const { columns, fetchTasks, onDragEnd } = useContext(columnsContext);
@@ -28,8 +30,6 @@ const ColumnList = (props) => {
     fetchTasks(params.id);
   }, [params]);
 
-
-
   console.log(columns);
   const columnArr = Object.entries(columns).map(([columnId, column]) => {
     return (
@@ -43,25 +43,33 @@ const ColumnList = (props) => {
     );
   });
 
-  const paperStyle = {
-    padding: 20,
-    height: "70vh",
-    width: 280,
-    margin: "20px auto",
-  };
+  // const paperStyle = {
+  //   padding: 20,
+  //   height: "70vh",
+  //   width: 280,
+  //   margin: "20px auto",
+  // };
 
   return (
     <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
       <Box
         sx={{
           flex: 1,
-          paddingTop: "8px",
+          paddingTop: "16px",
           paddingBottom: "16px",
-          bgcolor: "#eaeaee",
+          backgroundImage: `url(${background})`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center center",
+          backgroundSize: "cover",
+          backgroundAttachment: "fixed",
+          display: "block",
+          height: "100%",
+          paddingLeft: "8px",
+          paddingRight: "16px"
         }}
       >
 
-        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '3em',  }}>
+        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '3em', backgroundColor: '#00000090'}}>
 
           <Tooltip title="Email Lead">
             <Fab color="primary" aria-label="email" onClick={handleEmailClick}>
@@ -69,7 +77,7 @@ const ColumnList = (props) => {
             </Fab>
           </Tooltip>
 
-          <div>
+          <div className="project-header">
             <h1>{project.name}</h1>
             <h3>{project.description}</h3>
           </div>
