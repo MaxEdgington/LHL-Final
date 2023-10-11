@@ -17,7 +17,19 @@ VALUES
 
   ('Database Setup and Management', 'Design the database schema, set up the database server, and implement queries.', '2023-12-16', '4', 0, 1, 5),
   
-  ('Testing, Deployment, and Monitoring', 'Test for bugs, deploy to a web server, and set up monitoring for performance.', '2023-12-17', '4', 1, 1, 7);
+  ('Testing, Deployment, and Monitoring', 'Test for bugs, deploy to a web server, and set up monitoring for performance.', '2023-12-17', '4', 1, 1, 7),
+
+  ('Content Creation', 'Generate and optimize text, images, and other media for the website pages.', '2023-12-16', '1', 2, 1, 5),
+
+  ('User Registration and Login System', 'Implement user registration and login functionality with secure authentication.', '2023-12-21', '1', 3, 1, 7),
+
+  ('E-commerce Functionality', 'Add e-commerce features, such as product listings and shopping cart functionality.', '2023-12-23', '1', 4, 1, 5),
+
+  ('Mobile Responsiveness', 'Ensure the website is responsive and functions well on mobile devices.', '2023-12-25', '3', 2, 1, 6),
+
+  ('Security Audit', 'Conduct a security audit to identify and address potential vulnerabilities and threats.', '2023-12-26', '1', 5, 1, 9),
+
+  ('Performance Optimization', 'Optimize the website performance for faster loading and improved user experience.', '2023-12-27', '1', 6, 1, 8);
 
 
 -- -- as mock:
