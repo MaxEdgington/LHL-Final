@@ -58,12 +58,10 @@ const ColumnList = (props) => {
           paddingTop: "8px",
           paddingBottom: "16px",
           bgcolor: "#eaeaee",
-          // backgroundImage: `url(${background})`
-          // change to theme colours
         }}
       >
 
-        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '3em' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '3em',  }}>
 
           <Tooltip title="Email Lead">
             <Fab color="primary" aria-label="email" onClick={handleEmailClick}>

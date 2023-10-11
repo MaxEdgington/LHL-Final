@@ -1,7 +1,7 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import TaskListItem from "./TaskListItem";
-// import "../styles/TaskList.scss";
+import "../../styles/TaskList.scss";
 import { Box } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 
