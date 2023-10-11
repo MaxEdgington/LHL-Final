@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Button, Drawer, Tooltip, Card, Typography, CardContent, Divider, Grid, TextField, Fab } from "@mui/material";
+import { Box, Drawer, Tooltip, Card, Typography, CardContent, Divider, Grid, TextField, Fab } from "@mui/material";
 // import ChatIcon from '@mui/icons-material/ChatIcon';
 // import ChevronRightIcon from '@mui/icons-material/ChevronRightIcon';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
@@ -41,17 +41,14 @@ const ChatDrawer = (props) => {
         onClose={toggleDrawer(false)}
       >
 
-        <Card className="rootChat" sx={{ bgcolor: 'primary.light' }}>
+        <Card className="rootChat" sx={{ display: 'flex', bgcolor: 'primary.light' }}>
           <CardContent>
-            <Grid container direction='row' justifyContent="space-between" alignItems="center">
+            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between", alignItems: "center" }}>
 
-              <Tooltip title="Close">
-                <KeyboardArrowLeftIcon fontSize="large" className="iconCancelChat" onClick={toggleDrawer(false)} />
-              </Tooltip>
-              {/* <CommentIcon fontSize="large" className="titleIconChat" /> */}
-              <Typography>Chat for {project.name}</Typography>
+              <KeyboardArrowLeftIcon stroke='white' fontSize="large" className="iconCancelChat" onClick={toggleDrawer(false)} />
+              <Typography color='white'>Chat for {project.name}</Typography>
 
-            </Grid>
+            </Box>
           </CardContent>
         </Card>
 

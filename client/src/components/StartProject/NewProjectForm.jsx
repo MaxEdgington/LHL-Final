@@ -2,13 +2,15 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { FormControl, Stack, Box, Paper, Grid, Hidden } from "@mui/material";
+import { FormControl, Stack, Box, Paper, Grid, Hidden, Typography } from "@mui/material";
 import { DateField } from "@mui/x-date-pickers";
+
 import { projectContext } from "../../providers/ProjectProvider";
 import { columnsContext } from "../../providers/ColumnsProvider";
+import { userContext } from "../../providers/UserProvider";
+
 import background from "../../../public/lens-img-darkmode.jpeg";
 import { ClipLoader } from "react-spinners";
-import { userContext } from "../../providers/UserProvider";
 const spinningLens = "/spinning-lens.gif";
 
 function NewProjectForm() {
@@ -67,9 +69,14 @@ function NewProjectForm() {
 
   const paperStyle = {
     padding: 20,
-    height: "70vh",
     width: 280,
     margin: "20px auto",
+    paddingTop: "40px",
+    paddingBottom: "40px",
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center",
   };
 
   return (
@@ -80,8 +87,14 @@ function NewProjectForm() {
         backgroundPosition: "center center",
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
+        backdropFilter: "blur(2px)",
+        alignSelf: "center",
         height: "100%",
-        overflow: "hidden",
+        flexGrow: 1,
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
       }}
     >
       {/* <!-- set image to vertical, horizontal center, position: absolute, css animation rotate --> */}
@@ -108,11 +121,21 @@ function NewProjectForm() {
             height="150"
           />
         </div>
+
       ) : (
+
         <Grid>
           <Paper elevation={10} style={paperStyle}>
             <Grid align="center">
-              <h2>Start a New Project</h2>
+              <Typography sx={{
+                fontWeight: 'bold',
+                fontSize: "1.2rem",
+                fontFamily: "monospace",
+                letterSpacing: ".3px",
+
+              }}>
+                Start a New Project
+              </Typography>
             </Grid>
 
             <form noValidate autoComplete="off" onSubmit={handleSubmit}>
@@ -122,6 +145,8 @@ function NewProjectForm() {
                   name="project_name"
                   value={projectName}
                   onChange={(e) => setProjectName(e.target.value)}
+                  style={{ marginBottom: "10px" }}
+                  size="small"
                   variant="outlined"
                   margin="normal"
                 ></TextField>
@@ -131,8 +156,9 @@ function NewProjectForm() {
                   name="project_description"
                   value={projectDescription}
                   onChange={(e) => setProjectDescription(e.target.value)}
+                  size="small"
+                  style={{ marginBottom: "10px" }}
                   variant="outlined"
-                  margin="normal"
                   multiline
                   maxRows={4}
                 ></TextField>
@@ -142,15 +168,23 @@ function NewProjectForm() {
                   name="project_due_date"
                   value={projectDueDate}
                   variant="outlined"
-                  margin="normal"
+                  size="small"
                   onChange={(date) => setProjectDueDate(date)}
                 />
 
-                <h3>
+                <Typography style={{
+                  marginTop: "24px",
+                  fontSize: ".9rem",
+                  fontWeight: "600",
+                  marginBottom: "15px"
+                }}>
                   Would you like to use <br />
-                  Lens AI
-                  <br /> to help you get started?
-                </h3>
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img src='../../../public/lens-line.png' alt='logo' height="25px" width="25px" />
+                    Lens AI
+                  </span>
+                  to help you get started?
+                </Typography>
                 <Stack spacing={2} direction="column">
                   <Button
                     variant="contained"
@@ -158,7 +192,7 @@ function NewProjectForm() {
                     disabled={isLoading}
                     margin="normal"
                   >
-                    Yes, use LensAI
+                    Yes, use Lens AI
                   </Button>
 
                   <Button variant="contained" margin="2" onClick={handleSubmit}>
@@ -169,8 +203,9 @@ function NewProjectForm() {
             </form>
           </Paper>
         </Grid>
-      )}
-    </Box>
+      )
+      }
+    </Box >
   );
 }
 

@@ -38,28 +38,28 @@ function NewMsgForm(props) {
   return (
     <Card>
       <CardContent>
-        <Grid container style={{ padding: '1px' }}>
 
-          <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-            <FormControl>
-              <Box container sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                {/* why isnt this not spaced??? */}
 
-                <TextField
-                  id="outlined-basic-email"
-                  name="sendMessage"
-                  label="Send A Message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  fullWidth />
+        <form noValidate justifyContent='space-between' autoComplete="off" onSubmit={handleSubmit}>
+          <FormControl>
+            <Box container sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              {/* why isnt this not spaced??? */}
 
-                <Fab type="Submit" size="small" color="primary" aria-label="add"> <SendIcon /> </Fab>
-              </Box>
+              <TextField
+                id="outlined-basic-email"
+                name="sendMessage"
+                label="Send A Message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                sx={{ width: '100%' }} />
 
-            </FormControl>
-          </form >
+              <Fab type="Submit" size="small" color="primary" aria-label="add"> <SendIcon /> </Fab>
+            </Box>
 
-        </Grid>
+          </FormControl>
+        </form >
+
+
       </CardContent>
     </Card>
 

@@ -20,13 +20,13 @@ const ChatListItem = (props) => {
 
   return (
     <Box sx={{ margin: 2.5 }}>
-      <Paper sx={{ margin: 2, padding: 1 }}>
-        <Grid container flex-direction="row">
-          <Avatar alt={user_name} src={avatar} />
-          {user_name}: {msg}
-        </Grid>
+      <Paper sx={{ display: 'flex', flexDirection: 'row', alignItems: "left", width: 'auto', margin: .5, padding: 1 }}>
+
+        <Avatar alt={user_name} src={avatar} />
+        {user_name}: {msg}
+
       </Paper>
-    </Box>
+    </Box >
   );
 };
 export default ChatListItem;

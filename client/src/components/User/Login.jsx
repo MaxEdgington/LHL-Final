@@ -1,24 +1,24 @@
-import { useContext, useState } from "react"
-import { Box, Grid, Paper, Avatar, Button, Typography, Link, TextField } from "@mui/material"
+import { useContext, useState } from "react";
+import { Box, Grid, Paper, Avatar, Button, Typography, Link, TextField } from "@mui/material";
 // import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import background from "../../../public/lots-of-lenses.jpg"
-import { userContext } from "../../providers/UserProvider"
+import background from "../../../public/lots-of-lenses.jpg";
+import { userContext } from "../../providers/UserProvider";
 
 const Login = () => {
-  const { setCookie } = useContext(userContext)
-  const [formEmail, setFormEmail] = useState()
-  const [formPassword, setFormPassword] = useState()
+  const { setCookie } = useContext(userContext);
+  const [formEmail, setFormEmail] = useState();
+  const [formPassword, setFormPassword] = useState();
 
   const handleSignIn = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const formData = {
       email: formEmail,
-    }
-    console.log("move handle funct", formData)
-    await setCookie(formData)
-    e.target.reset()
-  }
+    };
+    console.log("move handle funct", formData);
+    await setCookie(formData);
+    e.target.reset();
+  };
 
   /*
     style={{
@@ -48,8 +48,10 @@ const Login = () => {
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
-  }
-  const btnstyle = { margin: "8px 0" }
+  };
+  const btnstyle = { margin: "8px 0" };
+
+
   return (
     <Box
       style={{
@@ -72,7 +74,14 @@ const Login = () => {
         <Paper elevation={10} style={paperStyle}>
           <Grid align="center" style={{ marginBottom: "50px" }}>
             <Avatar src="lens-line.png" style={{ marginBottom: "24px" }}></Avatar>
-            <span style={{ fontWeight: 400, fontSize: "1.2rem" }}>Sign In</span>
+            <span style={{
+              fontWeight: 'bold',
+              fontSize: "1.2rem",
+              fontFamily: "monospace",
+              letterSpacing: ".3px",
+            }}>
+              Sign In
+            </span>
           </Grid>
 
           <form onSubmit={handleSignIn}>
@@ -90,8 +99,8 @@ const Login = () => {
             <TextField
               label="Password"
               size="small"
-              onChange={(e) => setFormPassword(e.target.value)}
               style={{ marginBottom: "10px" }}
+              onChange={(e) => setFormPassword(e.target.value)}
               name="password"
               placeholder="Enter password"
               type="password"
@@ -110,7 +119,10 @@ const Login = () => {
               Sign in
             </Button>
 
-            <Typography style={{ marginTop: "24px", fontSize: ".9rem" }}>
+            <Typography style={{
+              marginTop: "24px",
+              fontSize: ".9rem"
+            }}>
               Don&apos;t have an account?
               <Link style={{ marginLeft: "4px", fontWeight: 700 }} href="#">
                 Sign Up
@@ -120,7 +132,7 @@ const Login = () => {
         </Paper>
       </Grid>
     </Box>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

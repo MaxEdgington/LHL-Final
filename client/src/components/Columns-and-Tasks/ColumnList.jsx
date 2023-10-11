@@ -69,7 +69,7 @@ const ColumnList = (props) => {
         }}
       >
 
-        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '3em', backgroundColor: '#00000090'}}>
+        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '3em', backgroundColor: '#00000090' }}>
 
           <Tooltip title="Email Lead">
             <Fab color="primary" aria-label="email" onClick={handleEmailClick}>
@@ -86,7 +86,9 @@ const ColumnList = (props) => {
 
         </Box>
 
-        <ul className="columnlist">{columnArr}</ul>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <ul className="columnlist">{columnArr}</ul>
+        </Box>
 
       </Box>
     </DragDropContext>
