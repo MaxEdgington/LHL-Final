@@ -37,7 +37,7 @@ const ColumnListItem = (props) => {
         paddingBottom: "16px",
         margin: "16px",
         width: "25%",
-        bgcolor: "white",
+        bgcolor: "white"
         // "&:first-child": {
         //   paddingLeft: "5px",
         //   borderTopLeftRadius: 5,
