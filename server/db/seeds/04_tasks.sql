@@ -31,7 +31,7 @@ VALUES
 --tasks for LHL Final
 INSERT INTO tasks (name, description, due_date, status, index, project_id, assigned_user)
 VALUES
-('ERD design', 'Database design with postgreSQL', '2023-10-15', '1', 1, 2, 1);
+('ERD design', 'Database design with postgreSQL', '2023-10-15', '1', 1, 2, 1),
 ('Wire Frames', 'Simple structure to layout he pages', '2023-10-15', '1', 2, 2, 1);
 
 --tasks for Yes No Toaster

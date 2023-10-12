@@ -49,6 +49,11 @@ const ProjectTable = (props) => {
     await selectProject(name);
     navigate(`/projectboard/${id}`);
   };
+  // const formattedDate = new Date(row.project_due_date).toLocaleDateString("en-US", {
+  //   year: "numeric",
+  //   month: "long",
+  //   day: "numeric",
+  // });
 
   return (
     <Box
@@ -113,12 +118,14 @@ const ProjectTable = (props) => {
                 }}
                 align="left"
               >
-                Owner
+                Lead
               </TableCell>
             </TableRow>
           </TableHead>
+
           <TableBody style={{ overflow: "scroll", height: "100%" }}>
             {whichProjects.map((row) => (
+
               <TableRow key={row.project_name}>
                 <TableCell
                   component="th"
@@ -136,11 +143,17 @@ const ProjectTable = (props) => {
                   {row.project_description}
                 </TableCell>
                 <TableCell align="right">
-                  {new Date(row.project_due_date).toLocaleString({
+                  {new Date(row.project_due_date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric"
+                  })}
+
+                  {/* {new Date(row.project_due_date).toLocaleString({
                     dateStyle: "short",
                     timeStyle: "medium",
                     weekDay: "short",
-                  })}
+                  })} */}
                 </TableCell>
                 {/* how can we format this date better? */}
                 <TableCell align="right">
