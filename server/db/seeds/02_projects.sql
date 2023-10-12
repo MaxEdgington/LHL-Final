@@ -9,7 +9,19 @@ VALUES
   ('Git Hub Search', 'A way to search for repos on git hub', '2023-10-13', 7),
   ('Yes, No, Toaster', 'An app for deciding what to put on your toast in the morning','2023-10-13', 3),
   ('Owen Wilson Fan Club', 'Wow', '2023-10-13', 4),
-  ('Vend!', 'Midterm buy and sell resource wall', '2023-10-13', 3)
+  ('Vend!', 'Midterm buy and sell resource wall', '2023-10-13', 3),
+  ('Recipe Swap', 'An online community for foodies to exchange, rate, and discuss their favorite recipes.', '2023-12-12', 3),
+  ('EcoConnect', 'A social network for environmental enthusiasts to discuss eco-friendly practices and projects.', '2023-12-12', 5),
+  ('Penguin Social Club', 'A social network where penguins can waddle around the internet, share fish recipes, and slide into each others icebergs.', '2023-12-12', 4),
+  ('Code Buddy', 'A platform for developers to find coding partners, collaborate on projects, and share code snippets.', '2023-12-12', 6),
+  ('TechGuru Chatbot', 'A chatbot that answers tech-related questions and provides information about the latest gadgets and technology trends.', '2023-12-12', 7),
+  ('ShopSaver', 'An app that helps users find the best deals, compare prices, and create shopping lists for a more budget-friendly shopping experience.', '2023-12-12', 2),
+  ('FitFusion', 'A platform that offers a variety of workout routines, tracks fitness progress, and provides nutritional tips to help users achieve their fitness goals.', '2023-12-12', 3),
+  ('KidzCraft', 'An online space where children can explore and share their creative projects, including drawings, crafts, and stories.', '2023-12-12', 1),
+
+
+
+
 
  -- -- as mock:
 -- const projectsMock = {

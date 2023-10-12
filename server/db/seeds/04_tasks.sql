@@ -22,11 +22,11 @@ VALUES
 INSERT INTO tasks (name, description, due_date, status, index, project_id, assigned_user)
 VALUES
   ('API Integration', 'Connect to the Owen Wilson WOW API and retrieve sample data to display on the website.', '2023-10-15', '1', 1, 7, 4),
-  ('Website Design', 'Create a visually appealing design for the fan club website, incorporating Owen Wilson-related elements.', '2023-10-20', '1', 2, 7, 3),
-  ('User Registration and Login', 'Implement a user registration and login system to manage member accounts.', '2023-10-25', '1', 3, 7, 4),
-  ('WOW API Data Display', 'Design and develop web pages to showcase Owen Wilson-related data fetched from the API.', '2023-11-05', '1', 4, 7, 3),
-  ('Discussion Forum', 'Create a space for fan club members to discuss Owen Wilson, his movies, and more.', '2023-11-10', '1', 5, 7, 3),
-  ('Content Management', 'Implement a system for administrators to add, edit, and manage content on the website.', '2023-11-15', '1', 6, 7, 7);
+  ('Website Design', 'Create a visually appealing design for the fan club website, incorporating Owen Wilson-related elements.', '2023-10-20', '4', 1, 7, 3),
+  ('User Registration and Login', 'Implement a user registration and login system to manage member accounts.', '2023-10-25', '1', 2, 7, 4),
+  ('WOW API Data Display', 'Design and develop web pages to showcase Owen Wilson-related data fetched from the API.', '2023-11-05', '2', 1, 7, 3),
+  ('Discussion Forum', 'Create a space for fan club members to discuss Owen Wilson, his movies, and more.', '2023-11-10', '2', 2, 7, 3),
+  ('Content Management', 'Implement a system for administrators to add, edit, and manage content on the website.', '2023-11-15', '2', 3, 7, 7);
 
 --tasks for LHL Final
 INSERT INTO tasks (name, description, due_date, status, index, project_id, assigned_user)
