@@ -7,7 +7,7 @@ import ProjectTable from "./ProjectsTable";
 import { userContext } from "../providers/UserProvider";
 import { projectContext } from "../providers/ProjectProvider";
 
-import background from "../../public/lens-img-darkmode.jpeg";
+// import background from "../../public/lens-img-darkmode.jpeg";
 
 
 const AllProjectsList = () => {
@@ -36,11 +36,11 @@ const AllProjectsList = () => {
     backgroundColor: "#FAFAFA",
   };
   const boxStyle = {
-    backgroundImage: `url(${background})`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center center",
-    backgroundSize: "cover",
-    backgroundAttachment: "fixed",
+    // backgroundImage: `url(${background})`,
+    // backgroundRepeat: "no-repeat",
+    // backgroundPosition: "center center",
+    // backgroundSize: "cover",
+    // backgroundAttachment: "fixed",
     height: "100%",
     width: "100%",
     display: "flex",

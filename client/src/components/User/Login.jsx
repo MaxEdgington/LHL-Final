@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Box, Grid, Paper, Avatar, Button, Typography, Link, TextField } from "@mui/material";
 // import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import background from "../../../public/lots-of-lenses.jpg";
+// import background from "../../../public/lots-of-lenses.jpg";
 import { userContext } from "../../providers/UserProvider";
 
 const Login = () => {
@@ -55,11 +55,11 @@ const Login = () => {
   return (
     <Box
       style={{
-        backgroundImage: `url(${background})`,
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center center",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed",
+        // backgroundImage: `url(${background})`,
+        // backgroundRepeat: "no-repeat",
+        // backgroundPosition: "center center",
+        // backgroundSize: "cover",
+        // backgroundAttachment: "fixed",
         backdropFilter: "blur(2px)",
         alignSelf: "center",
         height: "100%",
