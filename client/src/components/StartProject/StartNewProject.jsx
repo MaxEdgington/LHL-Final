@@ -6,7 +6,7 @@ function StartNewProject() {
 
   return (
 
-    <Box>
+    <Box sx={{height:"100%"}}>
       <NewProjectForm />
     </Box>
 

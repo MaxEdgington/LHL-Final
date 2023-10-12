@@ -11,7 +11,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { columnsContext } from "../../providers/ColumnsProvider";
 import { projectContext } from "../../providers/ProjectProvider";
 // import background from '../../../public/iris_Lens_background.jpg';
-import background from '../../../public/lens-img-darkmode.jpeg';
+// import background from '../../../public/lens-img-darkmode.jpeg';
 
 
 const ColumnList = (props) => {
@@ -57,11 +57,11 @@ const ColumnList = (props) => {
           flex: 1,
           paddingTop: "16px",
           paddingBottom: "16px",
-          backgroundImage: `url(${background})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center center",
-          backgroundSize: "cover",
-          backgroundAttachment: "fixed",
+          // backgroundImage: `url(${background})`,
+          // backgroundRepeat: "no-repeat",
+          // backgroundPosition: "center center",
+          // backgroundSize: "cover",
+          // backgroundAttachment: "fixed",
           display: "block",
           height: "100%",
           paddingLeft: "8px",

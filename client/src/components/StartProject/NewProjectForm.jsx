@@ -9,7 +9,7 @@ import { projectContext } from "../../providers/ProjectProvider";
 import { columnsContext } from "../../providers/ColumnsProvider";
 import { userContext } from "../../providers/UserProvider";
 
-import background from "../../../public/lens-img-darkmode.jpeg";
+// import background from "../../../public/lens-img-darkmode.jpeg";
 import { ClipLoader } from "react-spinners";
 const spinningLens = "/spinning-lens.gif";
 
@@ -82,11 +82,11 @@ function NewProjectForm() {
   return (
     <Box
       style={{
-        backgroundImage: `url(${background})`,
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center center",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed",
+        // backgroundImage: `url(${background})`,
+        // backgroundRepeat: "no-repeat",
+        // backgroundPosition: "center center",
+        // backgroundSize: "cover",
+        // backgroundAttachment: "fixed",
         backdropFilter: "blur(2px)",
         alignSelf: "center",
         height: "100%",
