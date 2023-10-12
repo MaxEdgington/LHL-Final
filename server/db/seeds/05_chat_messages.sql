@@ -23,10 +23,10 @@ INSERT INTO chat_messages (message, timestamp, user_id, project_id)
 --for owen wilson
 INSERT INTO chat_messages (message, timestamp, user_id, project_id) 
   VALUES 
-  ('Wow', '2023-10-13', 1, 7),
-  ('Wow', '2023-10-13', 2, 7),
-  ('Wow', '2023-10-13', 3, 7),
-  ('Wow', '2023-10-13', 4, 7),
-  ('Wow', '2023-10-13', 5, 7),
-  ('Wow', '2023-10-13', 6, 7),
-  ('Wow', '2023-10-13', 7, 7);
+  ('Wow!', '2023-10-13', 2, 7),
+  ('Wow!', '2023-10-13', 4, 7),
+  ('Wow!', '2023-10-13', 6, 7),
+  ('Wow!', '2023-10-13', 1, 7),
+  ('Wow!', '2023-10-13', 3, 7),
+  ('Wow!', '2023-10-13', 5, 7),
+  ('Wow!', '2023-10-13', 7, 7);
