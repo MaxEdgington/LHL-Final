@@ -51,7 +51,7 @@ function NewMsgForm(props) {
                 label="Send A Message"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                sx={{ width: '100%' }} />
+                sx={{ width: '100%', marginRight:'15px' }} />
 
               <Fab type="Submit" size="small" color="primary" aria-label="add"> <SendIcon /> </Fab>
             </Box>
