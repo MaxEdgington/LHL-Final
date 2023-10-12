@@ -9,7 +9,7 @@ VALUES
   ('UI/UX Design', 'Create wireframes, mockups, and a visually appealing cat-themed interface.', '2023-12-13', '2', 1, 1, 1),
   ('Front-End Development', 'Develop the front-end using HTML, CSS, and JavaScript with relevant frameworks.', '2023-12-14', '3', 0, 1, 4),
   ('Back-End Development', 'Build server-side logic, implement authentication, and create APIs for key features.', '2023-12-15', '3', 1, 1, 6),
-  ('Database Setup and Management', 'Design the database schema, set up the database server, and implement queries.', '2023-12-16', '4', 0, 1, 5),
+  ('Database Setup and Management', 'Design the database schema, set up the database server, and implement queries.', '2023-12-16', '3', 2, 1, 5),
   ('Testing, Deployment, and Monitoring', 'Test for bugs, deploy to a web server, and set up monitoring for performance.', '2023-12-17', '4', 1, 1, 7),
   ('Content Creation', 'Generate and optimize text, images, and other media for the website pages.', '2023-12-16', '1', 2, 1, 3),
   ('User Registration and Login System', 'Implement user registration and login functionality with secure authentication.', '2023-12-21', '2', 2, 1, 1),
