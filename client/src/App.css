@@ -1,32 +1,43 @@
+/* Main container setup */
 #root {
   width: 100%;
   margin: 0 auto;
-  /* padding: 2rem; */
+  /* Centers the content */
+  /* Padding has been commented out and can be removed if not needed */
   text-align: center;
+  /* Aligns text to the center for child elements */
 }
 
-
-
+/* Keyframes for logo rotation animation */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
+    /* Start rotation from 0 degrees */
   }
 
   to {
     transform: rotate(360deg);
+    /* End rotation at 360 degrees for a full rotation */
   }
 }
 
+/* Media query for users who have not expressed a preference for reduced motion */
 @media (prefers-reduced-motion: no-preference) {
+
+  /* Apply rotation animation to the logo in the second link element */
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
+    /* Continuous rotation with a 20-second duration */
   }
 }
 
-/* .card {
-  padding: 2ems;
-} */
-
+/* Style for 'Read the Docs' link */
 .read-the-docs {
   color: #888;
+  /* Grey color for the text */
 }
+
+/* Commented out card styles can be removed if they are not being used */
+/* .card {
+  padding: 2em;
+} */

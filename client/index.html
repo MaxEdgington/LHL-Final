@@ -1,46 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Standard UTF-8 charset declaration -->
+    <meta charset="UTF-8" />
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="lens-line.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lens - Project Managment</title>
-</head>
+    <!-- Link to favicon for the website -->
+    <link rel="icon" type="image/svg+xml" href="lens-line.png" />
 
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
-</body>
+    <!-- Meta tag for responsive design, sets the viewport width to device width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Title of the website as it will appear in the browser tab -->
+    <title>Lens - Project Management</title>
+  </head>
+
+  <body>
+    <!-- The root element where the React app will mount -->
+    <div id="root"></div>
+
+    <!-- Script tag referencing the main JavaScript file to bootstrap the application -->
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
 
+<!-- External styles for the application -->
 <style>
+  /* General styles for the root application container */
   body #root {
     height: 80vh;
     padding: 0;
     font-family: sans-serif;
   }
 
-  /* ===== Scrollbar CSS ===== */
-  /* Firefox */
+  /* Styles to customize the scrollbar for the entire document */
+
+  /* Firefox-specific scrollbar styles */
   * {
-    scrollbar-width: auto;
-    scrollbar-color: #660000 #ffffff;
+    scrollbar-width: auto; /* Sets the scrollbar width */
+    scrollbar-color: #660000 #ffffff; /* Sets the scrollbar thumb and track colors */
   }
 
-  /* Chrome, Edge, and Safari */
+  /* Chrome, Edge, and Safari scrollbar styles */
   *::-webkit-scrollbar {
-    width: 16px;
+    width: 16px; /* Sets the scrollbar width */
   }
 
   *::-webkit-scrollbar-track {
-    background: #ffffff;
+    background: #ffffff; /* Sets the background color of the scrollbar track */
   }
 
   *::-webkit-scrollbar-thumb {
-    background-color: #660000;
-    border-radius: 10px;
-    border: 3px solid #ffffff;
+    background-color: #660000; /* Sets the background color of the scrollbar thumb */
+    border-radius: 10px; /* Sets the border radius of the scrollbar thumb */
+    border: 3px solid #ffffff; /* Sets the border color and width of the scrollbar thumb */
   }
-  </style>
+</style>
